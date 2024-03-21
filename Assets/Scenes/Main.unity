@@ -4394,11 +4394,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32d73ed5bdb414d42894c662208bbc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startBtn: {fileID: 1145548347}
-  setBtn: {fileID: 741372266}
-  reBtn: {fileID: 417825349}
-  quitBtn: {fileID: 1810735922}
-  xBtn: {fileID: 673587488}
   setPopup: {fileID: 773016981}
   mainPage: {fileID: 1768430048}
 --- !u!4 &1240638922

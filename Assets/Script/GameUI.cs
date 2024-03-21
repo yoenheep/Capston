@@ -30,6 +30,7 @@ public class GameUI : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1;
         stopPopup.SetActive(false);
         quizPopup.SetActive(false);
         overPopup.SetActive(false);
@@ -76,6 +77,7 @@ public class GameUI : MonoBehaviour
 
     public void NewGame()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("Game");
     }
 

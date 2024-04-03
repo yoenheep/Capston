@@ -13,8 +13,6 @@ public class Monster_Spawn_Manager : MonoBehaviour
 
     public List<GameObject> monsters_Spawn_Point = new List<GameObject>();
 
-    public GameObject monsterA;
-    public GameObject spawnPoint;
     public GameObject room;
 
     private void Start()
@@ -34,7 +32,7 @@ public class Monster_Spawn_Manager : MonoBehaviour
         {
             Vector2 position = monsters_Spawn_Point[i].transform.localPosition;
             Transform tr = monsters_Spawn_Point[i].transform.parent;
-            GameObject createdPrefab = Instantiate(monstersDB[monsters_Name[0]], position, Quaternion.Euler(0, 180f, 0));
+            GameObject createdPrefab = Instantiate(monstersDB[monsters_Name[0]], position, Quaternion.identity);
             createdPrefab.transform.SetParent(tr, false);
             Debug.Log("º“»Ø");
         }

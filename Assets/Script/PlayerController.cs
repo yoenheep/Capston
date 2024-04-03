@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
+    public float damage = 10f;
     public float Speed;
     private float defaultSpeed;
     private bool isDash;

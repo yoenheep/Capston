@@ -129,7 +129,7 @@ public abstract class Monsters : MonoBehaviour
     {
         // 충돌이 발생한 객체의 태그가 "Ground"인 경우
         //오브젝트의 크기와 위치 값을 읽고 몬스터의 크기를 계산하여 이동범위를 설정
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Platform"))
         {
             if (x_max == x_min)
             {
@@ -144,12 +144,12 @@ public abstract class Monsters : MonoBehaviour
 
         if(collision.gameObject.CompareTag("Player"))
         {
-            Player_Controller player = collision.gameObject.GetComponent<Player_Controller>();
+            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
             Vector2 player_Location = collision.gameObject.transform.position;
 
             if(player != null)
             {
-                GetDamage(player.attack, gameObject, player_Location);
+                GetDamage(player.damage, gameObject, player_Location);
                 //GiveDamage(monster_Attack_Damage, player);
             }
         }

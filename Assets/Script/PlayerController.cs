@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //Animator animator;
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
-    public float damage = 10f;
     public float Speed;
     private float defaultSpeed;
     private bool isDash;
@@ -15,11 +15,16 @@ public class PlayerController : MonoBehaviour
     public float dashDuration; // 대쉬 지속 시간
     private float dashTime;
     private float dashCooldownTimer;
+    private float curTime;
+    public float coolTime = 0.5f;
+    public Transform pos;
+    public Vector2 BoxSize;
 
     public float JumpPower;
 
     void Awake()
     {
+        //animator = GetComponent<Animator>();
         defaultSpeed = Speed;
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -27,13 +32,37 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        //'A'어택
+        if (curTime <= 0)
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, BoxSize, 0);
+
+                foreach (Collider2D collider in collider2Ds)
+                {
+                    if (collider.tag == "Monster")
+                    {
+                        collider.GetComponent<Monsters>().TakeDamage(1);
+                    }
+                }
+
+                //animator.SetTrigger("atk");
+                curTime = coolTime;
+            }
+        }
+        else
+        {
+            curTime -= Time.deltaTime;
+        }
+
         //Jump
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
             rigid.velocity = new Vector2(rigid.velocity.x, JumpPower);
         }
 
-        if (Input.GetKeyDown(KeyCode.A) && dashCooldownTimer <= 0)
+        if (Input.GetKeyDown(KeyCode.D) && dashCooldownTimer <= 0)
         {
             isDash = true;
             dashTime = dashDuration;
@@ -73,6 +102,12 @@ public class PlayerController : MonoBehaviour
         {
             spriteRenderer.flipX = false; // 오른쪽으로 이동할 때 이미지를 원래대로 돌림
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(pos.position, BoxSize);
     }
 
     void FixedUpdate()

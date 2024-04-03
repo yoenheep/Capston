@@ -149,9 +149,14 @@ public abstract class Monsters : MonoBehaviour
 
             if(player != null)
             {
-                GetDamage(player.damage, gameObject, player_Location);
+                GetDamage(0, gameObject, player_Location);
                 //GiveDamage(monster_Attack_Damage, player);
             }
         }
+    }
+    public int Hp = 3;
+    public void TakeDamage(int damage)
+    {
+        Hp = Hp - damage;
     }
 }

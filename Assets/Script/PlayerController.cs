@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Jump
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (Input.GetKeyDown(KeyCode.S) && IsGrounded())
         {
             rigid.velocity = new Vector2(rigid.velocity.x, JumpPower);
         }

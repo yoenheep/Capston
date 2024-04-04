@@ -14,7 +14,7 @@ public abstract class Monsters : MonoBehaviour
     protected float monster_Attack_Damage;
     protected bool is_dead;
     protected float lastAttackTime;
-    protected float pushForce = 2f;
+    protected float pushForce = 80f;    //차후 수정
 
     //몬스터 이동 관련 변수
     private Rigidbody2D rb;
@@ -75,11 +75,11 @@ public abstract class Monsters : MonoBehaviour
             transform.Rotate(Vector3.up * 180f);
      }
 
-    protected virtual void GetDamage(float damage, GameObject obj, Vector2 attack_Direction)
+    public virtual void GetDamage(float damage,  Vector2 attack_Direction)
     {
         if(!is_dead)
         {
-            Rigidbody2D obj_Rb = obj.GetComponent<Rigidbody2D>();
+            Rigidbody2D obj_Rb = gameObject.GetComponent<Rigidbody2D>();
 
             // 뒤로 밀어내는 힘 적용
             if (obj_Rb != null)
@@ -88,6 +88,7 @@ public abstract class Monsters : MonoBehaviour
                 
                 monster_Pre_Health -= damage;
                 stop = true;
+                Debug.Log("몬스터 현재 체력 : " + monster_Pre_Health);
 
                 if (pushDirection.x > 0)
                 {
@@ -99,7 +100,7 @@ public abstract class Monsters : MonoBehaviour
                 }
                 StartCoroutine(StopForSeconds());
             }
-           if(monster_Pre_Health < 0)
+           if(monster_Pre_Health <= 0)
            {
                     Die();
            }
@@ -108,7 +109,7 @@ public abstract class Monsters : MonoBehaviour
 
     IEnumerator StopForSeconds()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         stop = false;
     }
 
@@ -149,7 +150,7 @@ public abstract class Monsters : MonoBehaviour
 
             if(player != null)
             {
-                GetDamage(0, gameObject, player_Location);
+                //GetDamage(0, gameObject, player_Location);
                 //GiveDamage(monster_Attack_Damage, player);
             }
         }

@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public float coolTime = 0.5f;
     public Transform pos;
     public Vector2 BoxSize;
+    public float damage;
 
     public float JumpPower;
 
@@ -37,13 +38,17 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.A))
             {
+                //근접무기
+                damage = 10f;
                 Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, BoxSize, 0);
+                Vector2 collisionPoint = Vector2.zero;
 
                 foreach (Collider2D collider in collider2Ds)
                 {
                     if (collider.tag == "Monster")
                     {
-                        collider.GetComponent<Monsters>().TakeDamage(1);
+                        collisionPoint = collider.ClosestPoint(pos.position);
+                        collider.GetComponent<Monsters>().GetDamage(damage, collisionPoint);
                     }
                 }
 

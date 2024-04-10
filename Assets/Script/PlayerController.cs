@@ -20,6 +20,11 @@ public class PlayerController : MonoBehaviour
     public Transform pos;
     public Vector2 BoxSize;
     public float damage;
+    //총알예시
+    public GameObject bullet;
+    public Transform pos_bullet;
+    private float bullet_curtime;
+    public float bullet_cooltime;
 
     public float JumpPower;
 
@@ -33,6 +38,19 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        //원거리EX
+        if(bullet_curtime <= 0)
+        {
+            if (Input.GetKey(KeyCode.Z))
+            {
+                Instantiate(bullet, pos_bullet.position, transform.rotation);
+            }
+            bullet_curtime = bullet_cooltime;
+        }
+        else
+        {
+            bullet_curtime -= Time.deltaTime;
+        }
         //'A'어택
         if (curTime <= 0)
         {

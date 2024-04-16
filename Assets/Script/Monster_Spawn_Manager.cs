@@ -15,24 +15,32 @@ public class Monster_Spawn_Manager : MonoBehaviour
 
     public GameObject room;
 
-    private void Start()
+    public GameObject hpBarParent;
+
+    //싱글톤
+    public static Monster_Spawn_Manager instance;
+
+    private void Awake()
     {
+        instance = this;
+
         monsters_Name.Add("gog");
 
         monstersDB = new Dictionary<string, GameObject>();
 
         //몬스터들 기본 정보 저장
         //키 값으로 몬스터 이름을 가짐
-        for(int i=0; i < monsters_Prefab.Count; i++)
-        {
-            monstersDB.Add(monsters_Name[i], monsters_Prefab[i]);
-        }
-        
-        for(int i = 0; i < monsters_Spawn_Point.Count; i++)
+        //for (int i = 0; i < monsters_Prefab.Count; i++)
+        //{
+        //    monstersDB.Add(monsters_Name[i], monsters_Prefab[i]);
+        //}
+
+        for (int i = 0; i < monsters_Spawn_Point.Count; i++)
         {
             Vector2 position = monsters_Spawn_Point[i].transform.localPosition;
             Transform tr = monsters_Spawn_Point[i].transform.parent;
-            GameObject createdPrefab = Instantiate(monstersDB[monsters_Name[0]], position, Quaternion.identity);
+            // GameObject createdPrefab = Instantiate(monstersDB[monsters_Name[0]], position, Quaternion.identity);
+            GameObject createdPrefab = Instantiate(monsters_Prefab[0], position, Quaternion.identity);
             createdPrefab.transform.SetParent(tr, false);
             Debug.Log("소환");
         }

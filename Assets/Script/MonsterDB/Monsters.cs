@@ -15,6 +15,9 @@ public abstract class Monsters : MonoBehaviour
     protected bool is_dead;
     protected float lastAttackTime;
     protected float pushForce = 80f;    //차후 수정
+    public float Hp;
+    protected GameObject hpBar;
+    protected monHpBar hpBarLogic;
 
     //몬스터 이동 관련 변수
     private Rigidbody2D rb;
@@ -23,9 +26,13 @@ public abstract class Monsters : MonoBehaviour
     private bool change_Direction;
     private bool stop = false;
 
-    protected void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void OnEnable()
+    {
         change_Direction = true;
 
         monster_Pre_Health = monster_Max_Health;
@@ -35,6 +42,9 @@ public abstract class Monsters : MonoBehaviour
     void FixedUpdate()
     {
         Move();
+        hpBarLogic.maxHp = monster_Max_Health; // 최대 hp
+        hpBarLogic.nowHp = monster_Pre_Health; // 현재 hp
+        hpBarLogic.owner = this.transform; // 체력바 주인 설정
     }
 
     public void Move()
@@ -123,6 +133,9 @@ public abstract class Monsters : MonoBehaviour
         {
             is_dead = true;
             gameObject.GetComponent<Rigidbody2D>().simulated = false;
+
+            // 체력바
+            hpBar.gameObject.SetActive(false);
         }
     }
 
@@ -155,8 +168,7 @@ public abstract class Monsters : MonoBehaviour
             }
         }
     }
-    public int Hp = 3;
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         Hp = Hp - damage;
     }

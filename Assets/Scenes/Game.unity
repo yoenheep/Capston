@@ -628,7 +628,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 354683872}
-  - {fileID: 949639824}
   - {fileID: 142557515}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2273,7 +2272,7 @@ Transform:
   m_GameObject: {fileID: 511513683}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.03, y: -2.48, z: 0}
+  m_LocalPosition: {x: 5.03, y: -1.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3115,11 +3114,11 @@ Transform:
   m_GameObject: {fileID: 949639821}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 10.75, z: -50}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalPosition: {x: 0, y: 0.60000014, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 105346957}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &986395976
 GameObject:
@@ -4922,17 +4921,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554107912}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f098a25dfa9173749a6dfb97331f6748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   monsters_Prefab:
   - {fileID: 2223182252726550665, guid: 997da49d7477f904688cf0ee14919926, type: 3}
+  - {fileID: 1983264480916593626, guid: fda7b72e883eb664d982f03404f72457, type: 3}
   monsters_Name: []
   monsters_Spawn_Point:
   - {fileID: 511513683}
   room: {fileID: 0}
+  hpBarParent: {fileID: 931612485}
 --- !u!1 &1626814193
 GameObject:
   m_ObjectHideFlags: 0
@@ -6697,6 +6698,7 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 949639824}
   - {fileID: 931612489}
   - {fileID: 1554107915}
   - {fileID: 1438588964}

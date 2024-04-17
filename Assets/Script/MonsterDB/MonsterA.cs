@@ -17,7 +17,7 @@ public class MonsterA : Monsters
         monster_Speed = 2f;
         monster_Attack_Damage = 10f;
         monster_Attack_Speed = 0.5f;
-        monster_Max_Health = 100f;
+        monster_Max_Health = 50f;
         monster_Pre_Health = monster_Max_Health;
         
 

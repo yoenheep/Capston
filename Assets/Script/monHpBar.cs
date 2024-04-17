@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class monHpBar : MonoBehaviour
 {
     [Header("#HP")]
-    //[SerializeField] private GameObject canvas;
     public Transform owner; // 체력바 주인
     public GameObject parent; // 체력바 부모 오브젝트 (canvas)
     public Image nowHpBar; // 현재 hp image

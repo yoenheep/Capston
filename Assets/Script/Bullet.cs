@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
         {
             if(ray.collider.tag == "Monster")
             {
-                ray.collider.GetComponent<Monsters>().TakeDamage(damage);
+                ray.collider.GetComponent<Monsters>().GetDamage(damage, gameObject.transform.position);
                 Debug.Log("ИэСп");
             }
             DestroyBullet();

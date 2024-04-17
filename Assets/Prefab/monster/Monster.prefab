@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2223182252726550670}
   - component: {fileID: 2223182252726550671}
   - component: {fileID: 4021103398401557223}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Monster
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -165,11 +165,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 250d065653764ac4188d50d36090f338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hp: 3
-  canvas: {fileID: 0}
-  hpBar: {fileID: 0}
-  maxHP: 100
-  nowHP: 0
-  horzontalPos: -2.1
-  height: 2
-  nowHpBar: {fileID: 0}

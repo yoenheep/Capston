@@ -1,9 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    //Ä³¸¯ÅÍhp
+    public float charac_MaxHP = 100f;
+    public float charac_PreHP;
+
     //Animator animator;
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
@@ -20,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public Transform pos;
     public Vector2 BoxSize;
     public float damage;
+
     //ÃÑ¾Ë¿¹½Ã
     public GameObject bullet;
     public Transform pos_bullet;
@@ -28,12 +34,19 @@ public class PlayerController : MonoBehaviour
 
     public float JumpPower;
 
+    //½Ì±ÛÅæ
+    public static PlayerController playerData { get; private set; }
+
     void Awake()
     {
+        playerData = this;
+
         //animator = GetComponent<Animator>();
         defaultSpeed = Speed;
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        charac_PreHP = charac_MaxHP;
     }
 
     void Update()

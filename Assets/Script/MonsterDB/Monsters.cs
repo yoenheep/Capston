@@ -15,7 +15,6 @@ public abstract class Monsters : MonoBehaviour
     protected bool is_dead;
     protected float lastAttackTime;
     protected float pushForce = 80f;    //차후 수정
-    public float Hp;
     protected GameObject hpBar;
     protected monHpBar hpBarLogic;
 
@@ -168,8 +167,5 @@ public abstract class Monsters : MonoBehaviour
             }
         }
     }
-    public void TakeDamage(float damage)
-    {
-        Hp = Hp - damage;
-    }
+
 }

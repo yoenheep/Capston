@@ -40,8 +40,8 @@ public class GameUI : MonoBehaviour
 
     [Header("# heart")]
     [SerializeField] private Image hpBar;
-    private float hp_max = 100;
-    private float hp_now;
+    public float hp_max;
+    public float hp_now;
     private bool isDamaged = false;
 
     [Header("# weapon")]
@@ -57,8 +57,8 @@ public class GameUI : MonoBehaviour
         clearPopup.SetActive(false);
         setPopup.SetActive(false);
 
-        hp_now = 100;
-        quizTimer_now = 20f;
+        quizTimer_now = quizTimer_max;
+        hp_max = PlayerController.playerData.charac_MaxHP;
     }
 
     private void Update()
@@ -95,6 +95,7 @@ public class GameUI : MonoBehaviour
         time(); // 타임표시
         quiz(); // quiz 임시키
         hp(); // HP 임시키
+        hp_now = PlayerController.playerData.charac_PreHP;
         hpBar.fillAmount = hp_now / hp_max; // 캐릭터 hpbar
     }
 
@@ -161,7 +162,7 @@ public class GameUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q) && quizPopup.activeSelf == false)
         {
-            hp_now -= 10;
+            PlayerController.playerData.charac_PreHP -= 10;
             isDamaged = true;
 
             if(hp_now <= 0)

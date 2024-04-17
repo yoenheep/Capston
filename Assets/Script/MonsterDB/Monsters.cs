@@ -15,25 +15,23 @@ public abstract class Monsters : MonoBehaviour
     protected bool is_dead;
     protected float lastAttackTime;
     protected float pushForce = 80f;    //차후 수정
+    private int next_Move;
+
     protected GameObject hpBar;
     protected monHpBar hpBarLogic;
 
     //몬스터 이동 관련 변수
     private Rigidbody2D rb;
-    private float x_min = 0;
-    private float x_max = 0;
-    private bool change_Direction;
     private bool stop = false;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        //Think();
     }
 
     private void OnEnable()
     {
-        change_Direction = true;
-
         monster_Pre_Health = monster_Max_Health;
         is_dead = false;
     }
@@ -50,39 +48,31 @@ public abstract class Monsters : MonoBehaviour
     {
         if(!is_dead && !stop)
         {
-            Change_Direction(gameObject.transform.localPosition.x);
+            rb.velocity = new Vector2(monster_Speed, rb.velocity.y);
 
-            if (change_Direction)
+            Vector2 frontVec = new Vector2(rb.position.x + monster_Speed * 0.3f, rb.position.y);
+            Debug.DrawRay(rb.position, Vector3.down, new Color(0, 1, 0));
+            RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Platform"));
+            if (rayHit.collider == null)
             {
-                rb.velocity = new Vector2(monster_Speed, rb.velocity.y);
-            }
-            else
-            {
-                rb.velocity = new Vector2(-monster_Speed, rb.velocity.y);
+                monster_Speed *= -1;
+                //Turn_A_Round();
+                
             }
         }
-    }
-
-    private void Change_Direction(float present_Location)
-    {
-        //x값이 최대 범위를 벗어나면 false값으로 변경
-        if (present_Location >= x_max)
-        {
-            change_Direction = false;
-            Turn_A_Round();
-        }
-        else if (present_Location <= x_min)
-        {
-            change_Direction = true;
-            Turn_A_Round();
-        }
-        
     }
 
      private void Turn_A_Round()
      {
             transform.Rotate(Vector3.up * 180f);
      }
+
+    void Think()
+    {
+        next_Move = Random.Range(-1, 2);
+
+        Think();
+    }
 
     public virtual void GetDamage(float damage,  Vector2 attack_Direction)
     {
@@ -94,32 +84,19 @@ public abstract class Monsters : MonoBehaviour
             if (obj_Rb != null)
             {
                 Vector2 pushDirection = ((obj_Rb.position - attack_Direction)).normalized;
-                
                 monster_Pre_Health -= damage;
-                stop = true;
-                Debug.Log("몬스터 현재 체력 : " + monster_Pre_Health);
 
-                if (pushDirection.x > 0)
-                {
-                    obj_Rb.AddForce(pushDirection * pushForce, ForceMode2D.Impulse);
-                }
-                else if(pushDirection.x < 0)
-                {
-                    obj_Rb.AddForce(pushDirection * pushForce, ForceMode2D.Impulse);
-                }
-                StartCoroutine(StopForSeconds());
+                Debug.Log("몬스터 현재 체력 : " + monster_Pre_Health);
+                Debug.Log("공격 방향 : " + pushDirection);
+
+                //obj_Rb.AddForce(pushDirection * pushForce, ForceMode2D.Impulse);
+                rb.transform.position = new Vector2(rb.position.x + 2f, rb.position.y);
             }
            if(monster_Pre_Health <= 0)
            {
                     Die();
            }
         }
-    }
-
-    IEnumerator StopForSeconds()
-    {
-        yield return new WaitForSeconds(1f);
-        stop = false;
     }
 
     protected virtual void GiveDamage(float damage, Player_Controller obj) {
@@ -140,21 +117,6 @@ public abstract class Monsters : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // 충돌이 발생한 객체의 태그가 "Ground"인 경우
-        //오브젝트의 크기와 위치 값을 읽고 몬스터의 크기를 계산하여 이동범위를 설정
-        if (collision.gameObject.CompareTag("Platform"))
-        {
-            if (x_max == x_min)
-            {
-                float platform_x = collision.gameObject.transform.localPosition.x;
-                float length = collision.collider.bounds.size.magnitude;
-                float obj_Size = gameObject.GetComponent<Collider2D>().bounds.size.x / 2;
-
-                x_max = platform_x + (length / 2) - obj_Size;
-                x_min = platform_x - (length / 2) + obj_Size;
-            }
-        }
-
         if(collision.gameObject.CompareTag("Player"))
         {
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();
@@ -162,10 +124,8 @@ public abstract class Monsters : MonoBehaviour
 
             if(player != null)
             {
-                //GetDamage(0, gameObject, player_Location);
                 //GiveDamage(monster_Attack_Damage, player);
             }
         }
     }
-
 }

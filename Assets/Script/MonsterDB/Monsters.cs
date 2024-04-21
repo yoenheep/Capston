@@ -112,6 +112,7 @@ public abstract class Monsters : MonoBehaviour
 
             // Ã¼·Â¹Ù
             hpBar.gameObject.SetActive(false);
+            GameUI.UIData.Clear();
         }
     }
 

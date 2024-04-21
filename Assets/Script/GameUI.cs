@@ -48,8 +48,13 @@ public class GameUI : MonoBehaviour
     [SerializeField] private Image AWeaponImg;
     [SerializeField] private Image SWeaponImg;
 
-    private void Awake()
+    //싱글톤
+    public static GameUI UIData { get; private set; }
+
+    void Awake()
     {
+        UIData = this;
+
         Time.timeScale = 1;
         stopPopup.SetActive(false);
         quizPopup.SetActive(false);
@@ -83,13 +88,6 @@ public class GameUI : MonoBehaviour
                 coolTime = coolTime_max;
                 StartCoroutine(CoolTimeFunc());
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.W) && quizPopup.activeSelf == false) // 임시 클리어 키
-        {
-            clearPopup.SetActive(true);
-            Time.timeScale = 0;
-            clearTimeTxt.text = TimeTxt.text;
         }
 
         time(); // 타임표시
@@ -214,6 +212,16 @@ public class GameUI : MonoBehaviour
             quizPopup.SetActive(false);
             hp_now -= 10.0f;
             quizTimer_now = 20f;
+        }
+    }
+
+    public void Clear()
+    {
+        if(quizPopup.activeSelf == false)
+        {
+            clearPopup.SetActive(true);
+            Time.timeScale = 0;
+            clearTimeTxt.text = TimeTxt.text;
         }
     }
 }

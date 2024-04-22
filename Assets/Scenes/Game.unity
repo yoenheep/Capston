@@ -662,6 +662,8 @@ MonoBehaviour:
   bullet: {fileID: 5982004908218681697, guid: f52971cd8de60664ca18edc1d23df6ce, type: 3}
   pos_bullet: {fileID: 105346957}
   bullet_cooltime: 0.2
+  hor: 0
+  pos_gun: 0
   JumpPower: 15
 --- !u!50 &105346959
 Rigidbody2D:
@@ -1616,7 +1618,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &354683872
 RectTransform:
   m_ObjectHideFlags: 0

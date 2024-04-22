@@ -36,6 +36,10 @@ public class PlayerController : MonoBehaviour
 
     public float JumpPower;
 
+    // 무기 선택 상태
+    private bool isMeleeActive = true; // 근접 무기 활성화 상태
+    private bool isRangedActive = false; // 원거리 무기 활성화 상태
+
     //싱글톤
     public static PlayerController playerData { get; private set; }
 
@@ -54,8 +58,19 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        // 무기 선택을 전환
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            isMeleeActive = true;
+            isRangedActive = false;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            isMeleeActive = false;
+            isRangedActive = true;
+        }
         //원거리EX
-        if(bullet_curtime <= 0)
+        if (isRangedActive && bullet_curtime <= 0)
         {
             if (Input.GetKey(KeyCode.Z))
             {
@@ -72,7 +87,7 @@ public class PlayerController : MonoBehaviour
             bullet_curtime -= Time.deltaTime;
         }
         //'A'어택
-        if (curTime <= 0)
+        if (isMeleeActive && curTime <= 0)
         {
             if (Input.GetKeyDown(KeyCode.A))
             {

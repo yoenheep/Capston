@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
     public Transform pos_bullet;
     private float bullet_curtime;
     public float bullet_cooltime;
+    public float hor;
+    public float pos_gun;
 
     public float JumpPower;
 
@@ -39,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+
         playerData = this;
 
         //animator = GetComponent<Animator>();
@@ -56,7 +59,11 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Z))
             {
-                Instantiate(bullet, pos_bullet.position, transform.rotation);
+                Vector3 bulletDirection = spriteRenderer.flipX ? Vector3.left : Vector3.right;
+                Quaternion bulletRotation = spriteRenderer.flipX ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
+
+                GameObject newBullet = Instantiate(bullet, pos_bullet.position, bulletRotation);
+                newBullet.GetComponent<Bullet>().SetMoveDirection(bulletDirection);
             }
             bullet_curtime = bullet_cooltime;
         }
@@ -130,13 +137,18 @@ public class PlayerController : MonoBehaviour
         }
 
         // 이미지 방향전환
-        if (Input.GetAxisRaw("Horizontal") < 0)
+        hor = Input.GetAxisRaw("Horizontal");
+        if (hor < 0)
         {
             spriteRenderer.flipX = true; // 왼쪽으로 이동할 때 이미지를 뒤집음
+            pos.localPosition = new Vector3(-Mathf.Abs(pos.localPosition.x), pos.localPosition.y, pos.localPosition.z); // pos를 왼쪽으로 이동
+            pos_gun = -1;
         }
-        else if (Input.GetAxisRaw("Horizontal") > 0)
+        else if (hor > 0)
         {
             spriteRenderer.flipX = false; // 오른쪽으로 이동할 때 이미지를 원래대로 돌림
+            pos.localPosition = new Vector3(Mathf.Abs(pos.localPosition.x), pos.localPosition.y, pos.localPosition.z); // pos를 오른쪽으로 이동
+            pos_gun = 1;
         }
     }
 

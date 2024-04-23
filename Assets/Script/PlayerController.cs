@@ -58,112 +58,115 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // 무기 선택을 전환
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (GameUI.UIData.quizPopup.activeSelf == false)
         {
-            isMeleeActive = true;
-            isRangedActive = false;
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            isMeleeActive = false;
-            isRangedActive = true;
-        }
-        //원거리EX
-        if (isRangedActive && bullet_curtime <= 0)
-        {
-            if (Input.GetKey(KeyCode.A))
+            // 무기 선택을 전환
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                Vector3 bulletDirection = spriteRenderer.flipX ? Vector3.left : Vector3.right;
-                Quaternion bulletRotation = spriteRenderer.flipX ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
-
-                GameObject newBullet = Instantiate(bullet, pos_bullet.position, bulletRotation);
-                newBullet.GetComponent<Bullet>().SetMoveDirection(bulletDirection);
+                isMeleeActive = true;
+                isRangedActive = false;
             }
-            bullet_curtime = bullet_cooltime;
-        }
-        else
-        {
-            bullet_curtime -= Time.deltaTime;
-        }
-        //'A'어택
-        if (isMeleeActive && curTime <= 0)
-        {
-            if (Input.GetKeyDown(KeyCode.A))
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                //근접무기
-                damage = 10f;
-                Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, BoxSize, 0);
-                Vector2 collisionPoint = Vector2.zero;
-
-                foreach (Collider2D collider in collider2Ds)
+                isMeleeActive = false;
+                isRangedActive = true;
+            }
+            //원거리EX
+            if (isRangedActive && bullet_curtime <= 0)
+            {
+                if (Input.GetKey(KeyCode.A))
                 {
-                    if (collider.tag == "Monster")
-                    {
-                        collisionPoint = collider.ClosestPoint(pos.position);
-                        collider.GetComponent<Monsters>().GetDamage(damage, collisionPoint);
-                    }
+                    Vector3 bulletDirection = spriteRenderer.flipX ? Vector3.left : Vector3.right;
+                    Quaternion bulletRotation = spriteRenderer.flipX ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
+
+                    GameObject newBullet = Instantiate(bullet, pos_bullet.position, bulletRotation);
+                    newBullet.GetComponent<Bullet>().SetMoveDirection(bulletDirection);
                 }
-
-                //animator.SetTrigger("atk");
-                curTime = coolTime;
+                bullet_curtime = bullet_cooltime;
             }
-        }
-        else
-        {
-            curTime -= Time.deltaTime;
-        }
-
-        //Jump
-        if (Input.GetKeyDown(KeyCode.S) && IsGrounded())
-        {
-            rigid.velocity = new Vector2(rigid.velocity.x, JumpPower);
-        }
-
-        if (Input.GetKeyDown(KeyCode.D) && dashCooldownTimer <= 0)
-        {
-            isDash = true;
-            dashTime = dashDuration;
-            dashCooldownTimer = dashCooldown;
-            Debug.Log("Dash");
-        }
-
-        if (dashTime > 0)
-        {
-            dashTime -= Time.deltaTime;
-            if (dashTime <= 0)
+            else
             {
-                isDash = false;
+                bullet_curtime -= Time.deltaTime;
             }
-        }
+            //'A'어택
+            if (isMeleeActive && curTime <= 0)
+            {
+                if (Input.GetKeyDown(KeyCode.A))
+                {
+                    //근접무기
+                    damage = 10f;
+                    Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, BoxSize, 0);
+                    Vector2 collisionPoint = Vector2.zero;
 
-        if (dashCooldownTimer > 0)
-        {
-            dashCooldownTimer -= Time.deltaTime;
-        }
+                    foreach (Collider2D collider in collider2Ds)
+                    {
+                        if (collider.tag == "Monster")
+                        {
+                            collisionPoint = collider.ClosestPoint(pos.position);
+                            collider.GetComponent<Monsters>().GetDamage(damage, collisionPoint);
+                        }
+                    }
 
-        if (isDash)
-        {
-            defaultSpeed = dashSpeed;
-        }
-        else
-        {
-            defaultSpeed = Speed;
-        }
+                    //animator.SetTrigger("atk");
+                    curTime = coolTime;
+                }
+            }
+            else
+            {
+                curTime -= Time.deltaTime;
+            }
 
-        // 이미지 방향전환
-        hor = Input.GetAxisRaw("Horizontal");
-        if (hor < 0)
-        {
-            spriteRenderer.flipX = true; // 왼쪽으로 이동할 때 이미지를 뒤집음
-            pos.localPosition = new Vector3(-Mathf.Abs(pos.localPosition.x), pos.localPosition.y, pos.localPosition.z); // pos를 왼쪽으로 이동
-            pos_gun = -1;
-        }
-        else if (hor > 0)
-        {
-            spriteRenderer.flipX = false; // 오른쪽으로 이동할 때 이미지를 원래대로 돌림
-            pos.localPosition = new Vector3(Mathf.Abs(pos.localPosition.x), pos.localPosition.y, pos.localPosition.z); // pos를 오른쪽으로 이동
-            pos_gun = 1;
+            //Jump
+            if (Input.GetKeyDown(KeyCode.S) && IsGrounded())
+            {
+                rigid.velocity = new Vector2(rigid.velocity.x, JumpPower);
+            }
+
+            if (Input.GetKeyDown(KeyCode.D) && dashCooldownTimer <= 0)
+            {
+                isDash = true;
+                dashTime = dashDuration;
+                dashCooldownTimer = dashCooldown;
+                Debug.Log("Dash");
+            }
+
+            if (dashTime > 0)
+            {
+                dashTime -= Time.deltaTime;
+                if (dashTime <= 0)
+                {
+                    isDash = false;
+                }
+            }
+
+            if (dashCooldownTimer > 0)
+            {
+                dashCooldownTimer -= Time.deltaTime;
+            }
+
+            if (isDash)
+            {
+                defaultSpeed = dashSpeed;
+            }
+            else
+            {
+                defaultSpeed = Speed;
+            }
+
+            // 이미지 방향전환
+            hor = Input.GetAxisRaw("Horizontal");
+            if (hor < 0)
+            {
+                spriteRenderer.flipX = true; // 왼쪽으로 이동할 때 이미지를 뒤집음
+                pos.localPosition = new Vector3(-Mathf.Abs(pos.localPosition.x), pos.localPosition.y, pos.localPosition.z); // pos를 왼쪽으로 이동
+                pos_gun = -1;
+            }
+            else if (hor > 0)
+            {
+                spriteRenderer.flipX = false; // 오른쪽으로 이동할 때 이미지를 원래대로 돌림
+                pos.localPosition = new Vector3(Mathf.Abs(pos.localPosition.x), pos.localPosition.y, pos.localPosition.z); // pos를 오른쪽으로 이동
+                pos_gun = 1;
+            }
         }
     }
 

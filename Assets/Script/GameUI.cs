@@ -207,18 +207,25 @@ public class GameUI : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            if (answerField.text == "넌 못지나간다")
+            if (answerField.text == "") 
             {
-                answerTrueIcon.SetActive(true);
-                StopCoroutine(quizTimerFunc());
-
-                Invoke("QAIcon", 2f);
+                answerField.ActivateInputField();
             }
             else
             {
-                answerFalseIcon.SetActive(true);
+                if (answerField.text == "넌 못지나간다")
+                {
+                    answerTrueIcon.SetActive(true);
+                    StopCoroutine(quizTimerFunc());
 
-                Invoke("QAIcon", 2f);
+                    Invoke("QAIcon", 2f);
+                }
+                else
+                {
+                    answerFalseIcon.SetActive(true);
+
+                    Invoke("QAIcon", 2f);
+                }
             }
         }
 

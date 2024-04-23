@@ -23,7 +23,7 @@ public class MonsterB :Monsters
         monsterA_animator = gameObject.GetComponent<Animator>();
         monsterA_Audio = gameObject.GetComponent<AudioListener>();
 
-        hpBar = Instantiate(Monster_Spawn_Manager.instance.monsters_Prefab[1], transform.position, Quaternion.identity);
+        hpBar = Instantiate(Monster_Spawn_Manager.instance.hpBar_Prefab, transform.position, Quaternion.identity);
         hpBarLogic = hpBar.GetComponent<monHpBar>();
     }
 }

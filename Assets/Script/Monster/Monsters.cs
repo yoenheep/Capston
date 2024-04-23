@@ -40,13 +40,14 @@ public abstract class Monsters : MonoBehaviour
         monster_Pre_Health = monster_Max_Health;
         is_dead = false;
     }
-
-    void FixedUpdate()
+    private void Update()
     {
         hpBarLogic.maxHp = monster_Max_Health; // 최대 hp
         hpBarLogic.nowHp = monster_Pre_Health; // 현재 hp
         hpBarLogic.owner = this.transform; // 체력바 주인 설정
-
+    }
+    void FixedUpdate()
+    {
         Move();
     }
 

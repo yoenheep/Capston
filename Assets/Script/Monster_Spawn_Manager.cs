@@ -6,6 +6,7 @@ public class Monster_Spawn_Manager : MonoBehaviour
 {
     //몬스터가 저장될 배열
     public List<GameObject> monsters_Prefab = new List<GameObject>();
+    public GameObject hpBar_Prefab;
     public List<string> monsters_Name = new List<string>();
 
     //몬스터 탐색용 리스트

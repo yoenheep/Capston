@@ -19,7 +19,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] private GameObject setPopup;
 
     [Header("# quiz")]
-    [SerializeField] private GameObject quizPopup;
+    public GameObject quizPopup;
     public TMP_InputField answerField;
     public Image quizImg;
     [SerializeField] private Image quizTimer;
@@ -210,6 +210,7 @@ public class GameUI : MonoBehaviour
             if (answerField.text == "넌 못지나간다")
             {
                 answerTrueIcon.SetActive(true);
+                StopCoroutine(quizTimerFunc());
 
                 Invoke("QAIcon", 2f);
             }

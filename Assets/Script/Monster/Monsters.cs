@@ -51,17 +51,20 @@ public abstract class Monsters : MonoBehaviour
     //몬스터 기본 이동
     protected void Move()
     {
-        rb.velocity = new Vector2(monster_Speed * nextMove, rb.velocity.y);
-
-        Vector2 frontVec = new Vector2(rb.position.x + nextMove, rb.position.y);
-        Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
-        RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Platform"));
-
-        //rayHit가 null일 때 Pause를 실행해서 잠시 멈추고 Turn을 실행해서 반대로 이동
-        if (rayHit.collider == null)
+        if (GameUI.UIData.quizPopup.activeSelf == false)
         {
-            Pause();
-            Turn();
+            rb.velocity = new Vector2(monster_Speed * nextMove, rb.velocity.y);
+
+            Vector2 frontVec = new Vector2(rb.position.x + nextMove, rb.position.y);
+            Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
+            RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Platform"));
+
+            //rayHit가 null일 때 Pause를 실행해서 잠시 멈추고 Turn을 실행해서 반대로 이동
+            if (rayHit.collider == null)
+            {
+                Pause();
+                Turn();
+            }
         }
     }
 

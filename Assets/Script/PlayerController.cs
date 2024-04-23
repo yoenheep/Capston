@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
         //¿ø°Å¸®EX
         if (isRangedActive && bullet_curtime <= 0)
         {
-            if (Input.GetKey(KeyCode.Z))
+            if (Input.GetKey(KeyCode.A))
             {
                 Vector3 bulletDirection = spriteRenderer.flipX ? Vector3.left : Vector3.right;
                 Quaternion bulletRotation = spriteRenderer.flipX ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;

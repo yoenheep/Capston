@@ -17,7 +17,6 @@ public abstract class Monsters : MonoBehaviour
     protected float monster_Attack_Damage;
     protected bool is_dead;
     protected float lastAttackTime;
-    protected float pushForce = 80f;    //차후 수정
 
     protected GameObject hpBar;
     protected monHpBar hpBarLogic;
@@ -26,31 +25,29 @@ public abstract class Monsters : MonoBehaviour
     private Rigidbody2D rb;
     private int nextMove;
 
+    //몬스터 변수 초기화
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
+        monster_Pre_Health = monster_Max_Health;
+        is_dead = false;
+
         Think();
     }
 
-    private void OnEnable()
-    {
-        monster_Pre_Health = monster_Max_Health;
-        is_dead = false;
-    }
-    private void Update()
+    void FixedUpdate()
     {
         hpBarLogic.maxHp = monster_Max_Health; // 최대 hp
         hpBarLogic.nowHp = monster_Pre_Health; // 현재 hp
         hpBarLogic.owner = this.transform; // 체력바 주인 설정
-    }
-    void FixedUpdate()
-    {
+
         Move();
     }
 
+    //몬스터 기본 이동
     protected void Move()
     {
         rb.velocity = new Vector2(monster_Speed * nextMove, rb.velocity.y);
@@ -58,26 +55,39 @@ public abstract class Monsters : MonoBehaviour
         Vector2 frontVec = new Vector2(rb.position.x + nextMove, rb.position.y);
         Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
         RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Platform"));
+
+        //rayHit가 null일 때 Pause를 실행해서 잠시 멈추고 Turn을 실행해서 반대로 이동
         if (rayHit.collider == null)
         {
-            nextMove = 0;
-            anim.SetInteger("MoveSpeed", nextMove);
+            Pause();
             Turn();
         }
     }
 
+    //랜덤 이동 기능
     void Think()
     {
         nextMove = Random.Range(-1, 2);
+        //nextMove 값에 따라 애니메이션을 변경
         anim.SetInteger("MoveSpeed", nextMove);
 
+        //이동 상태일 경우 nextMove값이 1일 때 sprite를 뒤집음
         if (nextMove != 0)
             spriteRenderer.flipX = (nextMove == 1);
 
-        float nextThinkTime = Random.Range(2f, 5f);
+        float nextThinkTime = Random.Range(1f, 5f);
         Invoke("Think", nextThinkTime);
     }
 
+    //이동 중지
+    void Pause()
+    {
+        nextMove = 0;
+        anim.SetInteger("MoveSpeed", nextMove);
+    }
+
+    //nextMove값을 반대로 하고 sprite를 뒤집음
+    //Invoke의 Think를 초기화하고 실행
     void Turn()
     {
         nextMove *= -1;
@@ -87,40 +97,51 @@ public abstract class Monsters : MonoBehaviour
             spriteRenderer.flipX = (nextMove == 1);
 
         CancelInvoke();
-        Invoke("Think", 5);
+        Invoke("Think", 0.5f);
     }
 
-    public virtual void GetDamage(float damage,  Vector2 attack_Direction)
+    //데미지 값과 공격 방향 값을 받아 방어력 값을 뺀 데미지 값만큼 현재 체력 감소
+    //몬스터는 공격 방향의 반대 방향으로 밀려남
+    public virtual void GetDamage(float damage, Vector2 attack_Direction)
     {
-        if(!is_dead)
+        Rigidbody2D obj_Rb = gameObject.GetComponent<Rigidbody2D>();
+
+        //obj_Rb가 null이 아니고 is_dead가 false일 때
+        if (!is_dead && obj_Rb != null)
         {
-            Rigidbody2D obj_Rb = gameObject.GetComponent<Rigidbody2D>();
+            Vector2 present_Position = obj_Rb.position;
+            Vector2 direction = (present_Position - attack_Direction).normalized;
 
-            // 뒤로 밀어내는 힘 적용
-            if (obj_Rb != null)
+            float pushForce = 1.5f;
+
+            //공격방향과 pushForce값을 계산하여 몬스터가 1f 이상 밀려났을 때 좌표 값
+            Vector2 pushAmount = direction * Mathf.Max(pushForce, 1f);
+
+            monster_Pre_Health -= (damage - this.monster_Armor);
+
+            // 밀린 후의 위치 값
+            Vector2 newPosition = present_Position + pushAmount;
+
+            // 몬스터를 밀린 후의 위치로 이동
+            obj_Rb.MovePosition(newPosition);
+
+            if (monster_Pre_Health <= 0)
             {
-                Vector2 pushDirection = ((obj_Rb.position - attack_Direction)).normalized;
-                monster_Pre_Health -= (damage - this.monster_Armor);
-
-                Debug.Log("몬스터 현재 체력 : " + monster_Pre_Health);
-
-                //obj_Rb.AddForce(pushDirection * pushForce, ForceMode2D.Impulse);
-                rb.transform.position = new Vector2(rb.position.x + 2f, rb.position.y);
+                Die();
             }
-           if(monster_Pre_Health <= 0)
-           {
-                    Die();
-           }
         }
     }
 
-    protected virtual void GiveDamage(float damage, PlayerController obj) {
+    protected virtual void GiveDamage(float damage, PlayerController obj)
+    {
         obj.charac_PreHP -= damage;
     }
 
+    //몬스터가 죽었을 때
     protected virtual void Die()
     {
-        if(!is_dead)
+        //is_dead값을 true로 변경하고 충돌이 더이상 일어나지 않도록 Rigidbody를 false로 변경
+        if (!is_dead)
         {
             is_dead = true;
             gameObject.GetComponent<Rigidbody2D>().simulated = false;
@@ -133,15 +154,23 @@ public abstract class Monsters : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        //충돌이 일어난 오브젝트의 태그가 Player일 때
+        //PlayerController 컴포넌트가 있을 경우 GiveDamage를 실행
+        if (collision.gameObject.CompareTag("Player"))
         {
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-            Vector2 player_Location = collision.gameObject.transform.position;
 
-            if(player != null)
+            if (player != null)
             {
-                //GiveDamage(monster_Attack_Damage, player);
+                GiveDamage(monster_Attack_Damage, player);
             }
+        }
+        
+        //몬스터가 추락시 낙사 처리
+        if (collision.gameObject.CompareTag("DeadZone"))
+        {
+            Debug.Log("낙사");
+            Die();
         }
     }
 }

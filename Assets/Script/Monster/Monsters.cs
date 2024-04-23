@@ -37,13 +37,14 @@ public abstract class Monsters : MonoBehaviour
 
         Think();
     }
-
-    void FixedUpdate()
+    private void Update()
     {
         hpBarLogic.maxHp = monster_Max_Health; // 최대 hp
         hpBarLogic.nowHp = monster_Pre_Health; // 현재 hp
         hpBarLogic.owner = this.transform; // 체력바 주인 설정
-
+    }
+    void FixedUpdate()
+    {
         Move();
     }
 
@@ -148,7 +149,7 @@ public abstract class Monsters : MonoBehaviour
 
             // 체력바
             hpBar.gameObject.SetActive(false);
-            GameUI.UIData.Clear();
+            //GameUI.UIData.Clear(); 나중에 보스에게 쓸것
         }
     }
 

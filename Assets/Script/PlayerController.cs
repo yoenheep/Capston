@@ -187,4 +187,18 @@ public class PlayerController : MonoBehaviour
         //null 값인지 확인해서 true,false반환 null이 아니면 true,platform에 닿아있는상태면 false
         return rayHit.collider != null;
     }
+
+    //임시낙사
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        //몬스터가 추락시 낙사 처리
+        if (collision.gameObject.CompareTag("DeadZone"))
+        {
+            Debug.Log("낙사");
+            GameUI.UIData.overPopup.SetActive(true);
+
+            gameObject.GetComponent<PlayerController>().enabled = false;
+        }
+    }
 }

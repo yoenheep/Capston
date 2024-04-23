@@ -25,9 +25,11 @@ public class GameUI : MonoBehaviour
     [SerializeField] private Image quizTimer;
     private float quizTimer_max = 20f;
     private float quizTimer_now;
+    [SerializeField] private GameObject answerFalseIcon;
+    [SerializeField] private GameObject answerTrueIcon;
 
     [Header("# over")]
-    [SerializeField] private GameObject overPopup;
+    public GameObject overPopup;
 
     [Header("# clear")]
     [SerializeField] private GameObject clearPopup;
@@ -42,7 +44,6 @@ public class GameUI : MonoBehaviour
     [SerializeField] private Image hpBar;
     public float hp_max;
     public float hp_now;
-    private bool isDamaged = false;
 
     [Header("# weapon")]
     [SerializeField] private Image AWeaponImg;
@@ -151,27 +152,16 @@ public class GameUI : MonoBehaviour
         }
     }
 
-    void CanDamaged()
-    {
-        isDamaged = false;
-    }
-
     public void hp()
     {
-        if (Input.GetKeyDown(KeyCode.Q) && quizPopup.activeSelf == false)
+        if (quizPopup.activeSelf == false)
         {
-            PlayerController.playerData.charac_PreHP -= 10;
-            isDamaged = true;
-
-            if(hp_now <= 0)
+            if(PlayerController.playerData.charac_PreHP <= 0)
             {
                 overPopup.SetActive(true);
                 Time.timeScale = 0;
             }
-
-            Invoke("CanDamaged", 0.4f);
         }
-
         if (Input.GetKeyDown(KeyCode.E))
         {
             hp_now += 10;
@@ -189,28 +179,52 @@ public class GameUI : MonoBehaviour
         }
     }
 
+    void QAIcon()
+    {
+        if (answerFalseIcon.activeSelf == true)
+        {
+            answerFalseIcon.SetActive(false);
+            answerField.text = "";
+        }
+        else
+        {
+            answerTrueIcon.SetActive(false);
+            quizPopup.SetActive(false);
+            quizTimer_now = 20f;
+        } 
+    }
+
     public void quiz() //임시 퀴즈창
     {
         if (Input.GetKeyDown(KeyCode.R)) // 임시퀴즈몬스터키
         {
             answerField.text = "";
+            answerFalseIcon.SetActive(false);
+            answerTrueIcon.SetActive(false);
             quizPopup.SetActive(true);
             StartCoroutine(quizTimerFunc()); 
         }
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            if (answerField.text == "살려줘")
+            if (answerField.text == "넌 못지나간다")
             {
-                quizPopup.SetActive(false);
-                quizTimer_now = 20f;
+                answerTrueIcon.SetActive(true);
+
+                Invoke("QAIcon", 2f);
+            }
+            else
+            {
+                answerFalseIcon.SetActive(true);
+
+                Invoke("QAIcon", 2f);
             }
         }
 
         if (quizTimer_now <= 0.0f)
         {
             quizPopup.SetActive(false);
-            hp_now -= 10.0f;
+            PlayerController.playerData.charac_PreHP -= 10.0f;
             quizTimer_now = 20f;
         }
     }

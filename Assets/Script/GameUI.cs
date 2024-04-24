@@ -49,6 +49,9 @@ public class GameUI : MonoBehaviour
     [SerializeField] private Image AWeaponImg;
     [SerializeField] private Image SWeaponImg;
 
+    [Header("# description")]
+    [SerializeField] private Ray2D ray;
+
     //ΩÃ±€≈Ê
     public static GameUI UIData { get; private set; }
 

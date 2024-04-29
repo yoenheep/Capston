@@ -8,6 +8,12 @@ public class PlayerController : MonoBehaviour
     //캐릭터hp
     public float charac_MaxHP = 100f;
     public float charac_PreHP;
+    bool isHurt = false;
+    SpriteRenderer sr;
+    Color halfA = new Color(1, 1, 1, 0);
+    Color fullA = new Color(1, 1, 1, 1);
+
+    bool isknockback;
 
     //Animator animator;
     Rigidbody2D rigid;
@@ -54,7 +60,9 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         charac_PreHP = charac_MaxHP;
+        sr = GetComponent<SpriteRenderer>();
     }
+
 
     void Update()
     {
@@ -170,6 +178,64 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Hp(float damage, Vector2 pos)
+    {
+        if (isHurt)
+        {
+            return; // 무적 기간 동안은 데미지 무시
+        }
+
+        isHurt = true; // 무적 시작
+        //charac_PreHP -= damage; // 체력 감소
+
+        if (charac_PreHP <= 0)
+        {
+            // 죽음 처리
+        }
+        else
+        {
+            StartCoroutine(Knockback(transform.position.x - pos.x < 0 ? 1 : -1));
+            StartCoroutine(HpRoutine()); // 무적 기간 코루틴 시작
+            StartCoroutine(alphablink()); // 깜빡임 효과 시작
+        }
+    }
+    IEnumerator Knockback(float dir)
+    {
+        isknockback = true;
+        float ctime = 0;
+        while (ctime<0.2f)
+        {
+            if(transform.rotation.y ==0)
+            {
+                transform.Translate(Vector2.left * Speed * Time.deltaTime*dir);
+            }
+            else
+            {
+                transform.Translate(Vector2.left * Speed * Time.deltaTime * -1f * dir);
+            }
+            ctime += Time.deltaTime;
+            yield return null;
+        }
+        isknockback = false;
+    }
+
+    IEnumerator HpRoutine()
+    {
+        yield return new WaitForSeconds(3f); // 무적 기간
+        isHurt = false; // 무적 해제
+    }
+    IEnumerator alphablink()
+    {
+        while (isHurt)
+        {
+            yield return new WaitForSeconds(0.1f);
+            sr.color = halfA;
+            yield return new WaitForSeconds(0.1f);
+            sr.color = fullA;
+        }
+    }
+
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
@@ -202,6 +268,16 @@ public class PlayerController : MonoBehaviour
             GameUI.UIData.overPopup.SetActive(true);
 
             gameObject.GetComponent<PlayerController>().enabled = false;
+        }
+        if (collision.collider.CompareTag("Monster"))
+        {
+            var monster = collision.collider.GetComponentInParent<Monsters>();
+            if (monster != null && !isHurt)
+            { // `isHurt` 확인
+                Debug.Log(monster.damage);
+                Hp(monster.damage, collision.transform.position);
+                charac_PreHP -= monster.monster_Attack_Damage;
+            }
         }
     }
 }

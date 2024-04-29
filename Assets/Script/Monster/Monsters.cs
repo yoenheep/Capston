@@ -7,6 +7,9 @@ public abstract class Monsters : MonoBehaviour
     Animator anim;
     SpriteRenderer spriteRenderer;
 
+    //임시
+    public int damage = 10;
+
     //몬스터 기본 변수
     protected string monster_Name;
     protected float monster_Max_Health;
@@ -14,7 +17,7 @@ public abstract class Monsters : MonoBehaviour
     protected float monster_Armor;
     protected float monster_Speed;
     protected float monster_Attack_Speed;
-    protected float monster_Attack_Damage;
+    public float monster_Attack_Damage;
     protected bool is_dead;
     protected float lastAttackTime;
 
@@ -166,7 +169,7 @@ public abstract class Monsters : MonoBehaviour
 
             if (player != null)
             {
-                GiveDamage(monster_Attack_Damage, player);
+                //GiveDamage(monster_Attack_Damage, player);
             }
         }
         

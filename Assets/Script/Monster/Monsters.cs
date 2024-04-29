@@ -7,9 +7,6 @@ public abstract class Monsters : MonoBehaviour
     Animator anim;
     SpriteRenderer spriteRenderer;
 
-    //임시
-    public int damage = 10;
-
     //몬스터 기본 변수
     protected string monster_Name;
     protected float monster_Max_Health;
@@ -38,6 +35,8 @@ public abstract class Monsters : MonoBehaviour
         monster_Pre_Health = monster_Max_Health;
         is_dead = false;
 
+        lastAttackTime = 0;
+
         Think();
     }
     private void Update()
@@ -59,7 +58,8 @@ public abstract class Monsters : MonoBehaviour
             rb.velocity = new Vector2(monster_Speed * nextMove, rb.velocity.y);
 
             Vector2 frontVec = new Vector2(rb.position.x + nextMove, rb.position.y);
-            Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
+            //확인용
+            //Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
             RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Platform"));
 
             //rayHit가 null일 때 Pause를 실행해서 잠시 멈추고 Turn을 실행해서 반대로 이동
@@ -141,7 +141,16 @@ public abstract class Monsters : MonoBehaviour
 
     protected virtual void GiveDamage(float damage, PlayerController obj)
     {
-        obj.charac_PreHP -= damage;
+        if(obj != null)
+        {
+            //몬스터의 공격이 최초이거나 마지막 공격 후에 일정 시간이 지났을 경우
+            if(lastAttackTime >= lastAttackTime + this.monster_Attack_Speed || lastAttackTime == 0)
+            {
+                Debug.Log(lastAttackTime);
+                obj.charac_PreHP -= damage;
+                lastAttackTime = Time.time;
+            }
+        }
     }
 
     //몬스터가 죽었을 때
@@ -151,33 +160,25 @@ public abstract class Monsters : MonoBehaviour
         if (!is_dead)
         {
             is_dead = true;
-            gameObject.GetComponent<Rigidbody2D>().simulated = false;
+            //gameObject.GetComponent<Rigidbody2D>().simulated = false;
 
             // 체력바
             hpBar.gameObject.SetActive(false);
+            //죽으면 몬스터 객체 삭제
+            this.gameObject.SetActive(false);
             //GameUI.UIData.Clear(); 나중에 보스에게 쓸것
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionStay2D(Collision2D collision)
     {
-        //충돌이 일어난 오브젝트의 태그가 Player일 때
-        //PlayerController 컴포넌트가 있을 경우 GiveDamage를 실행
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
-
-            if (player != null)
-            {
-                //GiveDamage(monster_Attack_Damage, player);
-            }
-        }
-        
         //몬스터가 추락시 낙사 처리
         if (collision.gameObject.CompareTag("DeadZone"))
         {
             Debug.Log("낙사");
             Die();
         }
+
+
     }
 }

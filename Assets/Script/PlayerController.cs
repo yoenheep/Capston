@@ -258,7 +258,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //임시낙사
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionStay2D(Collision2D collision)
     {
 
         //몬스터가 추락시 낙사 처리
@@ -274,8 +274,8 @@ public class PlayerController : MonoBehaviour
             var monster = collision.collider.GetComponentInParent<Monsters>();
             if (monster != null && !isHurt)
             { // `isHurt` 확인
-                Debug.Log(monster.damage);
-                Hp(monster.damage, collision.transform.position);
+                Debug.Log(monster.monster_Attack_Damage);
+                Hp(monster.monster_Attack_Damage, collision.transform.position);
                 charac_PreHP -= monster.monster_Attack_Damage;
             }
         }

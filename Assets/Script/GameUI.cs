@@ -205,12 +205,12 @@ public class GameUI : MonoBehaviour
             answerFalseIcon.SetActive(false);
             answerTrueIcon.SetActive(false);
             quizPopup.SetActive(true);
-            StartCoroutine(quizTimerFunc()); 
+            StartCoroutine(quizTimerFunc());
         }
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            if (answerField.text == "") 
+            if (answerField.text == "")
             {
                 answerField.ActivateInputField();
             }

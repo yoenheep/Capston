@@ -2,60 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster_Bullet : MonoBehaviour
+public class Monster_Bullet : Monsters
 {
-    Animator ani;
+    Sprite monster_Image;
+    Animator monster_animator;
+    AudioListener monster_Audio;
 
-    float speed;
-    public float damage;
-    public Vector2 obj_Position;
-    public Vector2 target_Position;
-    public int direction;
-    LayerMask layer;
 
     protected void OnEnable()
     {
-        speed = 5f;
+        monster_Name = "bullet";
+        monster_Armor = 0f;
+        monster_Speed = 3f;
 
-        ani = gameObject.GetComponent<Animator>();
+        monster_animator = gameObject.GetComponent<Animator>();
+        monster_Audio = gameObject.GetComponent<AudioListener>();
     }
 
-    private void FixedUpdate()
+    Monster_Bullet(float damage)
     {
-        Invoke("DestroyBullet", 1.5f);
-        this.Move();
+        monster_Attack_Damage = damage;
+    }
 
-        Vector2 obj = this.gameObject.transform.position;
-        //Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
-        RaycastHit2D ray = Physics2D.Raycast(obj, Vector3.down, 1, LayerMask.GetMask("Player"));
+    private void Move(Vector2 target)
+    {
+        
+    }
 
-        if (ray.collider != null)
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
         {
-            if (ray.collider.tag == "Player")
-            {
-                ray.collider.GetComponent<PlayerController>().Hp(damage, obj);
-                Debug.Log("∏Ì¡ﬂ");
-                DestroyBullet();
-            }
+            Debug.Log("¡¢√À");
         }
-    }
-
-    public void SetDamage(float damage)
-    {
-        this.damage = damage;
-    }
-    public void SetMove(Vector2 obj_Position, int direction)
-    {
-        this.obj_Position = obj_Position;
-        this.direction = direction;
-    }
-    private void Move()
-    {
-        transform.Translate(obj_Position  * direction * speed * Time.deltaTime);
-    }
-
-    private void DestroyBullet()
-    {
-        Destroy(this.gameObject);
     }
 }

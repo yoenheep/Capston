@@ -183,24 +183,21 @@ public class PlayerController : MonoBehaviour
         if (isHurt)
         {
             return; // 무적 기간 동안은 데미지 무시
-        } else if(!isHurt)
-        {
-            isHurt = true; // 무적 시작
-                           //charac_PreHP -= damage; // 체력 감소
-            charac_PreHP -= damage;
-            if (charac_PreHP <= 0)
-            {
-                // 죽음 처리
-            }
-            else
-            {
-                StartCoroutine(Knockback(transform.position.x - pos.x < 0 ? 1 : -1));
-                StartCoroutine(HpRoutine()); // 무적 기간 코루틴 시작
-                StartCoroutine(alphablink()); // 깜빡임 효과 시작
-            }
         }
 
-        
+        isHurt = true; // 무적 시작
+        //charac_PreHP -= damage; // 체력 감소
+
+        if (charac_PreHP <= 0)
+        {
+            // 죽음 처리
+        }
+        else
+        {
+            StartCoroutine(Knockback(transform.position.x - pos.x < 0 ? 1 : -1));
+            StartCoroutine(HpRoutine()); // 무적 기간 코루틴 시작
+            StartCoroutine(alphablink()); // 깜빡임 효과 시작
+        }
     }
     IEnumerator Knockback(float dir)
     {
@@ -261,7 +258,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //임시낙사
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionStay2D(Collision2D collision)
     {
 
         //몬스터가 추락시 낙사 처리
@@ -272,14 +269,15 @@ public class PlayerController : MonoBehaviour
 
             gameObject.GetComponent<PlayerController>().enabled = false;
         }
-        /*if (collision.collider.CompareTag("Monster"))
+        if (collision.collider.CompareTag("Monster"))
         {
             var monster = collision.collider.GetComponentInParent<Monsters>();
-            if (monster != null)
+            if (monster != null && !isHurt)
             { // `isHurt` 확인
                 Debug.Log(monster.monster_Attack_Damage);
                 Hp(monster.monster_Attack_Damage, collision.transform.position);
+                charac_PreHP -= monster.monster_Attack_Damage;
             }
-        }*/
+        }
     }
 }

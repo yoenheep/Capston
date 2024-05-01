@@ -139,15 +139,15 @@ public abstract class Monsters : MonoBehaviour
         }
     }
 
-    protected virtual void MeleeDamage(float damage, PlayerController obj)
+    protected virtual void GiveDamage(float damage, PlayerController obj)
     {
-        if (obj != null)
+        if(obj != null)
         {
             //몬스터의 공격이 최초이거나 마지막 공격 후에 일정 시간이 지났을 경우
-            if(Time.time >= lastAttackTime + this.monster_Attack_Speed || lastAttackTime == 0)
+            if(lastAttackTime >= lastAttackTime + this.monster_Attack_Speed || lastAttackTime == 0)
             {
-                obj.Hp(monster_Attack_Damage, rb.position);
-
+                Debug.Log(lastAttackTime);
+                obj.charac_PreHP -= damage;
                 lastAttackTime = Time.time;
             }
         }
@@ -178,5 +178,7 @@ public abstract class Monsters : MonoBehaviour
             Debug.Log("낙사");
             Die();
         }
+
+
     }
 }

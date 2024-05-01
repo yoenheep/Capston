@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5546769154402650659}
   - component: {fileID: 7132664774724313589}
   - component: {fileID: 7722944814702453936}
+  - component: {fileID: 2031788823179688593}
   - component: {fileID: 8673328954673454180}
-  - component: {fileID: 5078884591660588197}
   m_Layer: 6
   m_Name: MonsterC
   m_TagString: Monster
@@ -136,22 +136,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8673328954673454180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3491684017866995724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 392e449e7a377914187cacec5d48af2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monster_Attack_Damage: 0
-  bullet: {fileID: 2504111320158678109, guid: 6cf6e2e1342cd204e8c52b8ea98d02e1, type: 3}
---- !u!61 &5078884591660588197
-BoxCollider2D:
+--- !u!70 &2031788823179688593
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -182,16 +168,22 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.24}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.125, y: 2.0625}
-    newSize: {x: 2.125, y: 2.0625}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.5, y: 1.2}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1.58, y: 1.95}
+  m_Direction: 0
+--- !u!114 &8673328954673454180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3491684017866995724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392e449e7a377914187cacec5d48af2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  monster_Attack_Damage: 0
+  target: {fileID: 0}
+  bullet: {fileID: 2504111320158678109, guid: 6cf6e2e1342cd204e8c52b8ea98d02e1, type: 3}

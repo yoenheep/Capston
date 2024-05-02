@@ -43,7 +43,7 @@ public class Monster_Spawn_Manager : MonoBehaviour
             Transform tr = monsters_Spawn_Point[i].transform.parent;
             //GameObject createdPrefab = Instantiate(monstersDB[monsters_Name[Random.Range(0, monsters_Prefab.Count)]], position, Quaternion.identity);
             //특정몬스터 생성용
-            GameObject createdPrefab = Instantiate(monstersDB[monsters_Name[1]], position, Quaternion.identity);
+            GameObject createdPrefab = Instantiate(monstersDB[monsters_Name[2]], position, Quaternion.identity);
             createdPrefab.transform.SetParent(tr, false);
             Debug.Log("소환");
         }

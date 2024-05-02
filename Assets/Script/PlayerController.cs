@@ -247,8 +247,11 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        float hor = Input.GetAxisRaw("Horizontal");
-        rigid.velocity = new Vector2(hor * defaultSpeed, rigid.velocity.y);
+        if (GameUI.UIData.quizPopup.activeSelf == false)
+        {
+            float hor = Input.GetAxisRaw("Horizontal");
+            rigid.velocity = new Vector2(hor * defaultSpeed, rigid.velocity.y);
+        } 
     }
 
     bool IsGrounded()

@@ -7,7 +7,6 @@ public class MonsterB :Monsters
     Sprite monster_Image;
     Animator monster_animator;
     AudioListener monster_Audio;
-    GameUI gameUi = new GameUI();
 
     protected void OnEnable()
     {
@@ -29,7 +28,7 @@ public class MonsterB :Monsters
         if(collision.gameObject.CompareTag("Player"))
         {
             //수정필요
-            //gameUi.quiz();
+            GameUI.UIData.quiz();
             Debug.Log("quiz Time!");
         }
     }

@@ -95,8 +95,8 @@ public class GameUI : MonoBehaviour
         }
 
         time(); // 타임표시
-        quiz(); // quiz 임시키
         hp(); // HP 임시키
+        quiz_on(); // 퀴즈켜지면
         hp_now = PlayerController.playerData.charac_PreHP;
         hpBar.fillAmount = hp_now / hp_max; // 캐릭터 hpbar
     }
@@ -199,7 +199,7 @@ public class GameUI : MonoBehaviour
 
     public void quiz() //임시 퀴즈창
     {
-        if (Input.GetKeyDown(KeyCode.R)) // 임시퀴즈몬스터키
+        if (quizPopup.activeSelf == false) // 임시퀴즈몬스터키
         {
             answerField.text = "";
             answerFalseIcon.SetActive(false);
@@ -207,36 +207,44 @@ public class GameUI : MonoBehaviour
             quizPopup.SetActive(true);
             StartCoroutine(quizTimerFunc());
         }
+    }
 
-        if (Input.GetKeyDown(KeyCode.Return))
+    void quiz_on()
+    {
+        if(quizPopup.activeSelf == true)
         {
-            if (answerField.text == "")
+            if (Input.GetKeyDown(KeyCode.Return))
             {
-                answerField.ActivateInputField();
-            }
-            else
-            {
-                if (answerField.text == "넌 못지나간다")
+                Debug.Log("넌가");
+                if (answerField.text == "")
                 {
-                    answerTrueIcon.SetActive(true);
-                    StopCoroutine(quizTimerFunc());
-
-                    Invoke("QAIcon", 2f);
+                    answerField.ActivateInputField();
                 }
                 else
                 {
-                    answerFalseIcon.SetActive(true);
+                    if (answerField.text == "넌 못지나간다")
+                    {
+                        answerTrueIcon.SetActive(true);
+                        StopCoroutine(quizTimerFunc());
 
-                    Invoke("QAIcon", 2f);
+                        Invoke("QAIcon", 2f);
+                    }
+                    else
+                    {
+                        answerFalseIcon.SetActive(true);
+
+                        Invoke("QAIcon", 2f);
+                    }
                 }
             }
-        }
 
-        if (quizTimer_now <= 0.0f)
-        {
-            quizPopup.SetActive(false);
-            PlayerController.playerData.charac_PreHP -= 10.0f;
-            quizTimer_now = 20f;
+            if (quizTimer_now <= 0.0f)
+            {
+                Debug.Log("ㅋ");
+                quizPopup.SetActive(false);
+                PlayerController.playerData.charac_PreHP -= 10.0f;
+                quizTimer_now = 20f;
+            }
         }
     }
 

@@ -43,8 +43,17 @@ public class PlayerController : MonoBehaviour
     public float JumpPower;
 
     // 무기 선택 상태
-    private bool isMeleeActive = true; // 근접 무기 활성화 상태
+    private bool isMeleeActive = false; // 근접 무기 활성화 상태
     private bool isRangedActive = false; // 원거리 무기 활성화 상태
+
+    //무기관련 임시코드
+    int[] weapon_item = new int[2];
+    GameObject nearObject;
+    bool iDown;
+    public GameObject[] weapons;
+    public bool[] hasWeapons;
+    int weaponIndex = -1;
+    int weapon_Stack = 0;//무기들어온순서
 
     //싱글톤
     public static PlayerController playerData { get; private set; }
@@ -66,19 +75,49 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        GetInput();
+        Interation();
+
         if (GameUI.UIData.quizPopup.activeSelf == false)
         {
             // 무기 선택을 전환
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (Input.GetKeyDown(KeyCode.Alpha1))//근접
             {
-                isMeleeActive = true;
-                isRangedActive = false;
+                if(weapon_item[0]==0)
+                {
+                    isMeleeActive = true;
+                    isRangedActive = false;
+                }
+                else if(weapon_item[0]==1)
+                {
+                    isMeleeActive = false;
+                    isRangedActive = true;
+                }
+                else if(weaponIndex > 0)
+                {
+                    isMeleeActive = false;
+                    isRangedActive = false;
+                }
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                isMeleeActive = false;
-                isRangedActive = true;
+                if (weapon_item[1] == 0)
+                {
+                    isMeleeActive = true;
+                    isRangedActive = false;
+                }
+                else if (weapon_item[1] == 1)
+                {
+                    isMeleeActive = false;
+                    isRangedActive = true;
+                }
+                else if (weaponIndex > 0)
+                {
+                    isMeleeActive = false;
+                    isRangedActive = false;
+                }
             }
+            
             //원거리EX
             if (isRangedActive && bullet_curtime <= 0)
             {
@@ -177,6 +216,56 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    void FixedUpdate()
+    {
+        if (GameUI.UIData.quizPopup.activeSelf == false)
+        {
+            float hor = Input.GetAxisRaw("Horizontal");
+            rigid.velocity = new Vector2(hor * defaultSpeed, rigid.velocity.y);
+        }
+    }
+
+    void GetInput()
+    {
+        iDown = Input.GetButtonDown("Interation");
+    }
+
+    void Interation()
+    {
+        if(iDown && nearObject != null)
+        {
+            if(nearObject.tag == "Weapon")
+            {
+                Item item = nearObject.GetComponent<Item>();
+                weaponIndex = item.Weapon;
+                hasWeapons[weaponIndex] = true;
+                Destroy(nearObject);
+                if(weapon_Stack==0)
+                {
+                    weapon_item[0] = weaponIndex;
+                    weapon_Stack++;
+                    Debug.Log(weapon_item[0]);
+                }
+                else if(weapon_Stack==1)
+                {
+                    weapon_item[1] = weaponIndex;
+                    Debug.Log(weapon_item[1]);
+                }
+
+                if (weapon_item[0] == 0)
+                {
+                    isMeleeActive = true;
+                    isRangedActive = false;
+                }
+                else if (weapon_item[0] == 1)
+                {
+                    isMeleeActive = false;
+                    isRangedActive = true;
+                }
+
+            }
+        }
+    }
 
     public void Hp(float damage, Vector2 pos)
     {
@@ -245,15 +334,6 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireCube(pos.position, BoxSize);
     }
 
-    void FixedUpdate()
-    {
-        if (GameUI.UIData.quizPopup.activeSelf == false)
-        {
-            float hor = Input.GetAxisRaw("Horizontal");
-            rigid.velocity = new Vector2(hor * defaultSpeed, rigid.velocity.y);
-        } 
-    }
-
     bool IsGrounded()
     {
         Debug.DrawRay(rigid.position, Vector3.down * 1.2f, new Color(0, 1, 0));
@@ -284,5 +364,17 @@ public class PlayerController : MonoBehaviour
                 Hp(monster.monster_Attack_Damage, collision.transform.position);
             }
         }*/
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Weapon");
+        {
+            nearObject = collision.gameObject;
+            Debug.Log(nearObject);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        
     }
 }

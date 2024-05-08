@@ -33,15 +33,34 @@ public class MonsterC : Monsters
     }
     void FixedUpdate()
     {
-        
-        Move();
+        this.Move();
         SearchTarget();
+    }
+
+    protected new void Move()
+    {
+        if (GameUI.UIData.quizPopup.activeSelf == false)
+        {
+            rb.velocity = new Vector2(monster_Speed * nextMove, rb.velocity.y);
+
+            Vector2 frontVec = new Vector2(rb.position.x + nextMove, rb.position.y -1f);
+            //확인용
+            Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
+            RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Platform"));
+
+            //rayHit가 null일 때 Pause를 실행해서 잠시 멈추고 Turn을 실행해서 반대로 이동
+            if (rayHit.collider == null)
+            {
+                Pause();
+                Turn();
+            }
+        }
     }
 
     void SearchTarget()
     {
         Vector3 diretion = (gameObject.GetComponent<SpriteRenderer>().flipX ? Vector3.right : Vector3.left);
-        //확인용
+        //사거리 확인용
         //Debug.DrawRay(gameObject.transform.position, diretion * range, new Color(0, 1, 0));
         RaycastHit2D rayHit = Physics2D.Raycast(gameObject.transform.position, diretion, range, LayerMask.GetMask("Player"));
         

@@ -39,11 +39,18 @@ public class Monster_Spawn_Manager : MonoBehaviour
         //몬스터 스폰 포인트에 monsterDB에 저장된 몬스터를 소환
         for (int i = 0; i < monsters_Spawn_Point.Count; i++)
         {
-            Vector2 position = monsters_Spawn_Point[i].transform.localPosition;
-            Transform tr = monsters_Spawn_Point[i].transform.parent;
-            //GameObject createdPrefab = Instantiate(monstersDB[monsters_Name[Random.Range(0, monsters_Prefab.Count)]], position, Quaternion.identity);
+            //몬스터 크기에 따른 소환 위치 조정
+            //수정 중
+            int mon = Random.Range(0, monsters_Prefab.Count);
             //특정몬스터 생성용
-            GameObject createdPrefab = Instantiate(monstersDB[monsters_Name[1]], position, Quaternion.identity);
+            mon = 2;
+            BoxCollider2D box = monstersDB[monsters_Name[mon]].gameObject.GetComponent<BoxCollider2D>();
+            float monster_Height = monstersDB[monsters_Name[mon]].gameObject.transform.localScale.y;
+            Vector2 position = new Vector2(monsters_Spawn_Point[i].transform.localPosition.x, monsters_Spawn_Point[i].transform.localPosition.y+ monster_Height);
+
+            Transform tr = monsters_Spawn_Point[i].transform.parent;
+            GameObject createdPrefab = Instantiate(monstersDB[monsters_Name[mon]], position, Quaternion.identity);
+
             createdPrefab.transform.SetParent(tr, false);
             Debug.Log("소환");
         }

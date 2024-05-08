@@ -8,7 +8,6 @@ public class MonsterA : Monsters
     Sprite monster_Image;
     Animator monsterA_animator;
     AudioListener monsterA_Audio;
-    
 
     protected void OnEnable()
     {
@@ -16,7 +15,7 @@ public class MonsterA : Monsters
         monster_Armor = 0f;
         monster_Speed = 2f;
         monster_Attack_Damage = 10f;
-        monster_Attack_Speed = 0f;
+        monster_Attack_Speed = 2f;
         monster_Max_Health = 50f;
         monster_Pre_Health = monster_Max_Health;
         
@@ -28,11 +27,11 @@ public class MonsterA : Monsters
         hpBarLogic = hpBar.GetComponent<monHpBar>();
     }
 
-    
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
+            //수정 필요 사항 : 반응이 좀 늦게 오는 듯함
             MeleeDamage(monster_Attack_Damage, collision.gameObject.GetComponent<PlayerController>());
         }
     }

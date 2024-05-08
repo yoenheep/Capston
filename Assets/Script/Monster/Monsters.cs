@@ -22,8 +22,8 @@ public abstract class Monsters : MonoBehaviour
     protected monHpBar hpBarLogic;
 
     //몬스터 이동 관련 변수
-    private Rigidbody2D rb;
-    private int nextMove;
+    protected Rigidbody2D rb;
+    protected int nextMove;
 
     //몬스터 변수 초기화
     private void Awake()
@@ -34,7 +34,6 @@ public abstract class Monsters : MonoBehaviour
 
         monster_Pre_Health = monster_Max_Health;
         is_dead = false;
-
         lastAttackTime = 0;
 
         Think();
@@ -57,9 +56,9 @@ public abstract class Monsters : MonoBehaviour
         {
             rb.velocity = new Vector2(monster_Speed * nextMove, rb.velocity.y);
 
-            Vector2 frontVec = new Vector2(rb.position.x + nextMove, rb.position.y);
+            Vector2 frontVec = new Vector2(rb.position.x + nextMove, rb.position.y - gameObject.transform.localScale.y);
             //확인용
-            //Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
+            Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
             RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Platform"));
 
             //rayHit가 null일 때 Pause를 실행해서 잠시 멈추고 Turn을 실행해서 반대로 이동
@@ -68,11 +67,14 @@ public abstract class Monsters : MonoBehaviour
                 Pause();
                 Turn();
             }
+        } else
+        {
+            rb.velocity = new Vector2(0, 0);
         }
     }
 
     //랜덤 이동 기능
-    void Think()
+    protected void Think()
     {
         nextMove = Random.Range(-1, 2);
         //nextMove 값에 따라 애니메이션을 변경
@@ -87,7 +89,7 @@ public abstract class Monsters : MonoBehaviour
     }
 
     //이동 중지
-    void Pause()
+    protected void Pause()
     {
         nextMove = 0;
         anim.SetInteger("MoveSpeed", nextMove);
@@ -95,7 +97,7 @@ public abstract class Monsters : MonoBehaviour
 
     //nextMove값을 반대로 하고 sprite를 뒤집음
     //Invoke의 Think를 초기화하고 실행
-    void Turn()
+    protected void Turn()
     {
         nextMove *= -1;
         anim.SetInteger("MoveSpeed", nextMove);
@@ -130,6 +132,12 @@ public abstract class Monsters : MonoBehaviour
             Vector2 newPosition = present_Position + pushAmount;
 
             // 몬스터를 밀린 후의 위치로 이동
+            
+
+            RaycastHit2D rayHit = Physics2D.Raycast(newPosition, Vector3.down, 1, LayerMask.GetMask("Platform"));
+
+            
+
             obj_Rb.MovePosition(newPosition);
 
             if (monster_Pre_Health <= 0)

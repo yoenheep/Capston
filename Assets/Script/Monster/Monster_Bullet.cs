@@ -22,7 +22,7 @@ public class Monster_Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Invoke("DestroyBullet", 1.5f);
+        Invoke("DestroyBullet", 2f);
         this.Move();
 
         Vector2 obj = this.gameObject.transform.position;
@@ -34,7 +34,7 @@ public class Monster_Bullet : MonoBehaviour
             if (ray.collider.tag == "Player")
             {
                 ray.collider.GetComponent<PlayerController>().Hp(damage, obj);
-                Debug.Log("명중");
+                //Debug.Log("명중");
                 DestroyBullet();
             }
         }

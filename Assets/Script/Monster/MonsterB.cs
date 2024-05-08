@@ -7,7 +7,6 @@ public class MonsterB :Monsters
     Sprite monster_Image;
     Animator monster_animator;
     AudioListener monster_Audio;
-
     protected void OnEnable()
     {
         monster_Name = "bbb";
@@ -23,11 +22,11 @@ public class MonsterB :Monsters
         hpBarLogic = hpBar.GetComponent<monHpBar>();
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (collision.CompareTag("Monster"))
         {
-            //수정필요
+            //수정 중
             GameUI.UIData.quiz();
             Debug.Log("quiz Time!");
         }

@@ -22,11 +22,16 @@ public class GameUI : MonoBehaviour
     public GameObject quizPopup;
     public TMP_InputField answerField;
     public Image quizImg;
-    [SerializeField] private Image quizTimer;
+    public Image quizTimer;
     private float quizTimer_max = 20f;
     private float quizTimer_now;
     [SerializeField] private GameObject answerFalseIcon;
-    [SerializeField] private GameObject answerTrueIcon;
+    public GameObject answerTrueIcon;
+    [SerializeField] private List<int> QList;
+    [SerializeField] private List<Sprite> SpriteList = new List<Sprite>();
+    [SerializeField] private List<string> AList;
+    private int rand;
+    private int max = 2;
 
     [Header("# over")]
     public GameObject overPopup;
@@ -68,6 +73,14 @@ public class GameUI : MonoBehaviour
 
         quizTimer_now = quizTimer_max;
         hp_max = PlayerController.playerData.charac_MaxHP;
+
+        QList = new List<int>() {0,1};
+        AList = new List<string>() {"°³Æ÷µ¿", "Ä©¼Ö"};
+    }
+
+    private void Start()
+    {
+        rand = Random.Range(0, max);
     }
 
     private void Update()
@@ -211,41 +224,42 @@ public class GameUI : MonoBehaviour
 
     void quiz_on()
     {
-        if(quizPopup.activeSelf == true)
-        {
-            if (Input.GetKeyDown(KeyCode.Return))
-            {
-                Debug.Log("³Í°¡");
-                if (answerField.text == "")
-                {
-                    answerField.ActivateInputField();
-                }
-                else
-                {
-                    if (answerField.text == "³Í ¸øÁö³ª°£´Ù")
-                    {
-                        answerTrueIcon.SetActive(true);
-                        StopCoroutine(quizTimerFunc());
+        if(quizPopup.activeSelf == true) {
+          
+            quizImg.sprite = SpriteList[rand];
 
-                        Invoke("QAIcon", 2f);
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    if (answerField.text == "")
+                    {
+                        answerField.ActivateInputField();
                     }
                     else
                     {
-                        answerFalseIcon.SetActive(true);
+                        if (answerField.text == AList[rand])
+                        {
+                            answerTrueIcon.SetActive(true);
+                            StopCoroutine(quizTimerFunc());
 
-                        Invoke("QAIcon", 2f);
+                            Invoke("QAIcon", 2f);
+                        }
+                        else
+                        {
+                            answerFalseIcon.SetActive(true);
+
+                            Invoke("QAIcon", 2f);
+                        }
                     }
                 }
-            }
+            
 
-            if (quizTimer_now <= 0.0f)
-            {
-                Debug.Log("¤»");
-                quizPopup.SetActive(false);
-                PlayerController.playerData.charac_PreHP -= 10.0f;
-                quizTimer_now = 20f;
-            }
+            
         }
+
+        //QList.RemoveAt(rand);
+        //AList.RemoveAt(rand);
+        //SpriteList.RemoveAt(rand);
+        //max--;
     }
 
     public void Clear()

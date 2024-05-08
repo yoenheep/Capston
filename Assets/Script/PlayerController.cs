@@ -47,13 +47,13 @@ public class PlayerController : MonoBehaviour
     private bool isRangedActive = false; // 원거리 무기 활성화 상태
 
     //무기관련 임시코드
-    int[] weapon_item = new int[2];
+    int[] weapon_item = new int[2]; // 인벤토리 참조 [0-0 = 근접 / 0-1 = 원거리 / 1-0 = 근접 / 1-1 = 원거리]
     GameObject nearObject;
     bool iDown;
     public GameObject[] weapons;
     public bool[] hasWeapons;
     int weaponIndex = -1;
-    int weapon_Stack = 0;//무기들어온순서
+    int weapon_Stack = 0; //무기들어온순서
 
     //싱글톤
     public static PlayerController playerData { get; private set; }

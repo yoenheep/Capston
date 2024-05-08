@@ -132,11 +132,16 @@ public abstract class Monsters : MonoBehaviour
             // 몬스터를 밀린 후의 위치로 이동
             obj_Rb.MovePosition(newPosition);
 
+            //if (GameUI.UIData.answerTrueIcon.activeSelf == true) // 이따가 보기로하죠
+            //{
+            //    monster_Pre_Health = 0;
+            //}
+
             if (monster_Pre_Health <= 0)
             {
                 Die();
             }
-        }
+        }  
     }
 
     protected virtual void MeleeDamage(float damage, PlayerController obj)

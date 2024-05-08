@@ -2919,12 +2919,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: e8ced80c1d075e44a891a17313f5e8ca, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 37f7251ae10894348a326281d9590414, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 5, y: 5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2939,7 +2939,7 @@ RectTransform:
   m_GameObject: {fileID: 105346955}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.39, y: 0.39, z: 0.39}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 354683872}
@@ -3041,18 +3041,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.1929251, y: 0.3215418}
+  m_Offset: {x: -0.088492155, y: 0.016947746}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 10, y: 10}
-    newSize: {x: 1, y: 2}
+    oldSize: {x: 5, y: 5}
+    newSize: {x: 5, y: 5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.5627213, y: 9.356916}
+  m_Size: {x: 2.951891, y: 4.6748333}
   m_EdgeRadius: 0
 --- !u!1 &125109202
 GameObject:
@@ -6547,7 +6547,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 5.37, y: 0.55}
+  m_AnchoredPosition: {x: 3, y: 0.55}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &366823983
@@ -7279,6 +7279,11 @@ MonoBehaviour:
   quizTimer: {fileID: 737526827}
   answerFalseIcon: {fileID: 183627877}
   answerTrueIcon: {fileID: 348712067}
+  QList: 
+  SpriteList:
+  - {fileID: 21300000, guid: 36419cfaccc0116428f2de56ab8ba5f9, type: 3}
+  - {fileID: 21300000, guid: 33907b17a7aa46e44b141cae8fdbcc65, type: 3}
+  AList: []
   overPopup: {fileID: 1004325952}
   clearPopup: {fileID: 817187743}
   clearTimeTxt: {fileID: 802220997}
@@ -8589,7 +8594,7 @@ Transform:
   m_GameObject: {fileID: 949639821}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 10.75, z: -50}
+  m_LocalPosition: {x: 0, y: 4, z: -50}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -22,7 +22,7 @@ public class GameUI : MonoBehaviour
     public GameObject quizPopup;
     public TMP_InputField answerField;
     public Image quizImg;
-    public Image quizTimer;
+    [SerializeField] private Image quizTimer;
     private float quizTimer_max = 20f;
     private float quizTimer_now;
     [SerializeField] private GameObject answerFalseIcon;
@@ -76,11 +76,6 @@ public class GameUI : MonoBehaviour
 
         QList = new List<int>() {0,1};
         AList = new List<string>() {"°³Æ÷µ¿", "Ä©¼Ö"};
-    }
-
-    private void Start()
-    {
-        rand = Random.Range(0, max);
     }
 
     private void Update()
@@ -225,8 +220,11 @@ public class GameUI : MonoBehaviour
     void quiz_on()
     {
         if(quizPopup.activeSelf == true) {
-          
+
+            rand = Random.Range(0, max);
             quizImg.sprite = SpriteList[rand];
+
+            Debug.Log(AList[rand]);
 
                 if (Input.GetKeyDown(KeyCode.Return))
                 {
@@ -253,9 +251,13 @@ public class GameUI : MonoBehaviour
                 }
             
 
-            
+            if (quizTimer_now <= 0.0f)
+            {
+                quizPopup.SetActive(false);
+                PlayerController.playerData.charac_PreHP -= 10.0f;
+                quizTimer_now = 20f;
+            }
         }
-
         //QList.RemoveAt(rand);
         //AList.RemoveAt(rand);
         //SpriteList.RemoveAt(rand);

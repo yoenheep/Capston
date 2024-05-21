@@ -128,6 +128,7 @@ public abstract class Monsters : MonoBehaviour
 
             monster_Pre_Health -= (damage - this.monster_Armor);
 
+            Debug.Log(monster_Pre_Health);
             // 밀린 후의 위치 값
             Vector2 newPosition = present_Position + pushAmount;
 

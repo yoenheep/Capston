@@ -140,21 +140,20 @@ public class PlayerController : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.A))
                 {
-                    //근접무기
+                    // 근접 무기
                     damage = 10f;
                     Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, BoxSize, 0);
-                    Vector2 collisionPoint = Vector2.zero;
 
                     foreach (Collider2D collider in collider2Ds)
                     {
-                        if (collider.tag == "Monster")
+                        // 이제 몬스터 콜라이더는 트리거로 설정되어야 합니다.
+                        if (collider.CompareTag("Monster"))
                         {
-                            collisionPoint = collider.ClosestPoint(pos.position);
-                            collider.GetComponent<Monsters>().GetDamage(damage, collisionPoint);
+                            // OnTriggerEnter 함수를 사용하여 몬스터의 충돌을 처리하고 데미지를 적용합니다.
+                            collider.GetComponent<Monsters>().GetDamage(damage, pos.position);
                         }
                     }
 
-                    //animator.SetTrigger("atk");
                     curTime = coolTime;
                 }
             }
@@ -222,6 +221,18 @@ public class PlayerController : MonoBehaviour
         {
             float hor = Input.GetAxisRaw("Horizontal");
             rigid.velocity = new Vector2(hor * defaultSpeed, rigid.velocity.y);
+        }
+    }
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Monster"))
+        {
+            // 몬스터에게 데미지를 입힙니다.
+            Monsters monster = other.GetComponent<Monsters>();
+            if (monster != null)
+            {
+                monster.GetDamage(damage, transform.position);
+            }
         }
     }
 
@@ -344,27 +355,6 @@ public class PlayerController : MonoBehaviour
     }
 
     //임시낙사
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-
-        //몬스터가 추락시 낙사 처리
-        if (collision.gameObject.CompareTag("DeadZone"))
-        {
-            Debug.Log("낙사");
-            GameUI.UIData.overPopup.SetActive(true);
-
-            gameObject.GetComponent<PlayerController>().enabled = false;
-        }
-        /*if (collision.collider.CompareTag("Monster"))
-        {
-            var monster = collision.collider.GetComponentInParent<Monsters>();
-            if (monster != null)
-            { // `isHurt` 확인
-                Debug.Log(monster.monster_Attack_Damage);
-                Hp(monster.monster_Attack_Damage, collision.transform.position);
-            }
-        }*/
-    }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag == "Weapon");

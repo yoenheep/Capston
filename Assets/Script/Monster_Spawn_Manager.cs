@@ -43,7 +43,7 @@ public class Monster_Spawn_Manager : MonoBehaviour
             //수정 중
             int mon = Random.Range(0, monsters_Prefab.Count);
             //특정몬스터 생성용
-            mon = 2;
+            mon = 0;
             BoxCollider2D box = monstersDB[monsters_Name[mon]].gameObject.GetComponent<BoxCollider2D>();
             float monster_Height = monstersDB[monsters_Name[mon]].gameObject.transform.localScale.y;
             Vector2 position = new Vector2(monsters_Spawn_Point[i].transform.localPosition.x, monsters_Spawn_Point[i].transform.localPosition.y+ monster_Height);

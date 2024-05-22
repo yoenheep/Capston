@@ -130,7 +130,7 @@ public abstract class Monsters : MonoBehaviour
 
             Debug.Log(monster_Pre_Health);
             // 밀린 후의 위치 값
-            Vector2 newPosition = present_Position + pushAmount;
+            Vector2 newPosition = new Vector2(present_Position.x + pushAmount.x, present_Position.y);
 
             // 몬스터를 밀린 후의 위치로 이동
             

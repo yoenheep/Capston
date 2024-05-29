@@ -2906,6 +2906,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &78527895 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3070604336711176918, guid: aef3b88f41020c944aac2cd98c61c9c5, type: 3}
+  m_PrefabInstance: {fileID: 8317408455106466679}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &87733143
 GameObject:
   m_ObjectHideFlags: 0
@@ -9767,6 +9772,11 @@ Grid:
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
   m_CellSwizzle: 0
+--- !u!1 &730586148 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1984108036025234722, guid: 7523fe0332617864ab9ce604a4af7d66, type: 3}
+  m_PrefabInstance: {fileID: 7781241988126755673}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &747045052
 GameObject:
   m_ObjectHideFlags: 0
@@ -23058,6 +23068,7 @@ Transform:
   m_Children:
   - {fileID: 491983599}
   - {fileID: 586044094}
+  - {fileID: 2011893537}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1070080531
@@ -39970,6 +39981,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2006830755}
   m_CullTransparentMesh: 1
+--- !u!1 &2011893536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2011893537}
+  - component: {fileID: 2011893538}
+  m_Layer: 0
+  m_Name: GameManger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2011893537
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011893536}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1034761282}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2011893538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011893536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b6d89ebd65779d49aa0307684f6be4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drop_Item:
+  - {fileID: 78527895}
+  - {fileID: 730586148}
+  item_tr: {fileID: 2147355636}
 --- !u!1 &2017965472
 GameObject:
   m_ObjectHideFlags: 0
@@ -72676,7 +72735,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2147355637}
   m_Layer: 0
-  m_Name: MonsterSpawnPoint
+  m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

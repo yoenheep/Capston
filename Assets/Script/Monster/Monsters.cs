@@ -37,6 +37,8 @@ public abstract class Monsters : MonoBehaviour
         lastAttackTime = 0;
 
         Think();
+        //아이템 드롭 확인용
+        //Die();
     }
     private void Update()
     {
@@ -133,13 +135,8 @@ public abstract class Monsters : MonoBehaviour
             Vector2 newPosition = new Vector2(present_Position.x + pushAmount.x, present_Position.y);
 
             // 몬스터를 밀린 후의 위치로 이동
-            
-
-            RaycastHit2D rayHit = Physics2D.Raycast(newPosition, Vector3.down, 1, LayerMask.GetMask("Platform"));
-
-            
-
-            obj_Rb.MovePosition(newPosition);
+            //몬스터 피격시 이상이 생길경우 주석처리
+            obj_Rb.MovePosition(Check_Cliff(newPosition, present_Position));
 
             //if (GameUI.UIData.answerTrueIcon.activeSelf == true) // 이따가 보기로하죠
             //{
@@ -151,6 +148,27 @@ public abstract class Monsters : MonoBehaviour
                 Die();
             }
         }  
+    }
+
+    //밀려난 위치가 플랫폼 끝일 경우 x값을 변경
+    private Vector2 Check_Cliff(Vector2 after, Vector2 before)
+    {
+        float trans;
+        Vector2 final = after;
+        RaycastHit2D rayHit = Physics2D.Raycast(after, Vector3.down, 1, LayerMask.GetMask("Platform"));
+
+        if(after.x < before.x)
+        {
+            trans = 0.01f;
+        } else
+        {
+            trans = -0.01f;
+        }
+        do
+        {
+            final = new Vector2(after.x + trans, after.y);
+        } while (rayHit.collider == null);
+        return final;
     }
 
     protected virtual void MeleeDamage(float damage, PlayerController obj)
@@ -175,9 +193,11 @@ public abstract class Monsters : MonoBehaviour
         {
             is_dead = true;
             //gameObject.GetComponent<Rigidbody2D>().simulated = false;
+            //아이템 드롭
+            GameManager.gameMgr.Drop_Item(gameObject);
 
             // 체력바
-            hpBar.gameObject.SetActive(false);
+            //hpBar.gameObject.SetActive(false);
             //죽으면 몬스터 객체 삭제
             this.gameObject.SetActive(false);
             //GameUI.UIData.Clear(); 나중에 보스에게 쓸것

@@ -136,7 +136,7 @@ public abstract class Monsters : MonoBehaviour
 
             // 몬스터를 밀린 후의 위치로 이동
             //몬스터 피격시 이상이 생길경우 주석처리
-            obj_Rb.MovePosition(Check_Cliff(newPosition, present_Position));
+            //obj_Rb.MovePosition(Check_Cliff(newPosition, present_Position));
 
             //if (GameUI.UIData.answerTrueIcon.activeSelf == true) // 이따가 보기로하죠
             //{

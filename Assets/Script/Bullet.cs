@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -16,12 +15,12 @@ public class Bullet : MonoBehaviour
     {
         moveDirection = direction;
         transform.right = direction;
-        
+
     }
     void Start()
     {
         Invoke("DestroyBullet", 2);
-        if(PlayerController.playerData.pos_gun > 0)
+        if (PlayerController.playerData.pos_gun > 0)
         {
             pos = 1;
         }
@@ -32,19 +31,28 @@ public class Bullet : MonoBehaviour
     }
     void Update()
     {
-        
-        transform.Translate(moveDirection * pos* speed * Time.deltaTime);
-        RaycastHit2D ray = Physics2D.Raycast(transform.position, moveDirection, distance,isLayer);
-        if(ray.collider != null)
+        transform.Translate(moveDirection * pos * speed * Time.deltaTime);
+
+        // 총알의 현재 위치에서 레이를 발사하여 충돌을 감지
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, moveDirection, distance, isLayer);
+
+        // 디버그로 레이를 시각적으로 표시
+        Debug.DrawRay(transform.position, moveDirection * distance, Color.green);
+
+        // 레이가 어떤 물체와 충돌했을 때
+        if (hit.collider != null)
         {
-            if(ray.collider.tag == "Monster")
+            // 충돌한 물체가 "Monster" 태그를 가지고 있다면
+            if (hit.collider.CompareTag("Monster"))
             {
-                ray.collider.GetComponent<Monsters>().GetDamage(damage, gameObject.transform.position);
+                // 해당 몬스터에게 피해를 입히고 총알 파괴
+                hit.collider.GetComponent<Monsters>().GetDamage(damage, transform.position);
                 Debug.Log("명중");
             }
             DestroyBullet();
         }
     }
+
     void DestroyBullet()
     {
         Destroy(gameObject);

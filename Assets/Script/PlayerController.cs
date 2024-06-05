@@ -20,13 +20,15 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer spriteRenderer;
     public float Speed;
     private float defaultSpeed;
-    private bool isDash;
+    public bool isDash;
     public float dashSpeed;
     public float dashCooldown; // 대쉬 쿨타임
     public float dashDuration; // 대쉬 지속 시간
     private float dashTime;
     private float dashCooldownTimer;
     private float curTime;
+    //public float coolTime = 0.5f;
+    public float AttackCoolTime_max;
     public float coolTime = 0.5f;//근접무기쿨타임
     public Transform pos;
     public Vector2 BoxSize;
@@ -36,6 +38,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bullet;
     public Transform pos_bullet;
     private float bullet_curtime;
+    //public float bullet_cooltime;
     public float bullet_cooltime;//총알쿨타임
     public float hor;
     public float pos_gun;
@@ -43,7 +46,7 @@ public class PlayerController : MonoBehaviour
     public float JumpPower;
 
     // 무기 선택 상태
-    private bool isMeleeActive = false; // 근접 무기 활성화 상태
+    private bool isMeleeActive = true; // 근접 무기 활성화 상태
     private bool isRangedActive = false; // 원거리 무기 활성화 상태
 
     //무기관련 임시코드
@@ -55,21 +58,25 @@ public class PlayerController : MonoBehaviour
     int weaponIndex = -1;
     int weapon_Stack = 0; //무기들어온순서
 
+    //애니메이션
+    private Animator animator;
+
     //싱글톤
     public static PlayerController playerData { get; private set; }
 
     void Awake()
     {
-
+        animator = GetComponent<Animator>();
         playerData = this;
 
-        //animator = GetComponent<Animator>();
         defaultSpeed = Speed;
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         charac_PreHP = charac_MaxHP;
         sr = GetComponent<SpriteRenderer>();
+
+        AttackCoolTime_max = 0.5f;
     }
 
 
@@ -83,17 +90,19 @@ public class PlayerController : MonoBehaviour
             // 무기 선택을 전환
             if (Input.GetKeyDown(KeyCode.Alpha1))//근접
             {
-                if(weapon_item[0]==0)
+                AttackCoolTime_max = 0.5f;
+
+                if (weapon_item[0] == 0)
                 {
                     isMeleeActive = true;
                     isRangedActive = false;
                 }
-                else if(weapon_item[0]==1)
+                else if (weapon_item[0] == 1)
                 {
                     isMeleeActive = false;
                     isRangedActive = true;
                 }
-                else if(weaponIndex > 0)
+                else if (weaponIndex > 0)
                 {
                     isMeleeActive = false;
                     isRangedActive = false;
@@ -101,6 +110,8 @@ public class PlayerController : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
+                AttackCoolTime_max = 0.2f;
+
                 if (weapon_item[1] == 0)
                 {
                     isMeleeActive = true;
@@ -117,7 +128,7 @@ public class PlayerController : MonoBehaviour
                     isRangedActive = false;
                 }
             }
-            
+
             //원거리EX
             if (isRangedActive && bullet_curtime <= 0)
             {
@@ -129,7 +140,7 @@ public class PlayerController : MonoBehaviour
                     GameObject newBullet = Instantiate(bullet, pos_bullet.position, bulletRotation);
                     newBullet.GetComponent<Bullet>().SetMoveDirection(bulletDirection);
                 }
-                bullet_curtime = bullet_cooltime;
+                bullet_curtime = AttackCoolTime_max;
             }
             else
             {
@@ -143,6 +154,7 @@ public class PlayerController : MonoBehaviour
                     // 근접 무기
                     damage = 10f;
                     Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, BoxSize, 0);
+                    animator.SetTrigger("StickAttack");
 
                     foreach (Collider2D collider in collider2Ds)
                     {
@@ -154,7 +166,7 @@ public class PlayerController : MonoBehaviour
                         }
                     }
 
-                    curTime = coolTime;
+                    curTime = AttackCoolTime_max;
                 }
             }
             else
@@ -243,21 +255,21 @@ public class PlayerController : MonoBehaviour
 
     void Interation()
     {
-        if(iDown && nearObject != null)
+        if (iDown && nearObject != null)
         {
-            if(nearObject.tag == "Weapon")
+            if (nearObject.tag == "Weapon")
             {
                 Item item = nearObject.GetComponent<Item>();
                 weaponIndex = item.Weapon;
                 hasWeapons[weaponIndex] = true;
                 Destroy(nearObject);
-                if(weapon_Stack==0)
+                if (weapon_Stack == 0)
                 {
                     weapon_item[0] = weaponIndex;
                     weapon_Stack++;
                     Debug.Log(weapon_item[0]);
                 }
-                else if(weapon_Stack==1)
+                else if (weapon_Stack == 1)
                 {
                     weapon_item[1] = weaponIndex;
                     Debug.Log(weapon_item[1]);
@@ -283,7 +295,8 @@ public class PlayerController : MonoBehaviour
         if (isHurt)
         {
             return; // 무적 기간 동안은 데미지 무시
-        } else if(!isHurt)
+        }
+        else if (!isHurt)
         {
             isHurt = true; // 무적 시작
                            //charac_PreHP -= damage; // 체력 감소
@@ -300,17 +313,17 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        
+
     }
     IEnumerator Knockback(float dir)
     {
         isknockback = true;
         float ctime = 0;
-        while (ctime<0.2f)
+        while (ctime < 0.2f)
         {
-            if(transform.rotation.y ==0)
+            if (transform.rotation.y == 0)
             {
-                transform.Translate(Vector2.left * Speed * Time.deltaTime*dir);
+                transform.Translate(Vector2.left * Speed * Time.deltaTime * dir);
             }
             else
             {
@@ -357,7 +370,7 @@ public class PlayerController : MonoBehaviour
     //임시낙사
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Weapon");
+        if (collision.tag == "Weapon")
         {
             nearObject = collision.gameObject;
             Debug.Log(nearObject);
@@ -365,7 +378,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.CompareTag("Monster"))
+        if (collision.CompareTag("Monster"))
         {
             //Debug.Log("접촉");
         }

@@ -20,19 +20,14 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer spriteRenderer;
     public float Speed;
     private float defaultSpeed;
-    public bool isDash;
+    private bool isDash;
     public float dashSpeed;
     public float dashCooldown; // 대쉬 쿨타임
     public float dashDuration; // 대쉬 지속 시간
     private float dashTime;
     private float dashCooldownTimer;
     private float curTime;
-<<<<<<< HEAD
-    //public float coolTime = 0.5f;
-    public float AttackCoolTime_max;
-=======
     public float coolTime = 0.5f;//근접무기쿨타임
->>>>>>> 160c8b7117924528e671b0f6fe3c9f394c8bd300
     public Transform pos;
     public Vector2 BoxSize;
     public float damage;
@@ -41,18 +36,14 @@ public class PlayerController : MonoBehaviour
     public GameObject bullet;
     public Transform pos_bullet;
     private float bullet_curtime;
-<<<<<<< HEAD
-    //public float bullet_cooltime;
-=======
     public float bullet_cooltime;//총알쿨타임
->>>>>>> 160c8b7117924528e671b0f6fe3c9f394c8bd300
     public float hor;
     public float pos_gun;
 
     public float JumpPower;
 
     // 무기 선택 상태
-    private bool isMeleeActive = true; // 근접 무기 활성화 상태
+    private bool isMeleeActive = false; // 근접 무기 활성화 상태
     private bool isRangedActive = false; // 원거리 무기 활성화 상태
 
     //무기관련 임시코드
@@ -64,25 +55,21 @@ public class PlayerController : MonoBehaviour
     int weaponIndex = -1;
     int weapon_Stack = 0; //무기들어온순서
 
-    //애니메이션
-    private Animator animator;
-
     //싱글톤
     public static PlayerController playerData { get; private set; }
 
     void Awake()
     {
-        animator = GetComponent<Animator>();
+
         playerData = this;
 
+        //animator = GetComponent<Animator>();
         defaultSpeed = Speed;
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         charac_PreHP = charac_MaxHP;
         sr = GetComponent<SpriteRenderer>();
-
-        AttackCoolTime_max = 0.5f;
     }
 
 
@@ -96,8 +83,6 @@ public class PlayerController : MonoBehaviour
             // 무기 선택을 전환
             if (Input.GetKeyDown(KeyCode.Alpha1))//근접
             {
-                AttackCoolTime_max = 0.5f;
-
                 if(weapon_item[0]==0)
                 {
                     isMeleeActive = true;
@@ -116,8 +101,6 @@ public class PlayerController : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                AttackCoolTime_max = 0.2f;
-
                 if (weapon_item[1] == 0)
                 {
                     isMeleeActive = true;
@@ -146,7 +129,7 @@ public class PlayerController : MonoBehaviour
                     GameObject newBullet = Instantiate(bullet, pos_bullet.position, bulletRotation);
                     newBullet.GetComponent<Bullet>().SetMoveDirection(bulletDirection);
                 }
-                bullet_curtime = AttackCoolTime_max;
+                bullet_curtime = bullet_cooltime;
             }
             else
             {
@@ -160,7 +143,6 @@ public class PlayerController : MonoBehaviour
                     // 근접 무기
                     damage = 10f;
                     Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, BoxSize, 0);
-                    animator.SetTrigger("StickAttack");
 
                     foreach (Collider2D collider in collider2Ds)
                     {
@@ -172,7 +154,7 @@ public class PlayerController : MonoBehaviour
                         }
                     }
 
-                    curTime = AttackCoolTime_max;
+                    curTime = coolTime;
                 }
             }
             else

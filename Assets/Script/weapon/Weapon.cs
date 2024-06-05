@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : Equipment
+public abstract class Weapon
 {
-    public override Sprite GetIcon()
+    protected string strIconName;
+    public Weapon(string iconName)
     {
-        return ResourceMgr.GetWeapon(strIconName);
+        this.strIconName = iconName;
     }
+    public abstract Sprite GetIcon();
 }

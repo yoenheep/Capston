@@ -42,8 +42,13 @@ public class GameUI : MonoBehaviour
 
     [Header("Dash")]
     [SerializeField] private Image DashCoolTime;
-    private float coolTime = 2f;
-    private float coolTime_max = 2f;
+    private float coolTime;
+    private float coolTime_max;
+
+    [Header("# A attack")]
+    [SerializeField] private Image ACoolTimeImg;
+    private float ACoolTime;
+    private float ACoolTime_max;
 
     [Header("# heart")]
     [SerializeField] private Image hpBar;
@@ -56,7 +61,6 @@ public class GameUI : MonoBehaviour
 
     [Header("# description")]
     public GameObject descrip;
-    public GameObject backLight;
 
     //½Ì±ÛÅæ
     public static GameUI UIData { get; private set; }
@@ -74,6 +78,8 @@ public class GameUI : MonoBehaviour
 
         quizTimer_now = quizTimer_max;
         hp_max = PlayerController.playerData.charac_MaxHP;
+        coolTime_max = PlayerController.playerData.dashCooldown;
+        ACoolTime_max = PlayerController.playerData.AttackCoolTime_max;
 
         QList = new List<int>() {0,1};
         AList = new List<string>() {"°³Æ÷µ¿", "Ä©¼Ö"};
@@ -94,12 +100,23 @@ public class GameUI : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.D)) // µ¥½¬ ÄðÅ¸ÀÓ ÀÌÆÑÆ®
+        if (PlayerController.playerData.isDash == true) // µ¥½¬ ÄðÅ¸ÀÓ ÀÌÆÑÆ®
         {
-            if(coolTime < 0 || coolTime == coolTime_max)
+            if(coolTime <= 0 || coolTime == coolTime_max)
             {
                 coolTime = coolTime_max;
                 StartCoroutine(CoolTimeFunc());
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            ACoolTime_max = PlayerController.playerData.AttackCoolTime_max;
+
+            if (ACoolTime <= 0 || ACoolTime == ACoolTime_max)
+            {
+                ACoolTime = ACoolTime_max;
+                StartCoroutine(ACoolTimeFunc());
             }
         }
 
@@ -144,7 +161,6 @@ public class GameUI : MonoBehaviour
         if(descrip.activeSelf == true)
         {
             descrip.SetActive(false);
-            backLight.SetActive(false);
         }
     }
 
@@ -154,7 +170,7 @@ public class GameUI : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
-    public void goMain() //a¸ÞÀÎ°¡±â
+    public void goMain() // ¸ÞÀÎ°¡±â
     {
         SceneManager.LoadScene("Main");
     }
@@ -165,6 +181,17 @@ public class GameUI : MonoBehaviour
         {
             coolTime -= Time.deltaTime;
             DashCoolTime.fillAmount = coolTime / coolTime_max;
+
+            yield return new WaitForFixedUpdate();
+        }
+    }
+    IEnumerator ACoolTimeFunc() // °ø°Ý ÄðÅ¸ÀÓ ÀÌÆÑÆ®
+    {
+
+        while (ACoolTime > 0.0f)
+        {
+            ACoolTime -= Time.deltaTime;
+            ACoolTimeImg.fillAmount = ACoolTime / ACoolTime_max;
 
             yield return new WaitForFixedUpdate();
         }

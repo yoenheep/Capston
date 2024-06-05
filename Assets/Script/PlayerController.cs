@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     private float dashTime;
     private float dashCooldownTimer;
     private float curTime;
-    public float coolTime = 0.5f;
+    public float coolTime = 0.5f;//±ÙÁ¢¹«±âÄðÅ¸ÀÓ
     public Transform pos;
     public Vector2 BoxSize;
     public float damage;
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bullet;
     public Transform pos_bullet;
     private float bullet_curtime;
-    public float bullet_cooltime;
+    public float bullet_cooltime;//ÃÑ¾ËÄðÅ¸ÀÓ
     public float hor;
     public float pos_gun;
 

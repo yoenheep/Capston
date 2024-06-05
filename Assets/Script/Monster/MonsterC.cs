@@ -19,7 +19,7 @@ public class MonsterC : Monsters
         monster_Speed = 2f;
         monster_Attack_Damage = 5f;
         monster_Attack_Speed = 3f;
-        monster_Max_Health = 100;
+        monster_Max_Health = 100f;
         monster_Pre_Health = monster_Max_Health;
 
         range = 5f;

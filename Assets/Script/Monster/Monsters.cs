@@ -10,7 +10,7 @@ public abstract class Monsters : MonoBehaviour
     //몬스터 기본 변수
     protected string monster_Name;
     protected float monster_Max_Health;
-    protected float monster_Pre_Health;
+    public float monster_Pre_Health;
     protected float monster_Armor;
     protected float monster_Speed;
     protected float monster_Attack_Speed;
@@ -37,8 +37,6 @@ public abstract class Monsters : MonoBehaviour
         lastAttackTime = 0;
 
         Think();
-        //아이템 드롭 확인용
-        //Die();
     }
     private void Update()
     {
@@ -130,17 +128,16 @@ public abstract class Monsters : MonoBehaviour
 
             monster_Pre_Health -= (damage - this.monster_Armor);
 
-            Debug.Log(monster_Pre_Health);
             // 밀린 후의 위치 값
             Vector2 newPosition = new Vector2(present_Position.x + pushAmount.x, present_Position.y);
 
             // 몬스터를 밀린 후의 위치로 이동
-            //몬스터 피격시 이상이 생길경우 주석처리
-            //obj_Rb.MovePosition(Check_Cliff(newPosition, present_Position));
+            Debug.DrawRay(newPosition, Vector3.down, new Color(1, 0, 0));
+            obj_Rb.MovePosition(Check_Cliff(newPosition, present_Position));
 
             //if (GameUI.UIData.answerTrueIcon.activeSelf == true) // 이따가 보기로하죠
             //{
-            //    monster_Pre_Health = 0;
+               
             //}
 
             if (monster_Pre_Health <= 0)
@@ -153,21 +150,22 @@ public abstract class Monsters : MonoBehaviour
     //밀려난 위치가 플랫폼 끝일 경우 x값을 변경
     private Vector2 Check_Cliff(Vector2 after, Vector2 before)
     {
-        float trans;
-        Vector2 final = after;
-        RaycastHit2D rayHit = Physics2D.Raycast(after, Vector3.down, 1, LayerMask.GetMask("Platform"));
+        Vector2 final;
+        // 2D 레이캐스트를 위한 Vector2.down 사용 및 레이캐스트 거리 증가
+        RaycastHit2D checkRay = Physics2D.Raycast(after, Vector2.down, 2.0f);
+        Debug.DrawRay(after, Vector2.down * 2.0f, new Color(0, 1, 0));
 
-        if(after.x < before.x)
+        if (checkRay.collider != null)
         {
-            trans = 0.01f;
-        } else
-        {
-            trans = -0.01f;
+            Debug.Log("절벽이 아님");
+            final = after;
         }
-        do
+        else
         {
-            final = new Vector2(after.x + trans, after.y);
-        } while (rayHit.collider == null);
+            Debug.Log("절벽임");
+            final = before;
+        }
+
         return final;
     }
 
@@ -188,7 +186,7 @@ public abstract class Monsters : MonoBehaviour
     //몬스터가 죽었을 때
     protected virtual void Die()
     {
-        //is_dead값을 true로 변경하고 충돌이 더이상 일어나지 않도록 Rigidbody를 false로 변경
+        //is_dead값을 true로 변경
         if (!is_dead)
         {
             is_dead = true;
@@ -197,7 +195,7 @@ public abstract class Monsters : MonoBehaviour
             GameManager.gameMgr.Drop_Item(gameObject);
 
             // 체력바
-            //hpBar.gameObject.SetActive(false);
+            hpBar.gameObject.SetActive(false);
             //죽으면 몬스터 객체 삭제
             this.gameObject.SetActive(false);
             //GameUI.UIData.Clear(); 나중에 보스에게 쓸것

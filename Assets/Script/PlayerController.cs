@@ -134,6 +134,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.A))
                 {
+                    AttackCoolTime_max = 0.2f;
                     Vector3 bulletDirection = spriteRenderer.flipX ? Vector3.left : Vector3.right;
                     Quaternion bulletRotation = spriteRenderer.flipX ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
 
@@ -149,10 +150,12 @@ public class PlayerController : MonoBehaviour
             //'A'어택
             if (isMeleeActive && curTime <= 0)
             {
+               
                 if (Input.GetKeyDown(KeyCode.A))
                 {
                     // 근접 무기
                     damage = 10f;
+                    AttackCoolTime_max = 0.5f;
                     Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, BoxSize, 0);
                     animator.SetTrigger("StickAttack");
 
@@ -233,18 +236,6 @@ public class PlayerController : MonoBehaviour
         {
             float hor = Input.GetAxisRaw("Horizontal");
             rigid.velocity = new Vector2(hor * defaultSpeed, rigid.velocity.y);
-        }
-    }
-    public void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Monster"))
-        {
-            // 몬스터에게 데미지를 입힙니다.
-            Monsters monster = other.GetComponent<Monsters>();
-            if (monster != null)
-            {
-                monster.GetDamage(damage, transform.position);
-            }
         }
     }
 

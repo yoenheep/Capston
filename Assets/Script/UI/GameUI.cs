@@ -56,8 +56,9 @@ public class GameUI : MonoBehaviour
     public float hp_now;
 
     [Header("# weapon")]
-    [SerializeField] private Image AWeaponImg;
+    [SerializeField] private Image LWeaponImg;
     [SerializeField] private Image SWeaponImg;
+    [SerializeField] private Image NowWeaponImg;
 
     [Header("# description")]
     public GameObject descrip;
@@ -306,5 +307,10 @@ public class GameUI : MonoBehaviour
             Time.timeScale = 0;
             clearTimeTxt.text = TimeTxt.text;
         }
+    }
+
+    void changeweapon()
+    {
+
     }
 }

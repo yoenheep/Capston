@@ -53,7 +53,6 @@ public class PlayerController : MonoBehaviour
     int[] weapon_item = new int[2]; // 인벤토리 참조 [0-0 = 근접 / 0-1 = 원거리 / 1-0 = 근접 / 1-1 = 원거리]
     GameObject nearObject;
     bool iDown;
-    public GameObject[] weapons;
     public bool[] hasWeapons;
     int weaponIndex = -1;
     int weapon_Stack = 0; //무기들어온순서

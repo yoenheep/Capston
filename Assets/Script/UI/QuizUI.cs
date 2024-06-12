@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class QuizUI : MonoBehaviour
 {
-    public GameObject quizPopup;
+    GameObject quizPopup;
     public TMP_InputField answerField;
     public Image quizImg;
     [SerializeField] private Image quizTimer;
@@ -23,6 +23,7 @@ public class QuizUI : MonoBehaviour
     private void Awake()
     {
         quizTimer_now = quizTimer_max;
+        quizPopup = GameUI.UIData.quizPopup;
 
         AList = new List<string>() { "°³Æ÷µ¿", "Ä©¼Ö" };
     }
@@ -86,26 +87,29 @@ public class QuizUI : MonoBehaviour
 
     void quizEnter()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if(quizPopup.activeSelf == true)
         {
-            if (answerField.text == "")
+            if (Input.GetKeyDown(KeyCode.Return))
             {
-                answerField.ActivateInputField();
-            }
-            else
-            {
-                if (answerField.text == AList[rand])
+                if (answerField.text == "")
                 {
-                    answerTrueIcon.SetActive(true);
-                    StopCoroutine(quizTimerFunc());
-
-                    Invoke("QAIcon", 2f);
+                    answerField.ActivateInputField();
                 }
                 else
                 {
-                    answerFalseIcon.SetActive(true);
+                    if (answerField.text == AList[rand])
+                    {
+                        answerTrueIcon.SetActive(true);
+                        StopCoroutine(quizTimerFunc());
 
-                    Invoke("QAIcon", 2f);
+                        Invoke("QAIcon", 2f);
+                    }
+                    else
+                    {
+                        answerFalseIcon.SetActive(true);
+
+                        Invoke("QAIcon", 2f);
+                    }
                 }
             }
         }

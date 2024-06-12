@@ -21,18 +21,6 @@ public class GameUI : MonoBehaviour
     [Header("# quiz")]
     public QuizUI QuizUI;
     public GameObject quizPopup;
-    public TMP_InputField answerField;
-    public Image quizImg;
-    [SerializeField] private Image quizTimer;
-    private float quizTimer_max = 20f;
-    private float quizTimer_now;
-    [SerializeField] private GameObject answerFalseIcon;
-    public GameObject answerTrueIcon;
-    [SerializeField] private List<int> QList;
-    [SerializeField] private List<Sprite> SpriteList = new List<Sprite>();
-    [SerializeField] private List<string> AList;
-    private int rand;
-    private int max = 2;
 
     [Header("# over")]
     public GameObject overPopup;
@@ -78,13 +66,9 @@ public class GameUI : MonoBehaviour
         clearPopup.SetActive(false);
         setPopup.SetActive(false);
 
-        quizTimer_now = quizTimer_max;
         hp_max = PlayerController.playerData.charac_MaxHP;
         coolTime_max = PlayerController.playerData.dashCooldown;
         ACoolTime_max = PlayerController.playerData.AttackCoolTime_max;
-
-        QList = new List<int>() {0,1};
-        AList = new List<string>() {"°³Æ÷µ¿", "Ä©¼Ö"};
     }
 
     private void Update()
@@ -224,10 +208,5 @@ public class GameUI : MonoBehaviour
             Time.timeScale = 0;
             clearTimeTxt.text = TimeTxt.text;
         }
-    }
-
-    void changeweapon()
-    {
-
     }
 }

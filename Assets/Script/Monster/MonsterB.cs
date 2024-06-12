@@ -24,10 +24,10 @@ public class MonsterB :Monsters
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Monster"))
+        if (collision.CompareTag("Player"))
         {
             //МіСЄ Сп
-            GameUI.UIData.quiz();
+            GameUI.UIData.QuizUI.quiz();
             Debug.Log("quiz Time!");
         }
     }

@@ -8963,6 +8963,7 @@ MonoBehaviour:
   stopPopup: {fileID: 2006830755}
   stopBg: {fileID: 41701627}
   setPopup: {fileID: 238600767}
+  QuizUI: {fileID: 1079745877}
   quizPopup: {fileID: 2006461990}
   answerField: {fileID: 2017965473}
   quizImg: {fileID: 1252055282}
@@ -22995,6 +22996,7 @@ Transform:
   - {fileID: 491983599}
   - {fileID: 586044094}
   - {fileID: 2011893537}
+  - {fileID: 1079745878}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1070080531
@@ -24188,6 +24190,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1072645697}
   m_CullTransparentMesh: 1
+--- !u!1 &1079745876
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1079745878}
+  - component: {fileID: 1079745877}
+  m_Layer: 0
+  m_Name: QuizUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1079745877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079745876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a18437382c541c34295255f55b009282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quizPopup: {fileID: 2006461990}
+  answerField: {fileID: 2017965473}
+  quizImg: {fileID: 1252055282}
+  quizTimer: {fileID: 784239173}
+  answerFalseIcon: {fileID: 48164960}
+  answerTrueIcon: {fileID: 1890101803}
+  SpriteList:
+  - {fileID: 21300000, guid: 36419cfaccc0116428f2de56ab8ba5f9, type: 3}
+  - {fileID: 21300000, guid: 33907b17a7aa46e44b141cae8fdbcc65, type: 3}
+  AList: []
+--- !u!4 &1079745878
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079745876}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1034761282}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1095638034
 GameObject:
   m_ObjectHideFlags: 0
@@ -29809,7 +29865,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsters_Prefab:
-  - {fileID: 2893332361076090446, guid: 997da49d7477f904688cf0ee14919926, type: 3}
   - {fileID: 1733207059708374420, guid: faf7b245086bcf945a8610d99e862a9b, type: 3}
   - {fileID: 3491684017866995724, guid: 43237b815b501b643a1409900b8c1a42, type: 3}
   hpBar_Prefab: {fileID: 1983264480916593626, guid: fda7b72e883eb664d982f03404f72457, type: 3}

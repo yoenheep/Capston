@@ -19,6 +19,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] private GameObject setPopup;
 
     [Header("# quiz")]
+    public QuizUI QuizUI;
     public GameObject quizPopup;
     public TMP_InputField answerField;
     public Image quizImg;
@@ -123,7 +124,6 @@ public class GameUI : MonoBehaviour
 
         time(); // 타임표시
         hp(); // HP 임시키
-        quiz_on(); // 퀴즈켜지면
         hp_now = PlayerController.playerData.charac_PreHP;
         hpBar.fillAmount = hp_now / hp_max; // 캐릭터 hpbar
     }
@@ -214,90 +214,7 @@ public class GameUI : MonoBehaviour
         }
     }
 
-    IEnumerator quizTimerFunc() // 데쉬 쿨타임 이팩트
-    {
-        while (quizTimer_now > 0.0f && quizPopup.activeSelf == true)
-        {
-            quizTimer_now -= Time.deltaTime;
-            quizTimer.fillAmount = quizTimer_now / quizTimer_max;
-
-             yield return new WaitForFixedUpdate();
-        }
-    }
-
-    void QAIcon()
-    {
-        if (answerFalseIcon.activeSelf == true)
-        {
-            answerFalseIcon.SetActive(false);
-            answerField.text = "";
-        }
-        else
-        {
-            answerTrueIcon.SetActive(false);
-            quizPopup.SetActive(false);
-            quizTimer_now = 20f;
-        } 
-    }
-
-    public void quiz() //임시 퀴즈창
-    {
-        if (quizPopup.activeSelf == false) // 임시퀴즈몬스터키
-        {
-            answerField.text = "";
-            answerFalseIcon.SetActive(false);
-            answerTrueIcon.SetActive(false);
-            quizPopup.SetActive(true);
-            StartCoroutine(quizTimerFunc());
-        }
-    }
-
-    void quiz_on()
-    {
-        if(quizPopup.activeSelf == true) {
-
-            rand = Random.Range(0, max);
-            quizImg.sprite = SpriteList[rand];
-
-            Debug.Log(AList[rand]);
-
-                if (Input.GetKeyDown(KeyCode.Return))
-                {
-                    if (answerField.text == "")
-                    {
-                        answerField.ActivateInputField();
-                    }
-                    else
-                    {
-                        if (answerField.text == AList[rand])
-                        {
-                            answerTrueIcon.SetActive(true);
-                            StopCoroutine(quizTimerFunc());
-
-                            Invoke("QAIcon", 2f);
-                        }
-                        else
-                        {
-                            answerFalseIcon.SetActive(true);
-
-                            Invoke("QAIcon", 2f);
-                        }
-                    }
-                }
-            
-
-            if (quizTimer_now <= 0.0f)
-            {
-                quizPopup.SetActive(false);
-                PlayerController.playerData.charac_PreHP -= 10.0f;
-                quizTimer_now = 20f;
-            }
-        }
-        //QList.RemoveAt(rand);
-        //AList.RemoveAt(rand);
-        //SpriteList.RemoveAt(rand);
-        //max--;
-    }
+   
 
     public void Clear()
     {

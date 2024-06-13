@@ -8,6 +8,14 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] drop_Item;
     public GameObject item_tr;
+
+    public GameObject[] mainStages;
+    public GameObject[] mainPortal;
+    public int mainStageIndex;
+    public GameObject[] subStages;
+    public GameObject[] subPortal;
+    public int subStageIndex;
+
     private void Awake()
     {
         gameMgr = this;
@@ -51,4 +59,31 @@ public class GameManager : MonoBehaviour
             return 666;
         }
     }
+
+    /*public void NextStage()
+    {
+
+            if (nearObject.tag == "mainPortal")
+            {
+                mainStages[mainStageIndex].SetActive(false);
+                mainStageIndex++;
+                mainStages[mainStageIndex].SetActive(true);
+
+                subPortal[mainStageIndex].SetActive(true);
+                mainPortal[mainStageIndex].SetActive(false);
+            }
+            else if(nearObject.tag == "subPortal")
+            {
+                subStages[subStageIndex].SetActive(true);
+            }
+            else if(nearObject.tag == "subOutPortal")
+            {
+                subStages[subStageIndex].SetActive(false);
+                subStageIndex++;
+                mainStages[mainStageIndex].SetActive(true);
+
+                mainPortal[mainStageIndex].SetActive(true);
+                subPortal[mainStageIndex].SetActive(false);
+            }
+    }*/
 }

@@ -50,12 +50,12 @@ public class PlayerController : MonoBehaviour
     private bool isRangedActive = false; // 원거리 무기 활성화 상태
 
     //무기관련 임시코드
-    int[] weapon_item = new int[2]; // 인벤토리 참조 [0-0 = 근접 / 0-1 = 원거리 / 1-0 = 근접 / 1-1 = 원거리]
-    GameObject nearObject;
+    public int[] weapon_item = new int[2]; // 인벤토리 참조 [0-0 = 근접 / 0-1 = 원거리 / 1-0 = 근접 / 1-1 = 원거리]
+    public GameObject nearObject;
     bool iDown;
     public bool[] hasWeapons;
     int weaponIndex = -1;
-    int weapon_Stack = 0; //무기들어온순서
+    public int nowWeapon;
 
     //애니메이션
     private Animator animator;
@@ -86,46 +86,29 @@ public class PlayerController : MonoBehaviour
 
         if (GameUI.UIData.quizPopup.activeSelf == false)
         {
-            // 무기 선택을 전환
-            if (Input.GetKeyDown(KeyCode.Alpha1))//근접
+            if (weapon_item[nowWeapon] == 0 || weapon_item[nowWeapon] == 1 || weapon_item[nowWeapon] == 2) // 근접
             {
                 AttackCoolTime_max = 0.5f;
 
-                if (weapon_item[0] == 0)
-                {
-                    isMeleeActive = true;
-                    isRangedActive = false;
-                }
-                else if (weapon_item[0] == 1)
-                {
-                    isMeleeActive = false;
-                    isRangedActive = true;
-                }
-                else if (weaponIndex > 0)
-                {
-                    isMeleeActive = false;
-                    isRangedActive = false;
-                }
+                isMeleeActive = true;
+                isRangedActive = false;
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            else // 원거리
             {
                 AttackCoolTime_max = 0.2f;
 
-                if (weapon_item[1] == 0)
-                {
-                    isMeleeActive = true;
-                    isRangedActive = false;
-                }
-                else if (weapon_item[1] == 1)
-                {
-                    isMeleeActive = false;
-                    isRangedActive = true;
-                }
-                else if (weaponIndex > 0)
-                {
-                    isMeleeActive = false;
-                    isRangedActive = false;
-                }
+                isMeleeActive = false;
+                isRangedActive = true;
+            }
+
+            // 무기 선택을 전환
+            if (Input.GetKeyDown(KeyCode.Alpha1)) //1번무기
+            {
+                nowWeapon = 0;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && hasWeapons[1] == true) //2번무기
+            {
+                nowWeapon = 1;
             }
 
             //원거리EX
@@ -251,31 +234,27 @@ public class PlayerController : MonoBehaviour
             {
                 Item item = nearObject.GetComponent<Item>();
                 weaponIndex = item.Weapon;
-                hasWeapons[weaponIndex] = true;
                 Destroy(nearObject);
-                if (weapon_Stack == 0)
+                if (hasWeapons[0] == false)
                 {
                     weapon_item[0] = weaponIndex;
-                    weapon_Stack++;
-                    Debug.Log(weapon_item[0]);
+                    hasWeapons[0] = true;
+                    Debug.Log("first: " + weapon_item[0]);
                 }
-                else if (weapon_Stack == 1)
+                else if (hasWeapons[1] == false && hasWeapons[0] == true)
                 {
                     weapon_item[1] = weaponIndex;
-                    Debug.Log(weapon_item[1]);
+                    hasWeapons[1] = true;
+                    Debug.Log("second: " + weapon_item[1]);
+                }
+                else if (hasWeapons[1] == true && hasWeapons[0] == true)
+                {
+                    weapon_item[nowWeapon] = weaponIndex;
                 }
 
-                if (weapon_item[0] == 0)
-                {
-                    isMeleeActive = true;
-                    isRangedActive = false;
-                }
-                else if (weapon_item[0] == 1)
-                {
-                    isMeleeActive = false;
-                    isRangedActive = true;
-                }
-
+            } else if (nearObject.tag == "heartItem")
+            {
+                GameUI.UIData.hp_now += 10;
             }
         }
     }
@@ -357,9 +336,9 @@ public class PlayerController : MonoBehaviour
         return rayHit.collider != null;
     }
 
-    //임시낙사
     private void OnTriggerStay2D(Collider2D collision)
     {
+        
         if (collision.tag == "Weapon")
         {
             nearObject = collision.gameObject;

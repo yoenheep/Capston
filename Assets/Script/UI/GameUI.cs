@@ -45,9 +45,11 @@ public class GameUI : MonoBehaviour
     public float hp_now;
 
     [Header("# weapon")]
-    [SerializeField] private Image LWeaponImg;
-    [SerializeField] private Image SWeaponImg;
+    [SerializeField] private Image firstWeaponImg;
+    [SerializeField] private Image secondWeaponImg;
     [SerializeField] private Image NowWeaponImg;
+
+    [SerializeField] private List<Sprite> weaponsSprite = new List<Sprite>();
 
     [Header("# description")]
     public GameObject descrip;
@@ -106,6 +108,7 @@ public class GameUI : MonoBehaviour
             }
         }
 
+        changeWeapon();
         time(); // 타임표시
         hp(); // HP 임시키
         hp_now = PlayerController.playerData.charac_PreHP;
@@ -198,8 +201,6 @@ public class GameUI : MonoBehaviour
         }
     }
 
-   
-
     public void Clear()
     {
         if(quizPopup.activeSelf == false)
@@ -207,6 +208,33 @@ public class GameUI : MonoBehaviour
             clearPopup.SetActive(true);
             Time.timeScale = 0;
             clearTimeTxt.text = TimeTxt.text;
+        }
+    }
+
+    public void changeWeapon()
+    {
+        int firstWeapon = PlayerController.playerData.weapon_item[0];
+        int secondWeapon = PlayerController.playerData.weapon_item[1];
+
+        if (secondWeapon == 0)
+        {
+            secondWeaponImg.enabled = false;
+        }
+        else 
+        {
+            secondWeaponImg.enabled= true;
+        }
+
+        firstWeaponImg.sprite = weaponsSprite[firstWeapon];
+        secondWeaponImg.sprite = weaponsSprite[secondWeapon];
+
+        if(PlayerController.playerData.nowWeapon == 0)
+        {
+            NowWeaponImg.sprite= weaponsSprite[firstWeapon];
+        }
+        else if (secondWeapon != 0)
+        {
+            NowWeaponImg.sprite = weaponsSprite[secondWeapon];
         }
     }
 }

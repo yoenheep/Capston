@@ -9,6 +9,9 @@ TagManager:
   - DeadZone
   - Weapon
   - bullet
+  - subPortal
+  - mainPortal
+  - subOutPortal
   layers:
   - Default
   - TransparentFX

@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float charac_MaxHP = 100f;
     public float charac_PreHP;
     bool isHurt = false;
+    //피격
     SpriteRenderer sr;
     Color halfA = new Color(1, 1, 1, 0);
     Color fullA = new Color(1, 1, 1, 1);
@@ -203,12 +204,14 @@ public class PlayerController : MonoBehaviour
                 spriteRenderer.flipX = true; // 왼쪽으로 이동할 때 이미지를 뒤집음
                 pos.localPosition = new Vector3(-Mathf.Abs(pos.localPosition.x), pos.localPosition.y, pos.localPosition.z); // pos를 왼쪽으로 이동
                 pos_gun = -1;
+                animator.SetTrigger("Walk");
             }
             else if (hor > 0)
             {
                 spriteRenderer.flipX = false; // 오른쪽으로 이동할 때 이미지를 원래대로 돌림
                 pos.localPosition = new Vector3(Mathf.Abs(pos.localPosition.x), pos.localPosition.y, pos.localPosition.z); // pos를 오른쪽으로 이동
                 pos_gun = 1;
+                animator.SetTrigger("Walk");
             }
         }
     }
@@ -218,7 +221,6 @@ public class PlayerController : MonoBehaviour
         {
             float hor = Input.GetAxisRaw("Horizontal");
             rigid.velocity = new Vector2(hor * defaultSpeed, rigid.velocity.y);
-            //animator.SetTrigger("Walk");
         }
     }
 

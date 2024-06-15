@@ -7,6 +7,12 @@ public class Description : MonoBehaviour
 {
     public GameObject Descrip;
 
+    public Animator anim;
+
+    private void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
     private void Update()
     {
         Ray();

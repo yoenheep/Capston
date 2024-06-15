@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     //Animator animator;
     Rigidbody2D rigid;
-    SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
     public float Speed;
     private float defaultSpeed;
     public bool isDash;
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     private bool isRangedActive = false; // 원거리 무기 활성화 상태
 
     //무기관련 임시코드
-    public int[] weapon_item = new int[2]; // 인벤토리 참조 [0-0 = 근접 / 0-1 = 원거리 / 1-0 = 근접 / 1-1 = 원거리]
+    public int[] weapon_item = new int[2]; // 인벤토리 참조 [-1 = 물약 / 0 = 지팡이 / 1 = 도끼 / 2 = 칼 / 3 = 총 / 4 = 마법봉]
     public GameObject nearObject;
     bool iDown;
     public bool[] hasWeapons;
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
     public int nowWeapon;
 
     //애니메이션
-    public Animator animator;
+    private Animator animator;
 
     //싱글톤
     public static PlayerController playerData { get; private set; }
@@ -236,27 +236,27 @@ public class PlayerController : MonoBehaviour
                 Item item = nearObject.GetComponent<Item>();
                 weaponIndex = item.Weapon;
                 Destroy(nearObject);
-                if (hasWeapons[0] == false)
+                if (weaponIndex != -1)
                 {
-                    weapon_item[0] = weaponIndex;
-                    hasWeapons[0] = true;
-                    Debug.Log("first: " + weapon_item[0]);
+                    if (hasWeapons[0] == false)
+                    {
+                        weapon_item[0] = weaponIndex;
+                        hasWeapons[0] = true;
+                        Debug.Log("first: " + weapon_item[0]);
+                    }
+                    else if (hasWeapons[1] == false && hasWeapons[0] == true)
+                    {
+                        weapon_item[1] = weaponIndex;
+                        hasWeapons[1] = true;
+                        Debug.Log("second: " + weapon_item[1]);
+                    }
+                    else if (hasWeapons[1] == true && hasWeapons[0] == true)
+                    {
+                        weapon_item[nowWeapon] = weaponIndex;
+                    }
                 }
-                else if (hasWeapons[1] == false && hasWeapons[0] == true)
-                {
-                    weapon_item[1] = weaponIndex;
-                    hasWeapons[1] = true;
-                    Debug.Log("second: " + weapon_item[1]);
-                }
-                else if (hasWeapons[1] == true && hasWeapons[0] == true)
-                {
-                    weapon_item[nowWeapon] = weaponIndex;
-                }
-
-            }
-            else if (nearObject.tag == "heartItem")
-            {
-                charac_PreHP += 10;
+                else
+                    charac_PreHP += 10;
             }
             else if (nearObject.tag == "mainPortal")
             {

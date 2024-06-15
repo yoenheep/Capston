@@ -24,6 +24,7 @@ public class GameUI : MonoBehaviour
 
     [Header("# over")]
     public GameObject overPopup;
+    [SerializeField] Sprite deathSprite;
 
     [Header("# clear")]
     [SerializeField] private GameObject clearPopup;
@@ -54,6 +55,7 @@ public class GameUI : MonoBehaviour
     [Header("# description")]
     public GameObject descrip;
     public GameObject ItemZTxtObj;
+    [SerializeField] private Description Description;
 
     //ΩÃ±€≈Ê
     public static GameUI UIData { get; private set; }
@@ -101,6 +103,16 @@ public class GameUI : MonoBehaviour
             }
         }
 
+        if (quizPopup.activeSelf == false)
+        {
+            if (PlayerController.playerData.charac_PreHP <= 0)
+            {
+                PlayerController.playerData.spriteRenderer.sprite = deathSprite;
+                overPopup.SetActive(true);
+                Time.timeScale = 0;
+            }
+        }
+
         changeWeapon();
         time(); // ≈∏¿”«•Ω√
         hp(); // HP ¿”Ω√≈∞
@@ -139,7 +151,7 @@ public class GameUI : MonoBehaviour
         if (descrip.activeSelf == true)
         {
             descrip.SetActive(false);
-            PlayerController.playerData.animator.SetTrigger("Des_on");
+            Description.anim.SetTrigger("Des_on");
         }
         else if (stopPopup.activeSelf == false)
         {
@@ -197,13 +209,10 @@ public class GameUI : MonoBehaviour
         {
             if(PlayerController.playerData.charac_PreHP <= 0)
             {
+                PlayerController.playerData.spriteRenderer.sprite = deathSprite;
                 overPopup.SetActive(true);
                 Time.timeScale = 0;
             }
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            hp_now += 10;
         }
     }
 

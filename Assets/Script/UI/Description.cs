@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Description : MonoBehaviour
 {
-    public GameObject ItemZTxtObj;
     public GameObject Descrip;
 
     private void Update()
@@ -24,7 +23,7 @@ public class Description : MonoBehaviour
 
         if (leftRayHit.collider != null || rightRayHit.collider != null)
         {
-            ItemZTxtObj.SetActive(true);
+            GameUI.UIData.ItemZTxtObj.SetActive(true);
             if(Input.GetKeyDown(KeyCode.Z))
             {
                 Descrip.SetActive(true);
@@ -32,7 +31,7 @@ public class Description : MonoBehaviour
         }
         else
         {
-            ItemZTxtObj.SetActive(false);
+            GameUI.UIData.ItemZTxtObj.SetActive(false);
         }
     }
 }

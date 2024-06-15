@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
     public int nowWeapon;
 
     //æ÷¥œ∏ﬁ¿Ãº«
-    private Animator animator;
+    public Animator animator;
 
     //ΩÃ±€≈Ê
     public static PlayerController playerData { get; private set; }
@@ -218,6 +218,7 @@ public class PlayerController : MonoBehaviour
         {
             float hor = Input.GetAxisRaw("Horizontal");
             rigid.velocity = new Vector2(hor * defaultSpeed, rigid.velocity.y);
+            //animator.SetTrigger("Walk");
         }
     }
 

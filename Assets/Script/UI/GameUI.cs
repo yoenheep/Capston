@@ -53,6 +53,7 @@ public class GameUI : MonoBehaviour
 
     [Header("# description")]
     public GameObject descrip;
+    public GameObject ItemZTxtObj;
 
     //½Ì±ÛÅæ
     public static GameUI UIData { get; private set; }
@@ -77,15 +78,7 @@ public class GameUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && quizPopup.activeSelf == false) // ÀÏ½ÃÁ¤Áö
         {
-            if (stopPopup.activeSelf == false)
-            {
-                stopPopup.SetActive(true);
-                Time.timeScale = 0;
-            }
-            else
-            {
-                Continue();
-            }
+            esc();
         }
 
         if (PlayerController.playerData.isDash == true) // µ¥½¬ ÄðÅ¸ÀÓ ÀÌÆÑÆ®
@@ -141,14 +134,27 @@ public class GameUI : MonoBehaviour
         setPopup.SetActive(true);
     }
 
-    public void x() // ¼³Á¤Ã¢ ²ô±â ¹öÆ° && ¼³¸íÄ­ ²ô±â
+    public void esc() // ¼³Á¤Ã¢ ²ô±â ¹öÆ° && ¼³¸íÄ­ ²ô±â
     {
-        stopBg.SetActive(true);
-        setPopup.SetActive(false);
-
-        if(descrip.activeSelf == true)
+        if (descrip.activeSelf == true)
         {
             descrip.SetActive(false);
+            PlayerController.playerData.animator.SetTrigger("Des_on");
+        }
+        else if (stopPopup.activeSelf == false)
+        {
+            stopPopup.SetActive(true);
+            ItemZTxtObj.SetActive(false);
+            Time.timeScale = 0;
+        }
+        else if (setPopup.activeSelf == true)
+        {
+            stopBg.SetActive(true);
+            setPopup.SetActive(false);
+        }
+        else if (stopPopup.activeSelf == true)
+        {
+            stopPopup.SetActive(false);
         }
     }
 

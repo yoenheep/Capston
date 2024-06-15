@@ -252,9 +252,22 @@ public class PlayerController : MonoBehaviour
                     weapon_item[nowWeapon] = weaponIndex;
                 }
 
-            } else if (nearObject.tag == "heartItem")
+            }
+            else if (nearObject.tag == "heartItem")
             {
-                GameUI.UIData.hp_now += 10;
+                charac_PreHP += 10;
+            }
+            else if (nearObject.tag == "mainPortal")
+            {
+                GameManager.gameMgr.MainNextStage();
+            }
+            else if(nearObject.tag == "subPortal")
+            {
+                GameManager.gameMgr.SubNextStage();
+            }
+            else if(nearObject.tag == "subOutPortal")
+            {
+                GameManager.gameMgr.SubOutStage();
             }
         }
     }
@@ -340,6 +353,21 @@ public class PlayerController : MonoBehaviour
     {
         
         if (collision.tag == "Weapon")
+        {
+            nearObject = collision.gameObject;
+            Debug.Log(nearObject);
+        }
+        else if (collision.tag == "mainPortal")
+        {
+            nearObject = collision.gameObject;
+            Debug.Log(nearObject);
+        }
+        else if (collision.tag == "subPortal")
+        {
+            nearObject = collision.gameObject;
+            Debug.Log(nearObject);
+        }
+        else if (collision.tag == "subOutPortal")
         {
             nearObject = collision.gameObject;
             Debug.Log(nearObject);

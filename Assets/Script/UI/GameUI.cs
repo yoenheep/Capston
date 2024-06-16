@@ -24,7 +24,7 @@ public class GameUI : MonoBehaviour
 
     [Header("# over")]
     public GameObject overPopup;
-    [SerializeField] Sprite deathSprite;
+    public Sprite deathSprite;
 
     [Header("# clear")]
     [SerializeField] private GameObject clearPopup;
@@ -103,16 +103,6 @@ public class GameUI : MonoBehaviour
             }
         }
 
-        if (quizPopup.activeSelf == false)
-        {
-            if (PlayerController.playerData.charac_PreHP <= 0)
-            {
-                PlayerController.playerData.spriteRenderer.sprite = deathSprite;
-                overPopup.SetActive(true);
-                Time.timeScale = 0;
-            }
-        }
-
         changeWeapon();
         time(); // 타임표시
         hp(); // HP 임시키
@@ -181,6 +171,24 @@ public class GameUI : MonoBehaviour
         SceneManager.LoadScene("Main");
     }
 
+    public void ReGame()
+    {
+        overPopup.SetActive(false);
+        PlayerController.playerData.charac_PreHP += 10;
+        Time.timeScale = 1;
+
+        if (GameManager.gameMgr.mainStageIndex == 0)
+        {
+            GameManager.gameMgr.Player.transform.position = new Vector3(-7.5f, -1.5f, 0);
+        }else
+        {
+            float x = PlayerPrefs.GetFloat("SaveX");
+            float y = PlayerPrefs.GetFloat("SaveY");
+
+            GameManager.gameMgr.Player.transform.position = new Vector3(x, y, 0);
+        }
+    }
+
     IEnumerator CoolTimeFunc() // 데쉬 쿨타임 이팩트
     {
         while (coolTime > 0.0f)
@@ -209,7 +217,6 @@ public class GameUI : MonoBehaviour
         {
             if(PlayerController.playerData.charac_PreHP <= 0)
             {
-                PlayerController.playerData.spriteRenderer.sprite = deathSprite;
                 overPopup.SetActive(true);
                 Time.timeScale = 0;
             }

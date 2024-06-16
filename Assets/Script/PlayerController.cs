@@ -9,8 +9,9 @@ public class PlayerController : MonoBehaviour
     public float charac_MaxHP = 100f;
     public float charac_PreHP;
     bool isHurt = false;
+    private bool isReInvoked = false;
     //피격
-    SpriteRenderer sr;
+    //SpriteRenderer sr;
     Color halfA = new Color(1, 1, 1, 0);
     Color fullA = new Color(1, 1, 1, 1);
 
@@ -74,7 +75,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         charac_PreHP = charac_MaxHP;
-        sr = GetComponent<SpriteRenderer>();
+        //sr = GetComponent<SpriteRenderer>();
 
         AttackCoolTime_max = 0.5f;
     }
@@ -204,14 +205,18 @@ public class PlayerController : MonoBehaviour
                 spriteRenderer.flipX = true; // 왼쪽으로 이동할 때 이미지를 뒤집음
                 pos.localPosition = new Vector3(-Mathf.Abs(pos.localPosition.x), pos.localPosition.y, pos.localPosition.z); // pos를 왼쪽으로 이동
                 pos_gun = -1;
-                animator.SetTrigger("Walk");
+                animator.SetBool("Walk", true);
             }
             else if (hor > 0)
             {
                 spriteRenderer.flipX = false; // 오른쪽으로 이동할 때 이미지를 원래대로 돌림
                 pos.localPosition = new Vector3(Mathf.Abs(pos.localPosition.x), pos.localPosition.y, pos.localPosition.z); // pos를 오른쪽으로 이동
                 pos_gun = 1;
-                animator.SetTrigger("Walk");
+                animator.SetBool("Walk", true);
+            }
+            else if (hor == 0)
+            {
+                animator.SetBool("Walk", false);
             }
         }
     }
@@ -288,7 +293,7 @@ public class PlayerController : MonoBehaviour
             charac_PreHP -= damage;
             if (charac_PreHP <= 0)
             {
-                // 죽음 처리
+                spriteRenderer.sprite = GameUI.UIData.deathSprite;
             }
             else
             {
@@ -330,9 +335,9 @@ public class PlayerController : MonoBehaviour
         while (isHurt)
         {
             yield return new WaitForSeconds(0.1f);
-            sr.color = halfA;
+            spriteRenderer.color = halfA;
             yield return new WaitForSeconds(0.1f);
-            sr.color = fullA;
+            spriteRenderer.color = fullA;
         }
     }
 
@@ -350,6 +355,13 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1.2f, LayerMask.GetMask("Platform"));
         //null 값인지 확인해서 true,false반환 null이 아니면 true,platform에 닿아있는상태면 false
         return rayHit.collider != null;
+    }
+
+    void Re()
+    {
+        charac_PreHP -= 20;
+        GameUI.UIData.ReGame();
+        isReInvoked = false;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -374,6 +386,11 @@ public class PlayerController : MonoBehaviour
         {
             nearObject = collision.gameObject;
             Debug.Log(nearObject);
+        }
+        else if (collision.tag == "DeadZone" && !isReInvoked)
+        {
+            isReInvoked = true;
+            Invoke("Re", 1);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

@@ -101,29 +101,29 @@ public class GameManager : MonoBehaviour
         {
             Player.transform.position = new Vector3(-7.5f, -2, 0);
             mainPortal.transform.position = new Vector3(109.5f, -21.5f, 0);
-            PlayerPrefs.GetFloat("SaveX", -7.5f); //임시 저장
-            PlayerPrefs.GetFloat("SaveY", -2);
+            PlayerPrefs.SetFloat("SaveX", -7.5f); //임시 저장
+            PlayerPrefs.SetFloat("SaveY", -2);
         }
         else if (mainStageIndex == 1)
         {
             Player.transform.position = new Vector3(-11, -23, 0);
             mainPortal.transform.position = new Vector3(121.5f, -27.5f, 0);
-            PlayerPrefs.GetFloat("SaveX", -11);
-            PlayerPrefs.GetFloat("SaveY", -23);
+            PlayerPrefs.SetFloat("SaveX", -11);
+            PlayerPrefs.SetFloat("SaveY", -23);
         }
         else if (mainStageIndex == 2)
         {
             Player.transform.position = new Vector3(-34, -29, 0);
             mainPortal.transform.position = new Vector3(115.5f, -15.5f, 0);
-            PlayerPrefs.GetFloat("SaveX", -34);
-            PlayerPrefs.GetFloat("SaveY", -29);
+            PlayerPrefs.SetFloat("SaveX", -34);
+            PlayerPrefs.SetFloat("SaveY", -29);
         }
         else if(mainStageIndex == 3)
         {
             Player.transform.position = new Vector3(-36, -20, 0);
             mainPortal.transform.position = new Vector3(145.5f, 9.5f, 0);
-            PlayerPrefs.GetFloat("SaveX", -36);
-            PlayerPrefs.GetFloat("SaveY", -20);
+            PlayerPrefs.SetFloat("SaveX", -36);
+            PlayerPrefs.SetFloat("SaveY", -20);
         }
         else if( mainStageIndex == 4)
         {

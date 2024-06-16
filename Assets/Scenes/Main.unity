@@ -3744,8 +3744,9 @@ GameObject:
   m_Component:
   - component: {fileID: 931612487}
   - component: {fileID: 931612486}
+  - component: {fileID: 931612488}
   m_Layer: 0
-  m_Name: Sound
+  m_Name: BGMSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3763,7 +3764,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: daecb83923c32d240af670edf536ebc1, type: 2}
   m_audioClip: {fileID: 8300000, guid: a33cb42d7c085f549aaedcab9db57ef0, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3862,6 +3863,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &931612488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931612485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c536e92bfc124504ab2f090ee8a224e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &983698372
 GameObject:
   m_ObjectHideFlags: 0
@@ -5440,7 +5453,7 @@ MonoBehaviour:
   m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.3
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

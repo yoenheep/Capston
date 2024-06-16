@@ -59,6 +59,11 @@ public class PlayerController : MonoBehaviour
     int weaponIndex = -1;
     public int nowWeapon;
 
+    // 오디오
+    AudioSource audioSource;
+    public AudioClip pickUpItem;
+    public AudioClip magicAttack;
+    
     //애니메이션
     private Animator animator;
 
@@ -67,6 +72,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         playerData = this;
 
@@ -124,6 +130,12 @@ public class PlayerController : MonoBehaviour
 
                     GameObject newBullet = Instantiate(bullet, pos_bullet.position, bulletRotation);
                     newBullet.GetComponent<Bullet>().SetMoveDirection(bulletDirection);
+
+                    if (weapon_item[nowWeapon] == 4)
+                    {
+                        audioSource.clip = magicAttack;
+                        audioSource.Play();
+                    }
                 }
                 bullet_curtime = AttackCoolTime_max;
             }
@@ -242,7 +254,10 @@ public class PlayerController : MonoBehaviour
             {
                 Item item = nearObject.GetComponent<Item>();
                 weaponIndex = item.Weapon;
+                audioSource.clip = pickUpItem;
+                audioSource.Play();
                 Destroy(nearObject);
+
                 if (weaponIndex != -1)
                 {
                     if (hasWeapons[0] == false)

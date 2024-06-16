@@ -12,6 +12,7 @@ TagManager:
   - subPortal
   - mainPortal
   - subOutPortal
+  - Music
   layers:
   - Default
   - TransparentFX

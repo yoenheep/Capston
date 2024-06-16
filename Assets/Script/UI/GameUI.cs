@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using System.Net.Http.Headers;
 
 public class GameUI : MonoBehaviour
 {
@@ -258,5 +259,5 @@ public class GameUI : MonoBehaviour
         {
             NowWeaponImg.sprite = weaponsSprite[secondWeapon];
         }
-    }
+    } 
 }

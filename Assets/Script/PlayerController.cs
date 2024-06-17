@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
     AudioSource audioSource;
     public AudioClip pickUpItem;
     public AudioClip magicAttack;
+    public AudioClip a_Weapon;
     
     //애니메이션
     private Animator animator;
@@ -152,6 +153,11 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.A))
                 {
                     // 근접 무기
+                    if (weapon_item[nowWeapon]==0)
+                    {
+                        audioSource.clip = a_Weapon;
+                        audioSource.Play();
+                    }
                     damage = 10f;
                     AttackCoolTime_max = 0.5f;
                     Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, BoxSize, 0);

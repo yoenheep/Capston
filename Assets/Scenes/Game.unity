@@ -3082,10 +3082,10 @@ MonoBehaviour:
   nowWeapon: 0
   pickUpItem: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}
   magicAttack: {fileID: 8300000, guid: a652877b012108e41871f867ada9f176, type: 3}
-  a_Weapon: {fileID: 8300000, guid: 81fcd8145c28f2a44a7ad8d02ce69dfd, type: 3}
-  sword: {fileID: 8300000, guid: 6ae01f426c6efde4ca42b5d736cf1920, type: 3}
-  Gun: {fileID: 8300000, guid: 301b7fdaf9a65ea42af237877cc48ac7, type: 3}
-  hammer: {fileID: 8300000, guid: 2ac75dc0cb1e8ec4a82178911ecf1f96, type: 3}
+  a_Weapon: {fileID: 0}
+  sword: {fileID: 0}
+  Gun: {fileID: 0}
+  hammer: {fileID: 0}
 --- !u!50 &105346959
 Rigidbody2D:
   serializedVersion: 4
@@ -23341,7 +23341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1004325953
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24664,6 +24664,10 @@ MonoBehaviour:
   SpriteList:
   - {fileID: 21300000, guid: 36419cfaccc0116428f2de56ab8ba5f9, type: 3}
   - {fileID: 21300000, guid: 33907b17a7aa46e44b141cae8fdbcc65, type: 3}
+  - {fileID: 21300000, guid: 533e504dd7fcded4982a38d7e9704248, type: 3}
+  - {fileID: 21300000, guid: 8641345b4a2bc354699785987a50f4f7, type: 3}
+  - {fileID: 21300000, guid: 88469f0c2254b604aac8922af0f3f3b3, type: 3}
+  - {fileID: 21300000, guid: 46c0f4c5fe736624d9543df76323753b, type: 3}
   AList: []
 --- !u!4 &1079745878
 Transform:
@@ -29273,8 +29277,8 @@ RectTransform:
   - {fileID: 1890101806}
   m_Father: {fileID: 2006461993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.15, y: 0.3}
-  m_AnchorMax: {x: 0.85, y: 0.75}
+  m_AnchorMin: {x: 0.25, y: 0.3}
+  m_AnchorMax: {x: 0.75, y: 0.75}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
@@ -30433,7 +30437,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsters_Prefab:
-  - {fileID: 2893332361076090446, guid: 997da49d7477f904688cf0ee14919926, type: 3}
   - {fileID: 1733207059708374420, guid: faf7b245086bcf945a8610d99e862a9b, type: 3}
   - {fileID: 3491684017866995724, guid: 43237b815b501b643a1409900b8c1a42, type: 3}
   hpBar_Prefab: {fileID: 1983264480916593626, guid: fda7b72e883eb664d982f03404f72457, type: 3}
@@ -40354,7 +40357,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2006461991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66872,8 +66875,8 @@ SceneRoots:
   - {fileID: 105346957}
   - {fileID: 1034761282}
   - {fileID: 1554107915}
-  - {fileID: 3966183092503203006}
   - {fileID: 128610586}
+  - {fileID: 248854107}
   - {fileID: 8317408455106466679}
   - {fileID: 3761877454641174711}
-  - {fileID: 248854107}
+  - {fileID: 3966183092503203006}

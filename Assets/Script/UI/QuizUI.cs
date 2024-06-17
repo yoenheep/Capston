@@ -18,7 +18,7 @@ public class QuizUI : MonoBehaviour
     [SerializeField] private List<Sprite> SpriteList = new List<Sprite>();
     [SerializeField] private List<string> AList;
     private int rand;
-    private int max = 2;
+    private int max = 6;
 
     //몬스터 데미지 처리를 위한 변수
     private Monsters mon;
@@ -28,7 +28,7 @@ public class QuizUI : MonoBehaviour
         quizTimer_now = quizTimer_max;
         quizPopup = GameUI.UIData.quizPopup;
 
-        AList = new List<string>() { "개포동", "칫솔" };
+        AList = new List<string>() { "개포동", "칫솔","다리꼬지마","주토피아","메이플스토리","멕시코시티" };
     }
 
     private void Update()

@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void MainNextStage()
+    public void MainNextStage() //main map 이동
     {
         mainStages[mainStageIndex].SetActive(false);
         mainStageIndex++;
@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
 
         MainPlayerMove();
     }
-    public void SubNextStage()
+    public void SubNextStage() // 트랩, 미니보스방 이동
     {
         subStages[subStageIndex].SetActive(true);
         mainStages[mainStageIndex].SetActive(false);
@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour
         SubPlayerMove();
     }
 
-    public void SubOutStage()
+    public void SubOutStage() // 트랩, 미니보스방 나가기
     {
         SubOutPlayerMove();
         subStages[subStageIndex].SetActive(false);
@@ -232,7 +232,8 @@ public class GameManager : MonoBehaviour
     {
         if (subStageIndex == 0)
         {
-            Player.transform.position = new Vector3(19, -25, 0);
+            //Player.transform.position = new Vector3(19, -25, 0); 트랩
+            Player.transform.position = new Vector3(-12, -14, 0); //미니보스
             nowStage = 4;
         }
         else if(subStageIndex == 1 || subStageIndex == 2 || subStageIndex == 3)

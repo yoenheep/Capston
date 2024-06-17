@@ -15,9 +15,9 @@ public class monHpBar : MonoBehaviour
 
     private void OnEnable()
     {
-        parent = Monster_Spawn_Manager.instance.hpBarParent;
+            parent = Monster_Spawn_Manager.instance.hpBarParent;
 
-        transform.SetParent(parent.transform);// 부모 설정
+            transform.SetParent(parent.transform);// 부모 설정
     }
     private void Update()
     {

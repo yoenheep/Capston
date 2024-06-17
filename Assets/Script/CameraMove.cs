@@ -48,15 +48,15 @@ public class CameraMove : MonoBehaviour
             minCameraPos = new Vector3(-32, -29, -19.5f);
             maxCameraPos = new Vector3(143, 10, -19.5f);
         }
-        else if (GameManager.gameMgr.nowStage == 4) //트랩
+        else if (GameManager.gameMgr.nowStage == 5) //트랩
         {
             minCameraPos = new Vector3(-12, -24, -19.5f);
             maxCameraPos = new Vector3(46, 33, -19.5f);
         }
-        else if (GameManager.gameMgr.nowStage == 5) //미니 보스
+        else if (GameManager.gameMgr.nowStage == 4) //미니 보스
         {
             minCameraPos = new Vector3(-7.5f, -21, -19.5f);
-            maxCameraPos = new Vector3(49, -18, -19.5f);
+            maxCameraPos = new Vector3(23, -18, -19.5f);
         }
         else if (GameManager.gameMgr.nowStage == 6) //라스트보스
         {

@@ -26,7 +26,7 @@ public class Monster_Bullet : MonoBehaviour
         this.Move();
 
         Vector2 obj = this.gameObject.transform.position;
-        //Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
+
         RaycastHit2D ray = Physics2D.Raycast(obj, Vector3.down, 1, LayerMask.GetMask("Player"));
 
         if (ray.collider != null)

@@ -5,8 +5,6 @@ using UnityEngine;
 public class MonsterC : Monsters
 {
     SpriteRenderer sp;
-    Animator monster_animator;
-    AudioListener monster_Audio;
 
     float range;
     GameObject target;
@@ -14,18 +12,16 @@ public class MonsterC : Monsters
 
     protected void OnEnable()
     {
-        monster_Name = "ccc";
+        monster_Name = "CCC";
         monster_Armor = 0f;
         monster_Speed = 2f;
         monster_Attack_Damage = 5f;
-        monster_Attack_Speed = 3f;
+        monster_Attack_Speed = 4.5f;
         monster_Max_Health = 100f;
         monster_Pre_Health = monster_Max_Health;
 
         range = 5f;
-
-        monster_animator = gameObject.GetComponent<Animator>();
-        monster_Audio = gameObject.GetComponent<AudioListener>();
+        
         sp = gameObject.GetComponent<SpriteRenderer>();
 
         hpBar = Instantiate(Monster_Spawn_Manager.instance.hpBar_Prefab, transform.position, Quaternion.identity);
@@ -72,16 +68,19 @@ public class MonsterC : Monsters
         }
     }
 
+    
     protected void RangeAttack(float damage, GameObject obj)
     {
-        if (obj != null)
+        if (obj != null && !is_dead)
         {
-            
             //몬스터의 공격이 최초이거나 마지막 공격 후에 일정 시간이 지났을 경우
             if (Time.time >= lastAttackTime + monster_Attack_Speed || lastAttackTime == 0)
             {
                 int direction = sp.flipX ? -1 : 1;
                 Vector2 obj_Position = sp.flipX ? Vector2.left : Vector2.left;
+
+                monster_Audio.clip = monster_Audio_Clips[0];
+                monster_Audio.Play();
 
                 GameObject newBullet = Instantiate(bullet, this.gameObject.transform.position, Quaternion.identity);
                 newBullet.GetComponent<Monster_Bullet>().SetDamage(damage);

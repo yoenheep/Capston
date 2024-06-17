@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Monsters : MonoBehaviour
 {
-    Animator anim;
+    protected Animator anim;
     SpriteRenderer spriteRenderer;
 
     //몬스터 기본 변수
@@ -17,6 +17,7 @@ public abstract class Monsters : MonoBehaviour
     public float monster_Attack_Damage;
     protected bool is_dead;
     protected float lastAttackTime;
+    protected bool quiz_Mon;
 
     protected GameObject hpBar;
     protected monHpBar hpBarLogic;
@@ -25,15 +26,20 @@ public abstract class Monsters : MonoBehaviour
     protected Rigidbody2D rb;
     protected int nextMove;
 
+    protected AudioSource monster_Audio;
+    public AudioClip[] monster_Audio_Clips;
+
     //몬스터 변수 초기화
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        monster_Audio = gameObject.GetComponent<AudioSource>();
 
         monster_Pre_Health = monster_Max_Health;
         is_dead = false;
+        quiz_Mon = false;
         lastAttackTime = 0;
 
         Think();
@@ -50,7 +56,7 @@ public abstract class Monsters : MonoBehaviour
     }
 
     //몬스터 기본 이동
-    protected void Move()
+    protected virtual void Move()
     {
         if (GameUI.UIData.quizPopup.activeSelf == false)
         {
@@ -74,7 +80,7 @@ public abstract class Monsters : MonoBehaviour
     }
 
     //랜덤 이동 기능
-    protected void Think()
+    protected virtual void Think()
     {
         nextMove = Random.Range(-1, 2);
         //nextMove 값에 따라 애니메이션을 변경
@@ -118,6 +124,11 @@ public abstract class Monsters : MonoBehaviour
         //obj_Rb가 null이 아니고 is_dead가 false일 때
         if (!is_dead && obj_Rb != null)
         {
+            anim.SetTrigger("GetDamage");
+
+            monster_Audio.clip = monster_Audio_Clips[2];
+            monster_Audio.Play();
+
             Vector2 present_Position = obj_Rb.position;
             Vector2 direction = (present_Position - attack_Direction).normalized;
 
@@ -142,31 +153,37 @@ public abstract class Monsters : MonoBehaviour
 
             if (monster_Pre_Health <= 0)
             {
-                Die();
+                this.Die();
             }
-        }  
+        }
     }
 
     //밀려난 위치가 플랫폼 끝일 경우 x값을 변경
-    private Vector2 Check_Cliff(Vector2 after, Vector2 before)
+    protected Vector2 Check_Cliff(Vector2 after, Vector2 before)
     {
         Vector2 final;
-        // 2D 레이캐스트를 위한 Vector2.down 사용 및 레이캐스트 거리 증가
+
         RaycastHit2D checkRay = Physics2D.Raycast(after, Vector2.down, 2.0f);
         Debug.DrawRay(after, Vector2.down * 2.0f, new Color(0, 1, 0));
 
         if (checkRay.collider != null)
         {
-            Debug.Log("절벽이 아님");
             final = after;
         }
         else
         {
-            Debug.Log("절벽임");
             final = before;
         }
 
         return final;
+    }
+
+    public void Quiz_Mon_Die()
+    {
+        if(this.quiz_Mon)
+        {
+            Die();
+        }
     }
 
     protected virtual void MeleeDamage(float damage, PlayerController obj)
@@ -176,10 +193,13 @@ public abstract class Monsters : MonoBehaviour
             //몬스터의 공격이 최초이거나 마지막 공격 후에 일정 시간이 지났을 경우
             if(Time.time >= lastAttackTime + this.monster_Attack_Speed || lastAttackTime == 0)
             {
+                monster_Audio.clip = monster_Audio_Clips[0];
+                monster_Audio.Play();
+
                 obj.Hp(monster_Attack_Damage, rb.position);
 
                 lastAttackTime = Time.time;
-            }
+            } 
         }
     }
 
@@ -190,16 +210,32 @@ public abstract class Monsters : MonoBehaviour
         if (!is_dead)
         {
             is_dead = true;
-            //gameObject.GetComponent<Rigidbody2D>().simulated = false;
+            gameObject.GetComponent<Rigidbody2D>().simulated = false;
             //아이템 드롭
             GameManager.gameMgr.Drop_Item(gameObject);
 
+            //몬스터 사망 애니메이션 재생
+            anim.SetBool("isDead", true);
+
+            //몬스터 사망 사운드 재생
+            monster_Audio.clip = monster_Audio_Clips[1];
+            monster_Audio.Play();
             // 체력바
             hpBar.gameObject.SetActive(false);
             //죽으면 몬스터 객체 삭제
-            this.gameObject.SetActive(false);
+            StartCoroutine(DeactivateAfterSound());
             //GameUI.UIData.Clear(); 나중에 보스에게 쓸것
         }
+    }
+
+    private IEnumerator DeactivateAfterSound()
+    {
+        // 오디오 클립 길이만큼 대기
+        yield return new WaitForSeconds(monster_Audio.clip.length);
+
+        // 게임 오브젝트 비활성화
+        Debug.Log("몬스터 삭제");
+        this.gameObject.SetActive(false);
     }
 
     void OnCollisionStay2D(Collision2D collision)

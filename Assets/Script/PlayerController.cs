@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     public bool isDead = false;
 
     //ÇÇ°Ý
-    //SpriteRenderer sr;
     Color halfA = new Color(1, 1, 1, 0);
     Color fullA = new Color(1, 1, 1, 1);
 
@@ -83,7 +82,6 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         charac_PreHP = charac_MaxHP;
-        //sr = GetComponent<SpriteRenderer>();
 
         AttackCoolTime_max = 0.5f;
     }
@@ -391,8 +389,20 @@ public class PlayerController : MonoBehaviour
 
     void Re()
     {
-        charac_PreHP -= 20;
-        GameUI.UIData.ReGame();
+        charac_PreHP -= 10;
+
+        if (GameManager.gameMgr.mainStageIndex == 0)
+        {
+            GameManager.gameMgr.Player.transform.position = new Vector3(-7.5f, -1.5f, 0);
+        }
+        else
+        {
+            float x = PlayerPrefs.GetFloat("SaveX");
+            float y = PlayerPrefs.GetFloat("SaveY");
+
+            GameManager.gameMgr.Player.transform.position = new Vector3(x, y, 0);
+        }
+
         isReInvoked = false;
     }
 

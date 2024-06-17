@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         gameMgr = this;
+        nowStage = 0;
 
         GameStart();
     }
@@ -34,7 +35,7 @@ public class GameManager : MonoBehaviour
 
         Player.transform.position = new Vector3(x, y, 0);
 
-        nowStage = stageNum;
+       //nowStage = stageNum;
         mainStageIndex = stageNum;
 
         mainStages[nowStage].SetActive(true);
@@ -140,8 +141,8 @@ public class GameManager : MonoBehaviour
     }
     public void SubNextStage() // 트랩, 미니보스방 이동
     {
-        subStages[subStageIndex].SetActive(true);
-        mainStages[mainStageIndex].SetActive(false);
+        //subStages[subStageIndex].SetActive(true);
+        //mainStages[mainStageIndex].SetActive(false);
 
         subPortal.SetActive(false);
         SubPlayerMove();
@@ -233,7 +234,7 @@ public class GameManager : MonoBehaviour
         if (subStageIndex == 0)
         {
             //Player.transform.position = new Vector3(19, -25, 0); 트랩
-            Player.transform.position = new Vector3(-12, -14, 0); //미니보스
+            Player.transform.position = new Vector3(137, -24, 0); //미니보스
             nowStage = 4;
         }
         else if(subStageIndex == 1 || subStageIndex == 2 || subStageIndex == 3)

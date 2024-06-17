@@ -39,6 +39,7 @@ public class Monster_Spawn_Manager : MonoBehaviour
         }
 
         Summon_Monsters();
+
         Summon_Boss();
     }
 

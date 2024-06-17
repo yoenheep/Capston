@@ -55,8 +55,8 @@ public class CameraMove : MonoBehaviour
         }
         else if (GameManager.gameMgr.nowStage == 4) //미니 보스
         {
-            minCameraPos = new Vector3(-7.5f, -21, -19.5f);
-            maxCameraPos = new Vector3(23, -18, -19.5f);
+            minCameraPos = new Vector3(140, -23, -19.5f);
+            maxCameraPos = new Vector3(172, 0, -19.5f);
         }
         else if (GameManager.gameMgr.nowStage == 6) //라스트보스
         {

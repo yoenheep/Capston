@@ -163,8 +163,10 @@ public class GameUI : MonoBehaviour
 
     public void NewGame() // 새게임
     {
-        Time.timeScale = 1;
         SceneManager.LoadScene("Game");
+        PlayerPrefs.SetFloat("SaveX", -7.5f);
+        PlayerPrefs.SetFloat("SaveY", -2);
+        PlayerPrefs.SetInt("SaveStage", 0);
     }
 
     public void goMain() // 메인가기
@@ -174,22 +176,7 @@ public class GameUI : MonoBehaviour
 
     public void ReGame()
     {
-        overPopup.SetActive(false);
-        PlayerController.playerData.charac_PreHP += 10;
-        PlayerController.playerData.isHurt = false;
-        PlayerController.playerData.isDead = false;
-        Time.timeScale = 1;
-
-        if (GameManager.gameMgr.mainStageIndex == 0)
-        {
-            GameManager.gameMgr.Player.transform.position = new Vector3(-7.5f, -1.5f, 0);
-        }else
-        {
-            float x = PlayerPrefs.GetFloat("SaveX");
-            float y = PlayerPrefs.GetFloat("SaveY");
-
-            GameManager.gameMgr.Player.transform.position = new Vector3(x, y, 0);
-        }
+        SceneManager.LoadScene("Game");
     }
 
     IEnumerator CoolTimeFunc() // 데쉬 쿨타임 이팩트

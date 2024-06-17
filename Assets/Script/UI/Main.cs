@@ -29,6 +29,9 @@ public class Main : MonoBehaviour
     public void re() //새로시작하기
     {
         SceneManager.LoadScene("Game");
+        PlayerPrefs.SetFloat("SaveX", -7.5f);
+        PlayerPrefs.SetFloat("SaveY", -2);
+        PlayerPrefs.SetInt("SaveStage", 0);
     }
     public void quit() //종료하기
     {

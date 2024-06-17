@@ -11,7 +11,7 @@ public class CameraMove : MonoBehaviour
 
     GameObject player;
 
-    public bool bounds;
+    public bool bounds = true;
     public Vector3 minCameraPos;
     public Vector3 maxCameraPos;
 
@@ -28,6 +28,42 @@ public class CameraMove : MonoBehaviour
 
         transform.position = new Vector3(posX, posY, transform.position.z);
 
+        if (GameManager.gameMgr.nowStage == 0) //¸Ê1
+        {
+            minCameraPos = new Vector3(-7.1f, -29, -19.5f);
+            maxCameraPos = new Vector3(108, 0, -19.5f);
+        }
+        else if (GameManager.gameMgr.nowStage == 1) //Æ®·¦
+        {
+            minCameraPos = new Vector3(-12, -24, -19.5f);
+            maxCameraPos = new Vector3(46, 33, -19.5f);
+        }
+        else if (GameManager.gameMgr.nowStage == 2) //¸Ê2
+        {
+            minCameraPos = new Vector3(-7.5f, -29, -19.5f);
+            maxCameraPos = new Vector3(118, -15, -19.5f);
+        }
+        else if (GameManager.gameMgr.nowStage == 3) //¹Ì´Ïº¸½º
+        {
+            minCameraPos = new Vector3(-7.5f, -21, -19.5f);
+            maxCameraPos = new Vector3(49, -18, -19.5f);
+        }
+        else if (GameManager.gameMgr.nowStage == 4) //¸Ê3
+        {
+            minCameraPos = new Vector3(-32, -29, -19.5f);
+            maxCameraPos = new Vector3(112, -15, -19.5f);
+        }
+        else if (GameManager.gameMgr.nowStage == 5) //¸Ê4
+        {
+            minCameraPos = new Vector3(-32, -29, -19.5f);
+            maxCameraPos = new Vector3(143, 10, -19.5f);
+        }
+        else if (GameManager.gameMgr.nowStage == 6) //¶ó½ºÆ®º¸½º
+        {
+            minCameraPos = new Vector3(-31, -24, -19.5f);
+            maxCameraPos = new Vector3(113, -13, -19.5f);
+        }
+
         if (bounds)
         {
             transform.position = new Vector3(Mathf.Clamp(transform.position.x, minCameraPos.x, maxCameraPos.x),
@@ -35,4 +71,6 @@ public class CameraMove : MonoBehaviour
                 Mathf.Clamp(transform.position.z, minCameraPos.z, maxCameraPos.z));
         }
     }
+
+
 }

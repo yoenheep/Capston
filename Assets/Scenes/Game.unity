@@ -3219,8 +3219,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48ee79eee3c9ef644b6fdbcd3823c759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charac_MaxHP: 5
-  charac_PreHP: 0
+  charac_MaxHP: 100
+  charac_PreHP: 100
   isHurt: 0
   isDead: 0
   spriteRenderer: {fileID: 0}
@@ -15511,7 +15511,7 @@ Transform:
   m_GameObject: {fileID: 949639821}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.5, y: -0.44000006, z: -19.5}
+  m_LocalPosition: {x: -7.5, y: -1, z: -19.5}
   m_LocalScale: {x: 1.9499999, y: 1.9499999, z: 1.9499999}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -15530,8 +15530,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c846541a042180e418155c1630abe813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounds: 0
-  minCameraPos: {x: -8, y: 0, z: -19.5}
+  bounds: 1
+  minCameraPos: {x: -7.5, y: -35, z: -19.5}
   maxCameraPos: {x: 108, y: 0, z: -19.5}
 --- !u!1 &957986888
 GameObject:
@@ -40703,6 +40703,7 @@ MonoBehaviour:
   - {fileID: 7300803992178885255, guid: 4a6894304c9599b4cb3db9b592255ce9, type: 3}
   - {fileID: 8873148718333421407, guid: 27c1935bcb1b1374384e169bfff3810b, type: 3}
   item_tr: {fileID: 2147355636}
+  nowStage: 0
   mainStages:
   - {fileID: 1659113026}
   - {fileID: 643929933}
@@ -40713,6 +40714,8 @@ MonoBehaviour:
   mainStageIndex: 0
   subStages:
   - {fileID: 73370301}
+  - {fileID: 147930804}
+  - {fileID: 147930804}
   - {fileID: 147930804}
   subPortal: {fileID: 1362249474}
   subStageIndex: 0

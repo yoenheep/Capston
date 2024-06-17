@@ -295,14 +295,17 @@ public class PlayerController : MonoBehaviour
             else if (nearObject.tag == "mainPortal")
             {
                 GameManager.gameMgr.MainNextStage();
+                nearObject = null;
             }
             else if(nearObject.tag == "subPortal")
             {
                 GameManager.gameMgr.SubNextStage();
+                nearObject = null;
             }
             else if(nearObject.tag == "subOutPortal")
             {
                 GameManager.gameMgr.SubOutStage();
+                nearObject = null;
             }
         }
     }

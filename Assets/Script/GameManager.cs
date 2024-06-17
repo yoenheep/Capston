@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] drop_Item;
     public GameObject item_tr;
 
+    public int nowStage; // [map1 =0 / trap =1 / map2 =2 / middle =3 / map3 = 4 / map4 = 5 / last = 6]
     public GameObject[] mainStages;
     public GameObject mainPortal;
     public int mainStageIndex;
@@ -69,6 +70,10 @@ public class GameManager : MonoBehaviour
         mainStages[mainStageIndex].SetActive(true);
 
         mainPortal.SetActive(false);
+        if (mainStageIndex != 4)
+        {
+            subPortal.SetActive(true);
+        }
 
         MainPlayerMove();
     }
@@ -89,10 +94,7 @@ public class GameManager : MonoBehaviour
         mainStages[mainStageIndex].SetActive(true);
 
         mainPortal.SetActive(true);
-        if(mainStageIndex != 3)
-        {
-            subPortal.SetActive(true);
-        }
+        subPortal.SetActive(false);
     }
 
     void MainPlayerMove()
@@ -110,6 +112,7 @@ public class GameManager : MonoBehaviour
             mainPortal.transform.position = new Vector3(121.5f, -27.5f, 0);
             PlayerPrefs.SetFloat("SaveX", -11);
             PlayerPrefs.SetFloat("SaveY", -23);
+            nowStage = 2;
         }
         else if (mainStageIndex == 2)
         {
@@ -117,6 +120,7 @@ public class GameManager : MonoBehaviour
             mainPortal.transform.position = new Vector3(115.5f, -15.5f, 0);
             PlayerPrefs.SetFloat("SaveX", -34);
             PlayerPrefs.SetFloat("SaveY", -29);
+            nowStage = 4;
         }
         else if(mainStageIndex == 3)
         {
@@ -124,11 +128,13 @@ public class GameManager : MonoBehaviour
             mainPortal.transform.position = new Vector3(145.5f, 9.5f, 0);
             PlayerPrefs.SetFloat("SaveX", -36);
             PlayerPrefs.SetFloat("SaveY", -20);
+            nowStage = 5;
         }
         else if( mainStageIndex == 4)
         {
             mainPortal.SetActive(false);
             Player.transform.position = new Vector3(-15, -16, 0);
+            nowStage = 6;
         }
     }
 
@@ -139,18 +145,22 @@ public class GameManager : MonoBehaviour
         if(mainStageIndex == 0)
         {
             subPortal.transform.position = new Vector3(-2.5f, -16.5f, 0);
+            nowStage = 0;
         }
         else if(mainStageIndex == 1)
         {
             subPortal.transform.position = new Vector3(6.5f, -30.5f, 0);
+            nowStage = 2;
         }
         else if (mainStageIndex == 2)
         {
             subPortal.transform.position = new Vector3(94.5f, -20.5f, 0);
+            nowStage = 4;
         }
         else if (mainStageIndex == 3)
         {
             subPortal.SetActive(false);
+            nowStage = 5;
         }
     }
 
@@ -159,10 +169,12 @@ public class GameManager : MonoBehaviour
         if(subStageIndex == 0)
         {
             Player.transform.position = new Vector3(19, -26, 0);
+            nowStage = 1;
         }
         else if(subStageIndex == 1 || subStageIndex == 2 || subStageIndex == 3)
         {
             Player.transform.position = new Vector3(-12, -15, 0);
+            nowStage = 3;
         }
     }
 }

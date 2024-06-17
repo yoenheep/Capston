@@ -177,6 +177,7 @@ public class GameUI : MonoBehaviour
         overPopup.SetActive(false);
         PlayerController.playerData.charac_PreHP += 10;
         PlayerController.playerData.isHurt = false;
+        PlayerController.playerData.isDead = false;
         Time.timeScale = 1;
 
         if (GameManager.gameMgr.mainStageIndex == 0)
@@ -215,7 +216,7 @@ public class GameUI : MonoBehaviour
 
     void hp_Invoke()
     {
-        Time.timeScale = 0;
+        PlayerController.playerData.isDead = true;
     }
 
     public void hp()
@@ -226,6 +227,11 @@ public class GameUI : MonoBehaviour
             {
                 overPopup.SetActive(true);
                 Invoke("hp_Invoke", 0.5f);
+                if (PlayerController.playerData.isDead)
+                {
+                    Time.timeScale = 0;
+                }
+                
             }
         }
     }

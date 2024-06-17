@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public float charac_PreHP;
     public bool isHurt = false;
     private bool isReInvoked = false;
+    public bool isDead = false;
+
     //피격
     //SpriteRenderer sr;
     Color halfA = new Color(1, 1, 1, 0);
@@ -231,13 +233,15 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("Walk", false);
             }
         }
+
         if (charac_PreHP <= 0)
         {
-            animator.SetBool("death", true);
+            animator.SetBool("Death", true);
         }
         else
         {
-            animator.SetBool("death", false);
+            animator.SetBool("Death", false);
+            isDead = false;
         }
     }
     void FixedUpdate()
@@ -316,10 +320,12 @@ public class PlayerController : MonoBehaviour
             charac_PreHP -= damage;
             if (charac_PreHP <= 0)
             {
-                spriteRenderer.sprite = GameUI.UIData.deathSprite;
+                animator.SetBool("Death",true);
             }
             else
             {
+                animator.SetBool("Death", false);
+                isDead = false;
                 StartCoroutine(Knockback(transform.position.x - pos.x < 0 ? 1 : -1));
                 StartCoroutine(HpRoutine()); // 무적 기간 코루틴 시작
                 StartCoroutine(alphablink()); // 깜빡임 효과 시작

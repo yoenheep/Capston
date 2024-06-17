@@ -54,8 +54,15 @@ public class Cursed_Accompanist : Monsters
         }
     }
 
+    private IEnumerator InvokeThinkAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Think();
+    }
+
     protected override void Think()
     {
+        Debug.Log("다시 돌아옴");
         nextAttack = Random.Range(0, 2);
         nextAttack = (nextAttack == 0) ? -1 : 1;
 
@@ -94,9 +101,11 @@ public class Cursed_Accompanist : Monsters
                 yield return new WaitForSeconds(1f);
                 elapsedTime += 1f;
             }
-            attacking = false;
+            
         }
-        Invoke("Think", 5f);
+        attacking = false;
+        Debug.Log("Attack_1 종료, Think 호출");
+        StartCoroutine(InvokeThinkAfterDelay(5f));
         anim.SetInteger("Attack", 0);
     }
 
@@ -121,10 +130,11 @@ public class Cursed_Accompanist : Monsters
                 yield return new WaitForSeconds(1f);
                 elapsedTime += 1f;
             }
-            attacking = false;
+            
         }
-
-        Invoke("Think", 5f);
+        attacking = false;
+        Debug.Log("Attack_2 종료, Think 호출");
+        StartCoroutine(InvokeThinkAfterDelay(5f));
         anim.SetInteger("Attack", 0);
     }
 

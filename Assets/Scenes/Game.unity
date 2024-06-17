@@ -21608,7 +21608,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &931612486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45884,6 +45884,9 @@ MonoBehaviour:
   monsters_Spawn_Point:
   - {fileID: 1835905581}
   - {fileID: 887877800}
+  - {fileID: 206413930}
+  - {fileID: 1364910222}
+  - {fileID: 497882962}
   hpBarParent: {fileID: 1694069403}
 --- !u!114 &1980035323
 MonoBehaviour:

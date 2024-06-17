@@ -128,7 +128,6 @@ public class PlayerController : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.A))
                 {
-                    AttackCoolTime_max = 0.2f;
                     Vector3 bulletDirection = spriteRenderer.flipX ? Vector3.left : Vector3.right;
                     Quaternion bulletRotation = spriteRenderer.flipX ? Quaternion.Euler(0, 180, 0) : Quaternion.identity;
 

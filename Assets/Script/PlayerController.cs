@@ -66,7 +66,10 @@ public class PlayerController : MonoBehaviour
     public AudioClip pickUpItem;
     public AudioClip magicAttack;
     public AudioClip a_Weapon;
-    
+    public AudioClip sword;
+    public AudioClip Gun;
+    public AudioClip hammer;
+
     //애니메이션
     private Animator animator;
 
@@ -133,10 +136,20 @@ public class PlayerController : MonoBehaviour
 
                     GameObject newBullet = Instantiate(bullet, pos_bullet.position, bulletRotation);
                     newBullet.GetComponent<Bullet>().SetMoveDirection(bulletDirection);
+                    Bullet bulletComponent = newBullet.GetComponent<Bullet>();
 
-                    if (weapon_item[nowWeapon] == 4)
+                    if (weapon_item[nowWeapon] == 4)//마법
                     {
                         audioSource.clip = magicAttack;
+                        audioSource.Play();
+                        AttackCoolTime_max = 0.5f;
+                        bulletComponent.damage = 10f;
+                    }
+                    else if(weapon_item[nowWeapon] == 3)//총알
+                    {
+                        AttackCoolTime_max = 0.2f;
+                        bulletComponent.damage = 5f;
+                        audioSource.clip = Gun;
                         audioSource.Play();
                     }
                 }
@@ -152,14 +165,30 @@ public class PlayerController : MonoBehaviour
                
                 if (Input.GetKeyDown(KeyCode.A))
                 {
+                    damage = 15f;
+                    AttackCoolTime_max = 0.5f;
                     // 근접 무기
-                    if (weapon_item[nowWeapon]==0)
+                    if (weapon_item[nowWeapon]==0)//기본공격
                     {
+                        damage = 10f;
+                        AttackCoolTime_max = 0.5f;
                         audioSource.clip = a_Weapon;
                         audioSource.Play();
                     }
-                    damage = 10f;
-                    AttackCoolTime_max = 0.5f;
+                    else if(weapon_item[nowWeapon] == 2)//검
+                    {
+                        damage = 15f;
+                        AttackCoolTime_max = 0.25f;
+                        audioSource.clip = sword;
+                        audioSource.Play();
+                    }
+                    else if (weapon_item[nowWeapon] == 1)//해머
+                    {
+                        damage = 25f;
+                        AttackCoolTime_max = 0.6f;
+                        audioSource.clip = hammer;
+                        audioSource.Play();
+                    }
                     Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, BoxSize, 0);
                     animator.SetTrigger("StickAttack");
 

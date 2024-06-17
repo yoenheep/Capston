@@ -3247,6 +3247,9 @@ MonoBehaviour:
   pickUpItem: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}
   magicAttack: {fileID: 8300000, guid: a652877b012108e41871f867ada9f176, type: 3}
   a_Weapon: {fileID: 8300000, guid: 81fcd8145c28f2a44a7ad8d02ce69dfd, type: 3}
+  sword: {fileID: 8300000, guid: 6ae01f426c6efde4ca42b5d736cf1920, type: 3}
+  Gun: {fileID: 8300000, guid: 301b7fdaf9a65ea42af237877cc48ac7, type: 3}
+  hammer: {fileID: 8300000, guid: 2ac75dc0cb1e8ec4a82178911ecf1f96, type: 3}
 --- !u!50 &105346959
 Rigidbody2D:
   serializedVersion: 4
@@ -67033,8 +67036,8 @@ SceneRoots:
   - {fileID: 105346957}
   - {fileID: 1034761282}
   - {fileID: 1554107915}
+  - {fileID: 3966183092503203006}
   - {fileID: 128610586}
-  - {fileID: 248854107}
   - {fileID: 8317408455106466679}
   - {fileID: 3761877454641174711}
-  - {fileID: 3966183092503203006}
+  - {fileID: 248854107}

@@ -9,6 +9,9 @@ public class Monster_Spawn_Manager : MonoBehaviour
     public GameObject hpBar_Prefab;
     public List<string> monsters_Name = new List<string>();
 
+    public GameObject boss_Spawn_Point;
+    public GameObject boss_mon;
+
     //몬스터 DB
     Dictionary<string, GameObject> monstersDB;
 
@@ -36,12 +39,14 @@ public class Monster_Spawn_Manager : MonoBehaviour
         }
 
         Summon_Monsters();
+        Summon_Boss();
     }
 
     public void Summon_Monsters()
     {
         //몬스터 스폰 포인트에 monsterDB에 저장된 몬스터를 소환
-        for (int i = 0; i < monsters_Spawn_Point.Count; i++)
+        //강제적으로 막음 수정 필요
+        for (int i = 0; i < 2; i++)
         {
             //몬스터 크기에 따른 소환 위치 조정
             //수정 중
@@ -62,4 +67,13 @@ public class Monster_Spawn_Manager : MonoBehaviour
             Debug.Log("소환");
         }
     }
+    public void Summon_Boss()
+    {
+        Vector2 position = new Vector2(boss_Spawn_Point.transform.localPosition.x, boss_Spawn_Point.transform.localPosition.y);
+        Transform tr = boss_Spawn_Point.transform.parent;
+        GameObject createdPrefab = Instantiate(boss_mon, position, Quaternion.identity);
+        createdPrefab.transform.SetParent(tr, false);
+        Debug.Log("소환");
+    }
+
 }

@@ -322,7 +322,10 @@ public class PlayerController : MonoBehaviour
                     }
                 }
                 else
+                    if(charac_PreHP < 100)
+                {
                     charac_PreHP += 10;
+                }       
             }
             else if (nearObject.tag == "mainPortal")
             {

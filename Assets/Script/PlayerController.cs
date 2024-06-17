@@ -6,9 +6,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     //캐릭터hp
-    public float charac_MaxHP = 100f;
+    public float charac_MaxHP = 5f;
     public float charac_PreHP;
-    bool isHurt = false;
+    public bool isHurt = false;
     private bool isReInvoked = false;
     //피격
     //SpriteRenderer sr;
@@ -230,6 +230,14 @@ public class PlayerController : MonoBehaviour
             {
                 animator.SetBool("Walk", false);
             }
+        }
+        if (charac_PreHP <= 0)
+        {
+            animator.SetBool("death", true);
+        }
+        else
+        {
+            animator.SetBool("death", false);
         }
     }
     void FixedUpdate()

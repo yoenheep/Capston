@@ -158,6 +158,7 @@ public class GameUI : MonoBehaviour
         else if (stopPopup.activeSelf == true)
         {
             stopPopup.SetActive(false);
+            Time.timeScale = 1;
         }
     }
 

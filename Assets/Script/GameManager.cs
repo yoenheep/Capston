@@ -35,10 +35,8 @@ public class GameManager : MonoBehaviour
 
         Player.transform.position = new Vector3(x, y, 0);
 
-       //nowStage = stageNum;
+        nowStage = stageNum;
         mainStageIndex = stageNum;
-
-        mainStages[nowStage].SetActive(true);
 
         if(stageNum == 0)
         {
@@ -55,37 +53,27 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.gameMgr.nowStage == 0) //∏ 1
+        if (nowStage == 0) //∏ 1
         {
-            subPortal.transform.position = new Vector3(52.5f, -17.5f,0);
-            mainPortal.transform.position = new Vector3(109.5f, -21.5f, 0);
+            subPortal.transform.position = new Vector3(-19, -5,0);
+            mainPortal.transform.position = new Vector3(38, -9, 0);
         }
-        else if (GameManager.gameMgr.nowStage == 1) //∏ 2
+        else if (nowStage == 1) //∏ 2
         {
-            subPortal.transform.position = new Vector3(-2.5f, -16.5f, 0);
-            mainPortal.transform.position = new Vector3(121.5f, -27.5f, 0);
+            subPortal.transform.position = new Vector3(176, -4, 0);
+            mainPortal.transform.position = new Vector3(300, -15, 0);
         }
-        else if (GameManager.gameMgr.nowStage == 2) //∏ 3
+        else if (nowStage == 2) //∏ 3
         {
-            subPortal.transform.position = new Vector3(6.5f, -30.5f, 0);
-            mainPortal.transform.position = new Vector3(115.5f, -15.5f, 0);
+            subPortal.transform.position = new Vector3(438, -31.28f, 0);
+            mainPortal.transform.position = new Vector3(547, -16.27f, 0);
         }
-        else if (GameManager.gameMgr.nowStage == 3) //∏ 4
+        else if (nowStage == 3) //∏ 4
         {
-            subPortal.transform.position = new Vector3(94.5f, -20.5f, 0);
-            mainPortal.transform.position = new Vector3(145.5f, 9.5f, 0);
+            subPortal.transform.position = new Vector3(706, -21.27f, 0);
+            mainPortal.transform.position = new Vector3(757, 8.72f, 0);
         }
-        else if (GameManager.gameMgr.nowStage == 4) //trap
-        {
-            subPortal.SetActive(false);
-            mainPortal.SetActive(false);
-        }
-        else if (GameManager.gameMgr.nowStage == 5) //miniboss
-        {
-            subPortal.SetActive(false);
-            mainPortal.SetActive(false);
-        }
-        else if (GameManager.gameMgr.nowStage == 6) //∂ÛΩ∫∆Æ∫∏Ω∫
+        else if (nowStage == 4 || nowStage == 5 || nowStage == 6) //trap, mid, last
         {
             subPortal.SetActive(false);
             mainPortal.SetActive(false);
@@ -133,27 +121,20 @@ public class GameManager : MonoBehaviour
 
     public void MainNextStage() //main map ¿Ãµø
     {
-        mainStages[mainStageIndex].SetActive(false);
         mainStageIndex++;
-        mainStages[mainStageIndex].SetActive(true);
 
         MainPlayerMove();
     }
     public void SubNextStage() // ∆Æ∑¶, πÃ¥œ∫∏Ω∫πÊ ¿Ãµø
     {
-        //subStages[subStageIndex].SetActive(true);
-        //mainStages[mainStageIndex].SetActive(false);
-
-        subPortal.SetActive(false);
         SubPlayerMove();
     }
 
     public void SubOutStage() // ∆Æ∑¶, πÃ¥œ∫∏Ω∫πÊ ≥™∞°±‚
     {
         SubOutPlayerMove();
-        subStages[subStageIndex].SetActive(false);
+
         subStageIndex++;
-        mainStages[mainStageIndex].SetActive(true);
     }
 
     void MainPlayerMove()
@@ -161,44 +142,44 @@ public class GameManager : MonoBehaviour
         subPortal.SetActive(true);
         mainPortal.SetActive(false);
 
-        if (mainStageIndex == 0)
+        if (mainStageIndex == 0) // map1
         {
-            Player.transform.position = new Vector3(-7.5f, -2, 0);
+            Player.transform.position = new Vector3(-78, 11, 0);
 
-            PlayerPrefs.SetFloat("SaveXFirst", -7.5f); //¿”Ω√ ¿˙¿Â
-            PlayerPrefs.SetFloat("SaveYFirst", -2);
+            PlayerPrefs.SetFloat("SaveXFirst", -78); //¿”Ω√ ¿˙¿Â
+            PlayerPrefs.SetFloat("SaveYFirst", 11);
             PlayerPrefs.SetInt("SaveStage", 0);
         }
-        else if (mainStageIndex == 1)
+        else if (mainStageIndex == 1) // map2
         {
-            Player.transform.position = new Vector3(-11, -22, 0);
+            Player.transform.position = new Vector3(169, -10, 0);
             
-            PlayerPrefs.SetFloat("SaveX", -11);
-            PlayerPrefs.SetFloat("SaveY", -22);
+            PlayerPrefs.SetFloat("SaveX", 169);
+            PlayerPrefs.SetFloat("SaveY", -10);
             PlayerPrefs.SetInt("SaveStage", 1);
             nowStage = 1;
         }
-        else if (mainStageIndex == 2)
+        else if (mainStageIndex == 2) // map3
         {
-            Player.transform.position = new Vector3(-34, -28, 0);
+            Player.transform.position = new Vector3(398, -29, 0);
             
-            PlayerPrefs.SetFloat("SaveX", -34);
-            PlayerPrefs.SetFloat("SaveY", -28);
+            PlayerPrefs.SetFloat("SaveX", 398);
+            PlayerPrefs.SetFloat("SaveY", -29);
             PlayerPrefs.SetInt("SaveStage", 2);
             nowStage = 2;
         }
-        else if(mainStageIndex == 3)
+        else if(mainStageIndex == 3) // map4
         {
-            Player.transform.position = new Vector3(-36, -19, 0);
+            Player.transform.position = new Vector3(576, -20, 0);
             
-            PlayerPrefs.SetFloat("SaveX", -36);
-            PlayerPrefs.SetFloat("SaveY", -19);
+            PlayerPrefs.SetFloat("SaveX", 576);
+            PlayerPrefs.SetFloat("SaveY", -20);
             PlayerPrefs.SetInt("SaveStage", 3);
             nowStage = 3;
         }
-        else if( mainStageIndex == 4)
+        else if( mainStageIndex == 4) // lastboss
         {
-            Player.transform.position = new Vector3(-15, -15, 0);
+            Player.transform.position = new Vector3(870, -26, 0);
             nowStage = 6;
         }
     }
@@ -224,22 +205,20 @@ public class GameManager : MonoBehaviour
         }
         else if (mainStageIndex == 3)
         {
-            subPortal.SetActive(false);
             nowStage = 3;
         }
     }
 
     void SubPlayerMove()
     {
-        if (subStageIndex == 0)
+        if (subStageIndex == 0) //trap
         {
-            //Player.transform.position = new Vector3(19, -25, 0); ∆Æ∑¶
-            Player.transform.position = new Vector3(137, -24, 0); //πÃ¥œ∫∏Ω∫
+            Player.transform.position = new Vector3(115, -26, 0);
             nowStage = 4;
         }
-        else if(subStageIndex == 1 || subStageIndex == 2 || subStageIndex == 3)
+        else if(subStageIndex == 1 || subStageIndex == 2 || subStageIndex == 3) //midboss
         {
-            Player.transform.position = new Vector3(-12, -14, 0);
+            Player.transform.position = new Vector3(333, -2, 0);
             nowStage = 5;
         }
     }

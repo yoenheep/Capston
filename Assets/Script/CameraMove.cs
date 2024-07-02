@@ -30,38 +30,38 @@ public class CameraMove : MonoBehaviour
 
         if (GameManager.gameMgr.nowStage == 0) //¸Ê1
         {
-            minCameraPos = new Vector3(-7.1f, -29, -19.5f);
-            maxCameraPos = new Vector3(108, 0, -19.5f);
+            minCameraPos = new Vector3(-78, -29, -19.5f);
+            maxCameraPos = new Vector3(45, 10.5f, -19.5f);
         }
         else if (GameManager.gameMgr.nowStage == 1) //¸Ê2
         {
-            minCameraPos = new Vector3(-7.5f, -29, -19.5f);
-            maxCameraPos = new Vector3(118, -15, -19.5f);  
+            minCameraPos = new Vector3(169, -29, -19.5f);
+            maxCameraPos = new Vector3(298, 1, -19.5f);  
         }
         else if (GameManager.gameMgr.nowStage == 2) //¸Ê3
         {
-            minCameraPos = new Vector3(-32, -29, -19.5f);
-            maxCameraPos = new Vector3(112, -15, -19.5f);
+            minCameraPos = new Vector3(400, -29, -19.5f);
+            maxCameraPos = new Vector3(544, 0, -19.5f);
         }
         else if (GameManager.gameMgr.nowStage == 3) //¸Ê4
         {
-            minCameraPos = new Vector3(-32, -29, -19.5f);
-            maxCameraPos = new Vector3(143, 10, -19.5f);
+            minCameraPos = new Vector3(579, -29, -19.5f);
+            maxCameraPos = new Vector3(753, 10, -19.5f);
         }
-        else if (GameManager.gameMgr.nowStage == 5) //Æ®·¦
+        else if (GameManager.gameMgr.nowStage == 4) //Æ®·¦
         {
-            minCameraPos = new Vector3(-12, -24, -19.5f);
-            maxCameraPos = new Vector3(46, 33, -19.5f);
+            minCameraPos = new Vector3(84, -24, -19.5f);
+            maxCameraPos = new Vector3(142, 33, -19.5f);
         }
-        else if (GameManager.gameMgr.nowStage == 4) //¹Ì´Ï º¸½º
+        else if (GameManager.gameMgr.nowStage == 5) //¹Ì´Ï º¸½º
         {
-            minCameraPos = new Vector3(140, -23, -19.5f);
-            maxCameraPos = new Vector3(172, 0, -19.5f);
+            minCameraPos = new Vector3(336, -8, -19.5f);
+            maxCameraPos = new Vector3(366, 0, -19.5f);
         }
         else if (GameManager.gameMgr.nowStage == 6) //¶ó½ºÆ®º¸½º
         {
-            minCameraPos = new Vector3(-31, -24, -19.5f);
-            maxCameraPos = new Vector3(113, -13, -19.5f);
+            minCameraPos = new Vector3(801, -25, -19.5f);
+            maxCameraPos = new Vector3(940, 0, -19.5f);
         }
 
         if (bounds)

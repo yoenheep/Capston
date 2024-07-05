@@ -57,21 +57,37 @@ public class GameManager : MonoBehaviour
         {
             subPortal.transform.position = new Vector3(-19, -5,0);
             mainPortal.transform.position = new Vector3(38, -9, 0);
+
+            PlayerPrefs.SetFloat("SaveX", -78); //¿”Ω√ ¿˙¿Â
+            PlayerPrefs.SetFloat("SaveY", 11);
+            PlayerPrefs.SetInt("SaveStage", 0);
         }
         else if (nowStage == 1) //∏ 2
         {
             subPortal.transform.position = new Vector3(176, -4, 0);
             mainPortal.transform.position = new Vector3(300, -15, 0);
+
+            PlayerPrefs.SetFloat("SaveX", 169);
+            PlayerPrefs.SetFloat("SaveY", -10);
+            PlayerPrefs.SetInt("SaveStage", 1);
         }
         else if (nowStage == 2) //∏ 3
         {
             subPortal.transform.position = new Vector3(438, -31.28f, 0);
             mainPortal.transform.position = new Vector3(547, -16.27f, 0);
+
+            PlayerPrefs.SetFloat("SaveX", 398);
+            PlayerPrefs.SetFloat("SaveY", -29);
+            PlayerPrefs.SetInt("SaveStage", 2);
         }
         else if (nowStage == 3) //∏ 4
         {
             subPortal.transform.position = new Vector3(706, -21.27f, 0);
             mainPortal.transform.position = new Vector3(757, 8.72f, 0);
+
+            PlayerPrefs.SetFloat("SaveX", 576);
+            PlayerPrefs.SetFloat("SaveY", -20);
+            PlayerPrefs.SetInt("SaveStage", 3);
         }
         else if (nowStage == 4 || nowStage == 5 || nowStage == 6) //trap, mid, last
         {
@@ -146,35 +162,27 @@ public class GameManager : MonoBehaviour
         {
             Player.transform.position = new Vector3(-78, 11, 0);
 
-            PlayerPrefs.SetFloat("SaveXFirst", -78); //¿”Ω√ ¿˙¿Â
-            PlayerPrefs.SetFloat("SaveYFirst", 11);
-            PlayerPrefs.SetInt("SaveStage", 0);
+            
         }
         else if (mainStageIndex == 1) // map2
         {
             Player.transform.position = new Vector3(169, -10, 0);
             
-            PlayerPrefs.SetFloat("SaveX", 169);
-            PlayerPrefs.SetFloat("SaveY", -10);
-            PlayerPrefs.SetInt("SaveStage", 1);
+            
             nowStage = 1;
         }
         else if (mainStageIndex == 2) // map3
         {
             Player.transform.position = new Vector3(398, -29, 0);
             
-            PlayerPrefs.SetFloat("SaveX", 398);
-            PlayerPrefs.SetFloat("SaveY", -29);
-            PlayerPrefs.SetInt("SaveStage", 2);
+            
             nowStage = 2;
         }
         else if(mainStageIndex == 3) // map4
         {
             Player.transform.position = new Vector3(576, -20, 0);
             
-            PlayerPrefs.SetFloat("SaveX", 576);
-            PlayerPrefs.SetFloat("SaveY", -20);
-            PlayerPrefs.SetInt("SaveStage", 3);
+            
             nowStage = 3;
         }
         else if( mainStageIndex == 4) // lastboss

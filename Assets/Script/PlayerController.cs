@@ -281,7 +281,8 @@ public class PlayerController : MonoBehaviour
         if (GameUI.UIData.quizPopup.activeSelf == false)
         {
             float hor = Input.GetAxisRaw("Horizontal");
-            rigid.velocity = new Vector2(hor * defaultSpeed, rigid.velocity.y);
+            //rigid.velocity = new Vector2(hor * defaultSpeed, rigid.velocity.y);
+            rigid.AddForce(new Vector2(hor * defaultSpeed, 0), ForceMode2D.Force);
         }
     }
 
@@ -471,5 +472,10 @@ public class PlayerController : MonoBehaviour
         {
             //Debug.Log("¡¢√À");
         }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        Debug.Log("collider : " + collision.gameObject.name);
     }
 }

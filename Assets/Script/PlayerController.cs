@@ -275,14 +275,17 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Death", false);
             isDead = false;
         }
+        if(Input.GetButtonUp("Horizontal"))
+        {
+            rigid.velocity = new Vector2(rigid.velocity.normalized.x * 1.5f, rigid.velocity.y);
+        }
     }
     void FixedUpdate()
     {
         if (GameUI.UIData.quizPopup.activeSelf == false)
         {
             float hor = Input.GetAxisRaw("Horizontal");
-            //rigid.velocity = new Vector2(hor * defaultSpeed, rigid.velocity.y);
-            rigid.AddForce(new Vector2(hor * defaultSpeed, 0), ForceMode2D.Force);
+            rigid.velocity = new Vector2(hor * defaultSpeed, rigid.velocity.y);
         }
     }
 

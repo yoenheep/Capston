@@ -2917,9 +2917,9 @@ MonoBehaviour:
   bullet: {fileID: 5982004908218681697, guid: f52971cd8de60664ca18edc1d23df6ce, type: 3}
   pos_bullet: {fileID: 105346957}
   bullet_cooltime: 0.2
-  hor: 0
+  hor: 5
   pos_gun: 0
-  JumpPower: 15
+  JumpPower: 18
   weapon_item: 0000000000000000
   nearObject: {fileID: 0}
   hasWeapons: 0000
@@ -2943,10 +2943,10 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 3
-  m_Material: {fileID: 6200000, guid: c5b464c471aec664f90f7bdb32f3e5ca, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

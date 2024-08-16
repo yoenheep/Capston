@@ -125,6 +125,7 @@ public abstract class Monsters : MonoBehaviour
         if (!is_dead && obj_Rb != null)
         {
             anim.SetTrigger("GetDamage");
+            hpBarLogic.Dmg();
 
             monster_Audio.clip = monster_Audio_Clips[2];
             monster_Audio.Play();

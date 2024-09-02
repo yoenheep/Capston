@@ -40,7 +40,8 @@ public class Monster_Spawn_Manager : MonoBehaviour
 
         Summon_Monsters();
 
-        Summon_Boss();
+        //보스몹 재작업중
+        //Summon_Boss();
     }
 
     public void Summon_Monsters()

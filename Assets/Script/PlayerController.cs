@@ -72,6 +72,9 @@ public class PlayerController : MonoBehaviour
     //局聪皋捞记
     private Animator animator;
 
+    //Z Text
+    public GameObject zText;
+
     //教臂沛
     public static PlayerController playerData { get; private set; }
 
@@ -88,6 +91,8 @@ public class PlayerController : MonoBehaviour
         charac_PreHP = charac_MaxHP;
 
         AttackCoolTime_max = 0.5f;
+
+        zText.SetActive(false);
     }
 
 
@@ -445,21 +450,25 @@ public class PlayerController : MonoBehaviour
         
         if (collision.tag == "Weapon")
         {
+            zText.SetActive(true);
             nearObject = collision.gameObject;
             Debug.Log(nearObject);
         }
         else if (collision.tag == "mainPortal")
         {
+            zText.SetActive(true);
             nearObject = collision.gameObject;
             Debug.Log(nearObject);
         }
         else if (collision.tag == "subPortal")
         {
+            zText.SetActive(true);
             nearObject = collision.gameObject;
             Debug.Log(nearObject);
         }
         else if (collision.tag == "subOutPortal")
         {
+            zText.SetActive(true);
             nearObject = collision.gameObject;
             Debug.Log(nearObject);
         }
@@ -474,6 +483,12 @@ public class PlayerController : MonoBehaviour
         if (collision.CompareTag("Monster"))
         {
             //Debug.Log("立盟");
+        }
+
+        if (collision.tag == "Weapon" || collision.tag == "mainPortal" || collision.tag == "subPortal" || collision.tag == "subOutPortal")
+        {
+            nearObject = null;
+            zText.SetActive(false);
         }
     }
 

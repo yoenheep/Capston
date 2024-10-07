@@ -330,11 +330,17 @@ public class PlayerController : MonoBehaviour
                         weapon_item[nowWeapon] = weaponIndex;
                     }
                 }
-                else
-                    if(charac_PreHP < 100)
+                else if (weaponIndex == 4)
                 {
-                    charac_PreHP += 10;
-                }       
+                    if (charac_PreHP < 100)
+                    {
+                        charac_PreHP += 10;
+                    }
+                    else if (charac_PreHP >=90)
+                    {
+                        charac_PreHP = 100;
+                    }
+                }
             }
             else if (nearObject.tag == "mainPortal")
             {

@@ -12,10 +12,10 @@ public class GameManager : MonoBehaviour
     public GameObject item_tr;
 
     public int nowStage; // [map1 =0 / trap =4 / map2 =1 / middle =5 / map3 = 2 / map4 = 3 / last = 6]
-    public GameObject[] mainStages;
+    public GameObject[] mainPoints;
     public GameObject mainPortal;
     public int mainStageIndex;
-    public GameObject[] subStages;
+    public GameObject[] subPoints;
     public GameObject subPortal;
     public int subStageIndex;
 

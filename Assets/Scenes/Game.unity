@@ -3288,11 +3288,12 @@ MonoBehaviour:
   nowWeapon: 0
   pickUpItem: {fileID: 8300000, guid: 35cf7766e9e2aa542811e896fde57989, type: 3}
   magicAttack: {fileID: 8300000, guid: a652877b012108e41871f867ada9f176, type: 3}
-  a_Weapon: {fileID: 8300000, guid: 81fcd8145c28f2a44a7ad8d02ce69dfd, type: 3}
+  a_Weapon: {fileID: 8300000, guid: 4cbd3a6084ac8be4cb019e01d819e419, type: 3}
   sword: {fileID: 8300000, guid: 6ae01f426c6efde4ca42b5d736cf1920, type: 3}
   Gun: {fileID: 8300000, guid: 301b7fdaf9a65ea42af237877cc48ac7, type: 3}
   hammer: {fileID: 8300000, guid: 2ac75dc0cb1e8ec4a82178911ecf1f96, type: 3}
   dash: {fileID: 8300000, guid: 55fa8d2eb1799ae4bab78ea35f8c6a60, type: 3}
+  jump: {fileID: 0}
   zText: {fileID: 2053788285847655413}
 --- !u!50 &105346959
 Rigidbody2D:

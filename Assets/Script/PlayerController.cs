@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     private bool isRangedActive = false; // 원거리 무기 활성화 상태
 
     //무기관련 임시코드
-    public int[] weapon_item = new int[2]; // 인벤토리 참조 [-1 = 물약 / 0 = 지팡이 / 1 = 도끼 / 2 = 칼 / 3 = 총 / 4 = 마법봉]
+    public int[] weapon_item = new int[2]; // 인벤토리 참조 [-1 = 물약 / 0 = 지팡이 / 1 = 도끼 / 2 = 칼 / 3 = 마법봉]
     public GameObject nearObject;
     bool iDown;
     public bool[] hasWeapons;
@@ -140,19 +140,12 @@ public class PlayerController : MonoBehaviour
                     newBullet.GetComponent<Bullet>().SetMoveDirection(bulletDirection);
                     Bullet bulletComponent = newBullet.GetComponent<Bullet>();
 
-                    if (weapon_item[nowWeapon] == 4)//마법
+                    if (weapon_item[nowWeapon] == 3)//마법
                     {
                         audioSource.clip = magicAttack;
                         audioSource.Play();
                         AttackCoolTime_max = 0.5f;
                         bulletComponent.damage = 10f;
-                    }
-                    else if(weapon_item[nowWeapon] == 3)//총알
-                    {
-                        AttackCoolTime_max = 0.2f;
-                        bulletComponent.damage = 5f;
-                        audioSource.clip = Gun;
-                        audioSource.Play();
                     }
                 }
                 bullet_curtime = AttackCoolTime_max;
@@ -330,7 +323,7 @@ public class PlayerController : MonoBehaviour
                         weapon_item[nowWeapon] = weaponIndex;
                     }
                 }
-                else if (weaponIndex == 4)
+                else if (weaponIndex == -1)
                 {
                     if (charac_PreHP < 100)
                     {

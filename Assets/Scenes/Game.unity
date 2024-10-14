@@ -48687,7 +48687,6 @@ MonoBehaviour:
   drop_Item:
   - {fileID: 3070604336711176918, guid: aef3b88f41020c944aac2cd98c61c9c5, type: 3}
   - {fileID: 1984108036025234722, guid: 7523fe0332617864ab9ce604a4af7d66, type: 3}
-  - {fileID: 7300803992178885255, guid: 4a6894304c9599b4cb3db9b592255ce9, type: 3}
   - {fileID: 8873148718333421407, guid: 27c1935bcb1b1374384e169bfff3810b, type: 3}
   - {fileID: 8892477008422651662, guid: a2312f5483e4c28479de6cd9b20c7e6f, type: 3}
   item_tr: {fileID: 777729869}

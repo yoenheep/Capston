@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] drop_Item;
     public GameObject item_tr;
 
-    public int nowStage; // [map1 =0 / trap =4 / map2 =1 / middle =5 / map3 = 2 / map4 = 3 / last = 6]
+    public int nowStage; // [map1 =0 / map2 =1 / map3 = 2 / map4 = 3 / trap1 = 4 / trap2 = 5 / middle = 6 / angel = 7 / last = 8]
     public GameObject[] mainPoints;
     public GameObject mainPortal;
     public int mainStageIndex;
@@ -142,46 +142,46 @@ public class GameManager : MonoBehaviour
 
         if (mainStageIndex == 0) // map1
         {
-            Player.transform.position = new Vector3(-78, 11, 0);
+            Player.transform.position = mainPoints[0].transform.position;
 
-            PlayerPrefs.SetFloat("SaveX", -78); //임시 저장
-            PlayerPrefs.SetFloat("SaveY", 11);
+            PlayerPrefs.SetFloat("SaveX", mainPoints[0].transform.position.x);
+            PlayerPrefs.SetFloat("SaveY", mainPoints[0].transform.position.y);
             PlayerPrefs.SetInt("SaveStage", 0);
         }
         else if (mainStageIndex == 1) // map2
         {
-            Player.transform.position = new Vector3(169, -10, 0);
+            Player.transform.position = mainPoints[1].transform.position;
 
-            PlayerPrefs.SetFloat("SaveX", 169);
-            PlayerPrefs.SetFloat("SaveY", -10);
+            PlayerPrefs.SetFloat("SaveX", mainPoints[1].transform.position.x);
+            PlayerPrefs.SetFloat("SaveY", mainPoints[1].transform.position.y);
             PlayerPrefs.SetInt("SaveStage", 1);
 
             nowStage = 1;
         }
         else if (mainStageIndex == 2) // map3
         {
-            Player.transform.position = new Vector3(398, -29, 0);
+            Player.transform.position = mainPoints[2].transform.position;
 
-            PlayerPrefs.SetFloat("SaveX", 398);
-            PlayerPrefs.SetFloat("SaveY", -29);
+            PlayerPrefs.SetFloat("SaveX", mainPoints[2].transform.position.x);
+            PlayerPrefs.SetFloat("SaveY", mainPoints[2].transform.position.y);
             PlayerPrefs.SetInt("SaveStage", 2);
 
             nowStage = 2;
         }
         else if(mainStageIndex == 3) // map4
         {
-            Player.transform.position = new Vector3(576, -20, 0);
-            
-            PlayerPrefs.SetFloat("SaveX", 576);
-            PlayerPrefs.SetFloat("SaveY", -20);
+            Player.transform.position = mainPoints[3].transform.position;
+
+            PlayerPrefs.SetFloat("SaveX", mainPoints[3].transform.position.x);
+            PlayerPrefs.SetFloat("SaveY", mainPoints[3].transform.position.y);
             PlayerPrefs.SetInt("SaveStage", 3);
             
             nowStage = 3;
         }
         else if( mainStageIndex == 4) // lastboss
         {
-            Player.transform.position = new Vector3(870, -26, 0);
-            nowStage = 6;
+            Player.transform.position = mainPoints[4].transform.position;
+            nowStage = 8;
         }
     }
 
@@ -212,15 +212,25 @@ public class GameManager : MonoBehaviour
 
     void SubPlayerMove()
     {
-        if (subStageIndex == 0) //trap
+        if (subStageIndex == 0) //trap1
         {
-            Player.transform.position = new Vector3(115, -26, 0);
+            Player.transform.position = subPoints[0].transform.position;
             nowStage = 4;
         }
-        else if(subStageIndex == 1 || subStageIndex == 2 || subStageIndex == 3) //midboss
+        else if(subStageIndex == 1) //trap2
         {
-            Player.transform.position = new Vector3(333, -2, 0);
+            Player.transform.position = subPoints[1].transform.position;
             nowStage = 5;
+        }
+        else if(subStageIndex == 2) // middle
+        {
+            Player.transform.position = subPoints[2].transform.position;
+            nowStage = 6;
+        }
+        else if(subStageIndex == 3) // angel
+        {
+            Player.transform.position = subPoints[3].transform.position;
+            nowStage = 7;
         }
     }
 }

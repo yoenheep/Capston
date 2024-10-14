@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip sword;
     public AudioClip Gun;
     public AudioClip hammer;
+    public AudioClip dash;
 
     //애니메이션
     private Animator animator;
@@ -216,7 +217,8 @@ public class PlayerController : MonoBehaviour
                 isDash = true;
                 dashTime = dashDuration;
                 dashCooldownTimer = dashCooldown;
-                Debug.Log("Dash");
+                audioSource.clip = dash;
+                audioSource.Play();
             }
 
             if (dashTime > 0)

@@ -68,6 +68,8 @@ public class PlayerController : MonoBehaviour
     public AudioClip sword;
     public AudioClip Gun;
     public AudioClip hammer;
+    public AudioClip dash;
+    public AudioClip jump;
 
     //애니메이션
     private Animator animator;
@@ -209,6 +211,8 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.S) && IsGrounded())
             {
                 rigid.velocity = new Vector2(rigid.velocity.x, JumpPower);
+                audioSource.clip = jump;
+                audioSource.Play();
             }
 
             if (Input.GetKeyDown(KeyCode.D) && dashCooldownTimer <= 0)
@@ -216,7 +220,8 @@ public class PlayerController : MonoBehaviour
                 isDash = true;
                 dashTime = dashDuration;
                 dashCooldownTimer = dashCooldown;
-                Debug.Log("Dash");
+                audioSource.clip = dash;
+                audioSource.Play();
             }
 
             if (dashTime > 0)

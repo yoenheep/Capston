@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour
                         if (collider.CompareTag("Monster"))
                         {
                             // OnTriggerEnter 함수를 사용하여 몬스터의 충돌을 처리하고 데미지를 적용합니다.
-                            collider.GetComponent<Monsters>().GetDamage(damage, pos.position);
+                            collider.GetComponent<Monsters>().GetDamage(damage, gameObject.transform.position);
                         }
                     }
 

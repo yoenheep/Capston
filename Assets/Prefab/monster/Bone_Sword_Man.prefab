@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8782375954495775655
+--- !u!1 &4551550198574184046
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6108977614992063105}
-  - component: {fileID: 6474920476573639513}
-  - component: {fileID: 4948670663216374169}
-  - component: {fileID: 8754256378105037067}
-  - component: {fileID: -3402443210782977017}
-  - component: {fileID: 8315367017795510161}
-  - component: {fileID: 7690402138484630246}
-  - component: {fileID: -9219848343813627406}
+  - component: {fileID: 9016758564629855009}
+  - component: {fileID: 3145981109064706619}
+  - component: {fileID: 8720795946778734983}
+  - component: {fileID: 1983215071896702752}
+  - component: {fileID: 8915904000753517578}
+  - component: {fileID: 8469325433787085954}
+  - component: {fileID: 3902872446612672148}
   m_Layer: 6
-  m_Name: Cursed_Accompanist
+  m_Name: Bone_Sword_Man
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6108977614992063105
+--- !u!4 &9016758564629855009
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8782375954495775655}
+  m_GameObject: {fileID: 4551550198574184046}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8, y: 8, z: 8}
+  m_LocalPosition: {x: 172.2, y: -9.57, z: 0}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6474920476573639513
+--- !u!212 &3145981109064706619
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8782375954495775655}
+  m_GameObject: {fileID: 4551550198574184046}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -79,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5523270264967905422, guid: 897913435da59474688a03a9023f754c, type: 3}
+  m_Sprite: {fileID: 6749119837383039084, guid: 6378dfe5983862c42855bb63851eb851, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -90,34 +89,40 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &4948670663216374169
-Animator:
-  serializedVersion: 5
+--- !u!50 &8720795946778734983
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8782375954495775655}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 29653cb07859bc14cb544ec3395751b4, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!61 &8754256378105037067
+  m_GameObject: {fileID: 4551550198574184046}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 50
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!61 &1983215071896702752
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8782375954495775655}
+  m_GameObject: {fileID: 4551550198574184046}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -143,7 +148,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.01, y: -0.13}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -154,70 +159,19 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.63, y: 0.64}
+  m_Size: {x: 0.18, y: 0.37}
   m_EdgeRadius: 0
---- !u!50 &-3402443210782977017
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8782375954495775655}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!114 &8315367017795510161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8782375954495775655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b862e0b0c32b36f458eb1eb56b7f26ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monster_Max_Health: 0
-  monster_Pre_Health: 0
-  monster_Armor: 0
-  monster_Attack_Damage: 0
-  next_Move: 0
-  monster_Audio_Clips:
-  - {fileID: 8300000, guid: 47b5164ff7091404b931e1a25bec36d9, type: 3}
-  - {fileID: 8300000, guid: aea89aaa62861e941b75b474270719b2, type: 3}
-  - {fileID: 8300000, guid: ea303c1b37336484e8a515a9f4f97a87, type: 3}
-  target: {fileID: 0}
-  music_Note: {fileID: 5157482324850048741, guid: b7b8310a2f69528469b826e5b9932ee8, type: 3}
-  kamikaze_Skull: {fileID: 3025351667824363433, guid: 38c368d113cd90142aafae54caa0d80f, type: 3}
---- !u!82 &7690402138484630246
+--- !u!82 &8915904000753517578
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8782375954495775655}
+  m_GameObject: {fileID: 4551550198574184046}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 24300002, guid: daecb83923c32d240af670edf536ebc1, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 15c9fcdfaad20d147b3c3fbe56933ba1, type: 3}
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -303,15 +257,46 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-9219848343813627406
+--- !u!95 &8469325433787085954
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4551550198574184046}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 40856a9dc18d52645894e8b6ac8ecdc0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3902872446612672148
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8782375954495775655}
+  m_GameObject: {fileID: 4551550198574184046}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 243e8fc8fb0cc5448b906a8f0c5fdeec, type: 3}
+  m_Script: {fileID: 11500000, guid: 250d065653764ac4188d50d36090f338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monster_Name: 
+  monster_Max_Health: 0
+  monster_Pre_Health: 0
+  monster_Armor: 0
+  monster_Speed: 0
+  monster_Attack_Speed: 0
+  monster_Attack_Damage: 0
+  next_Move: 0
+  monster_Audio_Clips: []
+  range: 0

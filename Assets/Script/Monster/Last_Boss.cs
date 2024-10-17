@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cursed_Accompanist : Monsters
+public class Last_Boss : Monsters
 {
     SpriteRenderer sp;
 
@@ -27,10 +27,10 @@ public class Cursed_Accompanist : Monsters
             target_Position = trace_Target();
         }
 
-        monster_Armor = 3f;
+        monster_Armor = 5f;
         note_Damage = 6f;
         monster_Attack_Speed = 2f;
-        monster_Max_Health = 300f;
+        monster_Max_Health = 500f;
         monster_Pre_Health = monster_Max_Health;
         is_Elite = true;
 
@@ -46,7 +46,7 @@ public class Cursed_Accompanist : Monsters
     {
         target_Position = trace_Target();
 
-        if(GameUI.UIData.quizPopup.activeSelf == true)
+        if (GameUI.UIData.quizPopup.activeSelf == true)
         {
             is_Stopped = true;
         }

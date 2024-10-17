@@ -8,14 +8,14 @@ public class Music_Note : MonoBehaviour
 
     float speed;
     public float damage;
-    public Vector2 obj_Position;
-    public Vector2 target_Position;
-    public int direction;
 
-    protected void OnEnable()
+    private Vector2 move_Direction;
+
+    
+    protected void Awake()
     {
         int rand = Random.Range(0, 4);
-        speed = 5f;
+        speed = 10f;
 
         ani = gameObject.GetComponent<Animator>();
         ani.SetInteger("Note", rand);
@@ -23,20 +23,24 @@ public class Music_Note : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Invoke("DestroyBullet", 7f);
-        this.Move();
-
-        Vector2 obj = this.gameObject.transform.position;
-
-        RaycastHit2D ray = Physics2D.Raycast(obj, Vector3.down, 1, LayerMask.GetMask("Player"));
-
-        if (ray.collider != null)
+        if(GameUI.UIData.quizPopup.activeSelf == false)
         {
-            if (ray.collider.tag == "Player")
+            Invoke("DestroyBullet", 7f);
+
+            Move();
+
+            Vector2 obj = this.gameObject.transform.position;
+
+            RaycastHit2D ray = Physics2D.Raycast(obj, Vector3.one, 1, LayerMask.GetMask("Player"));
+
+            if (ray.collider != null)
             {
-                ray.collider.GetComponent<PlayerController>().Hp(damage, obj);
-                //Debug.Log("명중");
-                DestroyBullet();
+                if (ray.collider.tag == "Player")
+                {
+                    ray.collider.GetComponent<PlayerController>().Hp(damage, obj);
+                    //Debug.Log("명중");
+                    DestroyBullet();
+                }
             }
         }
     }
@@ -45,14 +49,17 @@ public class Music_Note : MonoBehaviour
     {
         this.damage = damage;
     }
-    public void SetMove(Vector2 obj_Position, int direction)
+
+    public void SetMove(Vector2 target_Position)
     {
-        this.obj_Position = obj_Position;
-        this.direction = direction;
+        move_Direction = (target_Position - (Vector2)gameObject.transform.position).normalized;
     }
+
     private void Move()
     {
-        transform.Translate(obj_Position * direction * speed * Time.deltaTime);
+        gameObject.transform.position = new Vector2(
+         gameObject.transform.position.x + move_Direction.x * speed  * Time.deltaTime,
+         gameObject.transform.position.y + move_Direction.y * speed  * Time.deltaTime);
     }
 
     private void DestroyBullet()

@@ -5,19 +5,19 @@ using UnityEngine;
 public class Monster_Bullet : MonoBehaviour
 {
     Animator ani;
+    SpriteRenderer sp;
 
     float speed;
     public float damage;
     public Vector2 obj_Position;
-    public Vector2 target_Position;
     public int direction;
-    LayerMask layer;
 
-    protected void OnEnable()
+    protected void Awake()
     {
-        speed = 5f;
+        speed = 10f;
 
         ani = gameObject.GetComponent<Animator>();
+        sp = gameObject.GetComponent<SpriteRenderer>();
     }
 
     private void FixedUpdate()
@@ -48,10 +48,15 @@ public class Monster_Bullet : MonoBehaviour
     {
         this.obj_Position = obj_Position;
         this.direction = direction;
+
+        if(direction < 0)
+        {
+            sp.flipX = true;
+        }
     }
     private void Move()
     {
-        transform.Translate(obj_Position  * direction * speed * Time.deltaTime);
+        transform.Translate(obj_Position  * speed * Time.deltaTime);
     }
 
     private void DestroyBullet()

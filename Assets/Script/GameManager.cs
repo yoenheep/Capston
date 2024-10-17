@@ -80,8 +80,11 @@ public class GameManager : MonoBehaviour
 
     public void Drop_Item(GameObject obj)
     {
+        //int i = Random_Percentage();
+        int i = 1;
         Transform parentTransform = item_tr.transform;
         Vector2 loc = obj.GetComponent<Rigidbody2D>().position;
+        loc = new Vector2(loc.x, loc.y - (obj.transform.localScale.y / 2f) + 1.8f);
         //Debug.Log(tr);
 
         if(parentTransform == null)
@@ -89,8 +92,6 @@ public class GameManager : MonoBehaviour
             Debug.Log("부모 찾지 못함");
             //return;
         }
-
-        int i = Random_Percentage();
 
         if(i != 666)
         {

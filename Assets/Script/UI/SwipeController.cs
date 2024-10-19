@@ -13,10 +13,30 @@ public class SwipeController : MonoBehaviour
     [SerializeField] float tweenTime;
     [SerializeField] LeanTweenType tweenType;
 
+    public GameObject preBtn;
+    public GameObject nextBtn;
+
     private void Awake()
     {
         currentPage = 1;
         targetPos = RoundPageRect.localPosition;
+    }
+
+    private void Update()
+    {
+        if (currentPage == 1) 
+        {
+            preBtn.SetActive(false);
+        }
+        else if ( currentPage == maxPage)
+        {
+            nextBtn.SetActive(false);
+        }
+        else
+        {
+            nextBtn.SetActive(true);
+            preBtn.SetActive(true);
+        }
     }
 
     public void Next()

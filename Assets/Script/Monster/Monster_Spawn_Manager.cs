@@ -19,6 +19,14 @@ public class Monster_Spawn_Manager : MonoBehaviour
 
     public GameObject hpBarParent;
 
+    // 생성된 몬스터 리스트
+    public List <GameObject> map1_spawnedMonsters = new List<GameObject>();
+    public List<GameObject> map2_spawnedMonsters = new List<GameObject>();
+    public List<GameObject> map3_spawnedMonsters = new List<GameObject>();
+    public List<GameObject> map4_spawnedMonsters = new List<GameObject>();
+    public List<GameObject> trap1_spawnedMonsters = new List<GameObject>();
+    public List<GameObject> boss_spawnedMonsters = new List<GameObject>();
+
     //싱글톤
     public static Monster_Spawn_Manager instance;
 
@@ -37,17 +45,25 @@ public class Monster_Spawn_Manager : MonoBehaviour
         }
 
         //제거 예정
-        Summon_Monsters();
+        Summon_Monsters_For_Map(1, 0, 12);
+
+        Summon_Monsters_For_Map(2, 12, 15);
+
+        Summon_Monsters_For_Map(3, 27, 12);
+
+        Summon_Monsters_For_Map(4, 39, 15);
+
+        Summon_Monsters_For_Map(5, 54, 4);
 
         Summon_Mini_Boss();
 
         Summon_Last_Boss();
     }
 
-    public void Summon_Monsters()
+    public void Summon_Monsters_For_Map(int mapIndex, int startIndex, int monsterCount)
     {
         //몬스터 스폰 포인트에 monsterDB에 저장된 몬스터를 소환
-        for (int i = 0; i < monsters_Spawn_Point.Count; i++)
+        for (int i = startIndex; i < (monsterCount + startIndex); i++)
         {
             int mon = Random.Range(0, monsters_Prefab.Count-1);
 
@@ -69,6 +85,29 @@ public class Monster_Spawn_Manager : MonoBehaviour
             Transform tr = monsters_Spawn_Point[i].transform.parent;
             GameObject createdPrefab = Instantiate(monsters_Prefab[mon], position, Quaternion.identity);
             createdPrefab.transform.SetParent(tr, false);
+
+            switch (mapIndex)
+            {
+                case 1:
+                    map1_spawnedMonsters.Add(createdPrefab);
+                    break;
+
+                case 2:
+                    map2_spawnedMonsters.Add(createdPrefab);
+                    break;
+
+                case 3:
+                    map3_spawnedMonsters.Add(createdPrefab);
+                    break;
+
+                case 4:
+                    map4_spawnedMonsters.Add(createdPrefab);
+                    break;
+
+                case 5:
+                    trap1_spawnedMonsters.Add(createdPrefab);
+                    break;
+            }
 
             Debug.Log("소환");
         }
@@ -99,6 +138,9 @@ public class Monster_Spawn_Manager : MonoBehaviour
         Transform tr = boss_Spawn_Point.transform.parent;
         GameObject createdPrefab = Instantiate(boss_mon, position, Quaternion.identity);
         createdPrefab.transform.SetParent(tr, false);
+
+        boss_spawnedMonsters.Add(createdPrefab);
+
         Debug.Log("중간 보스 소환");
     }
 
@@ -108,6 +150,39 @@ public class Monster_Spawn_Manager : MonoBehaviour
         Transform tr = boss_Spawn_Point.transform.parent;
         GameObject createdPrefab = Instantiate(boss_mon, position, Quaternion.identity);
         createdPrefab.transform.SetParent(tr, false);
+
+        boss_spawnedMonsters.Add(createdPrefab);
+
         Debug.Log("라스트 보스 소환");
+    }
+
+    public void RemoveMonsterFromList(Monsters monster)
+    {
+        if (map1_spawnedMonsters.Contains(monster.gameObject))
+        {
+            map1_spawnedMonsters.Remove(monster.gameObject);
+        }
+        else if (map2_spawnedMonsters.Contains(monster.gameObject))
+        {
+            map2_spawnedMonsters.Remove(monster.gameObject);
+        }
+        else if (map3_spawnedMonsters.Contains(monster.gameObject))
+        {
+            map3_spawnedMonsters.Remove(monster.gameObject);
+        }
+        else if (map4_spawnedMonsters.Contains(monster.gameObject))
+        {
+            map4_spawnedMonsters.Remove(monster.gameObject);
+        }
+        else if (trap1_spawnedMonsters.Contains(monster.gameObject))
+        {
+            trap1_spawnedMonsters.Remove(monster.gameObject);
+        }
+        else if (boss_spawnedMonsters.Contains(monster.gameObject))
+        {
+            boss_spawnedMonsters.Remove(monster.gameObject);
+        }
+
+        Debug.Log("몬스터가 리스트에서 제거됨: " + monster.gameObject.name);
     }
 }

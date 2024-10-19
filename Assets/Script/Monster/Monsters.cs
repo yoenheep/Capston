@@ -208,7 +208,9 @@ public abstract class Monsters : MonoBehaviour
             hpBar.gameObject.SetActive(false);
             //죽으면 몬스터 객체 삭제
             //StartCoroutine(DeactivateAfterSound());
-            //GameUI.UIData.Clear(); 나중에 보스에게 쓸것
+
+            // 리스트에서 제거
+            Monster_Spawn_Manager.instance.RemoveMonsterFromList(this);
         }
     }
 

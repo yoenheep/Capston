@@ -218,6 +218,15 @@ public class GameUI : MonoBehaviour
                 if (PlayerController.playerData.isDead)
                 {
                     Time.timeScale = 0;
+
+                    if (GameManager.gameMgr.nowStage == 4)
+                    {
+                        GameManager.gameMgr.nowStage = 0;
+                    }
+                    else if (GameManager.gameMgr.nowStage == 7 || GameManager.gameMgr.nowStage == 8)
+                    {
+                        GameManager.gameMgr.nowStage = 3;
+                    }
                 }
                 
             }

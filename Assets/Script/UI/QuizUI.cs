@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -20,6 +21,9 @@ public class QuizUI : MonoBehaviour
     private int rand;
     private int max = 6;
 
+    public GameObject QuizBoard;
+    public bool quizTrigger;
+
     //몬스터 데미지 처리를 위한 변수
     private Monsters mon;
 
@@ -27,6 +31,8 @@ public class QuizUI : MonoBehaviour
     {
         quizTimer_now = quizTimer_max;
         quizPopup = GameUI.UIData.quizPopup;
+        quizTrigger = false;
+        QuizBoard.SetActive(false);
 
         AList = new List<string>() { "개포동", "칫솔","다리꼬지마","주토피아","메이플스토리","멕시코시티" };
     }
@@ -114,6 +120,12 @@ public class QuizUI : MonoBehaviour
                         {
                             this.mon.Quiz_Mon_Die();
                         } 
+                        if(quizTrigger == true)
+                        {
+                            QuizBoard.SetActive(false);
+
+                            GameManager.gameMgr.subOutPortal[GameManager.gameMgr.subStageIndex].SetActive(true);
+                        }
                     }
                     else
                     {
@@ -128,8 +140,18 @@ public class QuizUI : MonoBehaviour
         if (quizTimer_now <= 0.0f)
         {
             quizPopup.SetActive(false);
-            PlayerController.playerData.Hp(10f, this.mon.gameObject.transform.position);
             quizTimer_now = 20f;
+
+            if(quizTrigger == true)
+            {
+                QuizBoard.SetActive(false);
+                PlayerController.playerData.charac_PreHP /= 2;
+                GameManager.gameMgr.subOutPortal[GameManager.gameMgr.subStageIndex].SetActive(true);
+            }
+            else
+            {
+                PlayerController.playerData.Hp(10f, this.mon.gameObject.transform.position);
+            }
         }
     }
 }

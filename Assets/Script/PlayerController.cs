@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -456,25 +457,25 @@ public class PlayerController : MonoBehaviour
         {
             zText.SetActive(true);
             nearObject = collision.gameObject;
-            Debug.Log(nearObject);
+            //Debug.Log(nearObject);
         }
         else if (collision.tag == "mainPortal")
         {
             zText.SetActive(true);
             nearObject = collision.gameObject;
-            Debug.Log(nearObject);
+           // Debug.Log(nearObject);
         }
         else if (collision.tag == "subPortal")
         {
             zText.SetActive(true);
             nearObject = collision.gameObject;
-            Debug.Log(nearObject);
+            //Debug.Log(nearObject);
         }
         else if (collision.tag == "subOutPortal")
         {
             zText.SetActive(true);
             nearObject = collision.gameObject;
-            Debug.Log(nearObject);
+            //Debug.Log(nearObject);
         }
         else if (collision.tag == "DeadZone" && !isReInvoked)
         {
@@ -482,6 +483,16 @@ public class PlayerController : MonoBehaviour
             Invoke("Re", 1);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "QuizBoard")
+        {
+            GameUI.UIData.QuizUI.quiz(this.gameObject);
+            GameUI.UIData.QuizUI.quizTrigger = true;
+        }
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Monster"))
@@ -498,6 +509,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        Debug.Log("collider : " + collision.gameObject.name);
+        //Debug.Log("collider : " + collision.gameObject.name);
     }
 }

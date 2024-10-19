@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] subPoints;
     public GameObject subPortal;
     public int subStageIndex;
+    public GameObject[] subOutPortal;
 
     private void Awake()
     {
@@ -53,28 +54,64 @@ public class GameManager : MonoBehaviour
     {
         if (nowStage == 0) //¸Ê1
         {
-            subPortal.transform.position = new Vector3(-19, -5,0);
+            subPortal.transform.position = new Vector3(-19, -5, 0);
             mainPortal.transform.position = new Vector3(38, -9, 0);
+
+            if (Monster_Spawn_Manager.instance.map1_spawnedMonsters.Count == 0 && subPortal.activeSelf == false)
+            {
+                mainPortal.SetActive(true);
+            }
         }
         else if (nowStage == 1) //¸Ê2
         {
             subPortal.transform.position = new Vector3(176, -4, 0);
             mainPortal.transform.position = new Vector3(300, -15, 0);
+
+            if (Monster_Spawn_Manager.instance.map2_spawnedMonsters.Count == 0 && subPortal.activeSelf == false)
+            {
+                mainPortal.SetActive(true);
+            }
         }
         else if (nowStage == 2) //¸Ê3
         {
             subPortal.transform.position = new Vector3(438, -31.28f, 0);
             mainPortal.transform.position = new Vector3(547, -16.27f, 0);
+
+            if (Monster_Spawn_Manager.instance.map3_spawnedMonsters.Count == 0 && subPortal.activeSelf == false)
+            {
+                mainPortal.SetActive(true);
+            }
         }
         else if (nowStage == 3) //¸Ê4
         {
             subPortal.transform.position = new Vector3(706, -21.27f, 0);
             mainPortal.transform.position = new Vector3(757, 8.72f, 0);
+
+            if (Monster_Spawn_Manager.instance.map4_spawnedMonsters.Count == 0 && subPortal.activeSelf == false)
+            {
+                mainPortal.SetActive(true);
+            }
         }
-        else if (nowStage == 4 || nowStage == 5 || nowStage == 6) //trap, mid, last
+        else if (nowStage == 4) //trap1
         {
-            subPortal.SetActive(false);
-            mainPortal.SetActive(false);
+            if (Monster_Spawn_Manager.instance.trap1_spawnedMonsters.Count == 0)
+            {
+                subOutPortal[subStageIndex].SetActive(true);
+            }
+        }
+        else if (nowStage == 7) // middle
+        {
+            if (Monster_Spawn_Manager.instance.boss_spawnedMonsters.Count == 1)
+            {
+                subOutPortal[subStageIndex].SetActive(true);
+            }
+        }
+        else if (nowStage == 8) // last
+        {
+            if (Monster_Spawn_Manager.instance.boss_spawnedMonsters.Count == 0)
+            {
+                GameUI.UIData.Clear();
+            }
         }
     }
 
@@ -188,7 +225,6 @@ public class GameManager : MonoBehaviour
 
     void SubOutPlayerMove()
     {
-        mainPortal.SetActive(true);
         subPortal.SetActive(false);
 
         Player.transform.position = subPortal.transform.position;
@@ -213,6 +249,8 @@ public class GameManager : MonoBehaviour
 
     void SubPlayerMove()
     {
+        subOutPortal[subStageIndex].SetActive(false);
+
         if (subStageIndex == 0) //trap1
         {
             Player.transform.position = subPoints[0].transform.position;
@@ -221,14 +259,16 @@ public class GameManager : MonoBehaviour
         else if(subStageIndex == 1) //trap2
         {
             Player.transform.position = subPoints[1].transform.position;
+            GameUI.UIData.QuizUI.QuizBoard.SetActive(true);
             nowStage = 5;
         }
-        else if(subStageIndex == 2) // middle
+        else if(subStageIndex == 2) // angel
         {
+            subOutPortal[subStageIndex].SetActive(true);
             Player.transform.position = subPoints[2].transform.position;
             nowStage = 6;
         }
-        else if(subStageIndex == 3) // angel
+        else if(subStageIndex == 3) // middle
         {
             Player.transform.position = subPoints[3].transform.position;
             nowStage = 7;

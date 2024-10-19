@@ -23,31 +23,14 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         gameMgr = this;
-        nowStage = 0;
 
-        GameStart();
-    }
-
-    void GameStart()
-    {
         int stageNum = PlayerPrefs.GetInt("SaveStage");
 
         nowStage = stageNum;
         mainStageIndex = stageNum;
+        subStageIndex = stageNum;
 
         MainPlayerMove();
-
-        if (stageNum == 0)
-        {
-            subStageIndex = 0;
-        }
-        else
-        {
-            subStageIndex = 1;
-        }
-
-        subPortal.SetActive(true);
-        mainPortal.SetActive(false);
     }
 
     private void Update()

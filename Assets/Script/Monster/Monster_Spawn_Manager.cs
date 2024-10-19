@@ -31,7 +31,7 @@ public class Monster_Spawn_Manager : MonoBehaviour
     public static Monster_Spawn_Manager instance;
 
     //DB √ ±‚»≠
-    private void Awake()
+    private void Start()
     {
         instance = this;
 
@@ -53,7 +53,10 @@ public class Monster_Spawn_Manager : MonoBehaviour
 
         Summon_Monsters_For_Map(4, 39, 15);
 
-        Summon_Monsters_For_Map(5, 54, 4);
+        if(GameManager.gameMgr.subStageIndex == 0)
+        {
+            Summon_Monsters_For_Map(5, 54, 4);
+        }
 
         Summon_Mini_Boss();
 

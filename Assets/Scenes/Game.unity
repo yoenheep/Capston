@@ -3076,7 +3076,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 37f7251ae10894348a326281d9590414, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2f0e79f69bab2bd468098ce2f5f8eb94, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3153,6 +3153,7 @@ MonoBehaviour:
   hammer: {fileID: 8300000, guid: 2ac75dc0cb1e8ec4a82178911ecf1f96, type: 3}
   dash: {fileID: 8300000, guid: 55fa8d2eb1799ae4bab78ea35f8c6a60, type: 3}
   jump: {fileID: 0}
+  Death: {fileID: 8300000, guid: 5113891a5419d5446b2d70e167323d35, type: 3}
   zText: {fileID: 2053788285847655413}
 --- !u!50 &105346959
 Rigidbody2D:
@@ -48148,6 +48149,7 @@ MonoBehaviour:
   - {fileID: 1814071421}
   - {fileID: 874646205}
   - {fileID: 1984521544}
+  trapRoom: {fileID: 0}
 --- !u!1 &2017965472
 GameObject:
   m_ObjectHideFlags: 0

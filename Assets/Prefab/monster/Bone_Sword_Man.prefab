@@ -172,7 +172,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -290,13 +290,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 250d065653764ac4188d50d36090f338, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster_Name: 
   monster_Max_Health: 0
   monster_Pre_Health: 0
   monster_Armor: 0
-  monster_Speed: 0
-  monster_Attack_Speed: 0
   monster_Attack_Damage: 0
   next_Move: 0
-  monster_Audio_Clips: []
+  monster_Audio_Clips:
+  - {fileID: 8300000, guid: 92c7738641d4f9a449099db7abf914ba, type: 3}
+  - {fileID: 8300000, guid: ea303c1b37336484e8a515a9f4f97a87, type: 3}
+  - {fileID: 8300000, guid: b40eacf7d294a524aa316b7fb0cbffc0, type: 3}
   range: 0

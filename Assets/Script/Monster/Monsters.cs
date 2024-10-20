@@ -125,8 +125,8 @@ public abstract class Monsters : MonoBehaviour
             anim.SetTrigger("getDamaged");
             hpBarLogic.Dmg();
 
-            //monster_Audio.clip = monster_Audio_Clips[2];
-            //monster_Audio.Play();
+            monster_Audio.clip = monster_Audio_Clips[0];
+            monster_Audio.Play();
 
             Vector2 present_Position = obj_Rb.position;
             Vector2 direction = (present_Position - attack_Direction).normalized;
@@ -195,14 +195,17 @@ public abstract class Monsters : MonoBehaviour
             is_Dead = true;
             gameObject.GetComponent<Rigidbody2D>().simulated = false;
             //아이템 드롭
-            GameManager.gameMgr.Drop_Item(gameObject);
+            if(!is_Elite)
+            {
+                GameManager.gameMgr.Drop_Item(gameObject);
+            }
 
             //몬스터 사망 애니메이션 재생
             anim.SetBool("isDead", true);
 
             //몬스터 사망 사운드 재생
-            //monster_Audio.clip = monster_Audio_Clips[1];
-            //monster_Audio.Play();
+            monster_Audio.clip = monster_Audio_Clips[1];
+            monster_Audio.Play();
             // 체력바
             hpBar.gameObject.SetActive(false);
             //죽으면 몬스터 객체 삭제

@@ -199,7 +199,10 @@ MonoBehaviour:
   monster_Armor: 0
   monster_Attack_Damage: 0
   next_Move: 0
-  monster_Audio_Clips: []
+  monster_Audio_Clips:
+  - {fileID: 8300000, guid: bd760090dff80f4488e622ba11a7c1b8, type: 3}
+  - {fileID: 8300000, guid: f659ca7182e752041abe95f01a9d4a8d, type: 3}
+  - {fileID: 8300000, guid: 2d560f1d802524541b574dd0696370d2, type: 3}
   ammo: {fileID: 3855426583266689748, guid: d40abc385dde11a4097ab9941821385b, type: 3}
   target: {fileID: 0}
 --- !u!82 &1959674341217122387

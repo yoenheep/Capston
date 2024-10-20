@@ -81,13 +81,10 @@ public class MonsterB :Monsters
             //몬스터의 공격이 최초이거나 마지막 공격 후에 일정 시간이 지났을 경우
             if (Time.time >= last_Attack_Time + this.monster_Attack_Speed || last_Attack_Time == 0)
             {
-                //monster_Audio.clip = monster_Audio_Clips[0];
-                //monster_Audio.Play();
-                
+                CancelInvoke();
                 Debug.Log("속도 증가");
                 StartCoroutine(Monter_Charge(3f, monster_Attack_Speed));
 
-                CancelInvoke();
                 Invoke("Think", 1f);
                 last_Attack_Time = Time.time;
             }
@@ -122,7 +119,7 @@ public class MonsterB :Monsters
             //수정 중
             PlayerController player = collision.GetComponent<PlayerController>();
 
-            monster_Audio.clip = monster_Audio_Clips[0];
+            monster_Audio.clip = monster_Audio_Clips[2];
             monster_Audio.Play();
 
             Quiz_Attack(player);

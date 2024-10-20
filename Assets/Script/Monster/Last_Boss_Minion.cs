@@ -45,10 +45,13 @@ public class Last_Boss_Minion : Monsters
         {
             is_Attacking = true;  // 공격 중으로 설정
 
+            monster_Audio.clip = monster_Audio_Clips[2];
+            monster_Audio.Play();
+
             // 공격 로직
             Vector2 pos = new Vector2(target.gameObject.transform.position.x, gameObject.transform.position.y + 30f);
             GameObject newBullet = Instantiate(ammo, pos, Quaternion.Euler(0, 0, -90));
-            newBullet.GetComponent<Monster_Bullet>().SetDamage(damage);
+            newBullet.GetComponent<Monster_Flame>().SetDamage(damage);
 
             last_Attack_Time = Time.time;
 
@@ -61,7 +64,7 @@ public class Last_Boss_Minion : Monsters
     {
         anim.SetTrigger("GetDamage");
 
-        monster_Audio.clip = monster_Audio_Clips[2];
+        monster_Audio.clip = monster_Audio_Clips[0];
         monster_Audio.Play();
 
         monster_Pre_Health -= (damage - this.monster_Armor);
@@ -70,5 +73,13 @@ public class Last_Boss_Minion : Monsters
         {
             this.Die();
         }
+    }
+
+    protected override void Die()
+    {
+        monster_Audio.clip = monster_Audio_Clips[1];
+        monster_Audio.Play();
+
+        anim.SetBool("isDead", true);
     }
 }

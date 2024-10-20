@@ -93,8 +93,8 @@ public class MonsterA : Monsters
             if (Time.time >= last_Attack_Time + this.monster_Attack_Speed || last_Attack_Time == 0)
             {
                 Stop();
-                //monster_Audio.clip = monster_Audio_Clips[0];
-                //monster_Audio.Play();
+                monster_Audio.clip = monster_Audio_Clips[2];
+                monster_Audio.Play();
                 anim.SetTrigger("attack");
 
                 CancelInvoke();

@@ -201,9 +201,8 @@ MonoBehaviour:
   monster_Attack_Damage: 0
   next_Move: 0
   monster_Audio_Clips:
-  - {fileID: 8300000, guid: 47b5164ff7091404b931e1a25bec36d9, type: 3}
-  - {fileID: 8300000, guid: aea89aaa62861e941b75b474270719b2, type: 3}
-  - {fileID: 8300000, guid: ea303c1b37336484e8a515a9f4f97a87, type: 3}
+  - {fileID: 8300000, guid: f2d02b8fafbde6745b13accdfa255a30, type: 3}
+  - {fileID: 8300000, guid: a8bf2cc340dd99047b3fca5d41a3b41a, type: 3}
   target: {fileID: 0}
   music_Note: {fileID: 5157482324850048741, guid: b7b8310a2f69528469b826e5b9932ee8, type: 3}
   kamikaze_Skull: {fileID: 3025351667824363433, guid: 38c368d113cd90142aafae54caa0d80f, type: 3}
@@ -218,7 +217,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: daecb83923c32d240af670edf536ebc1, type: 2}
   m_audioClip: {fileID: 8300000, guid: 15c9fcdfaad20d147b3c3fbe56933ba1, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

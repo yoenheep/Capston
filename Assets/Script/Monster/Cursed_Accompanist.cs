@@ -163,7 +163,7 @@ public class Cursed_Accompanist : Monsters
     {
         anim.SetTrigger("GetDamage");
 
-        monster_Audio.clip = monster_Audio_Clips[2];
+        monster_Audio.clip = monster_Audio_Clips[0];
         monster_Audio.Play();
 
         monster_Pre_Health -= (damage - this.monster_Armor);

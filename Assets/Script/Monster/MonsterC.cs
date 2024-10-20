@@ -115,8 +115,8 @@ public class MonsterC : Monsters
         int direction = sp.flipX ? -1 : 1;
         Vector2 obj_Position = sp.flipX ? Vector2.left : Vector2.right;
 
-        //monster_Audio.clip = monster_Audio_Clips[0];
-        //monster_Audio.Play();
+        monster_Audio.clip = monster_Audio_Clips[2];
+        monster_Audio.Play();
 
         GameObject newBullet = Instantiate(ammo, this.gameObject.transform.position, Quaternion.identity);
         newBullet.GetComponent<Monster_Bullet>().SetDamage(monster_Attack_Damage);

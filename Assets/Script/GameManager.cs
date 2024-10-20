@@ -100,8 +100,8 @@ public class GameManager : MonoBehaviour
 
     public void Drop_Item(GameObject obj)
     {
-        //int i = Random_Percentage();
-        int i = 1;
+        int i = Random_Percentage();
+        //int i = 1;
         Transform parentTransform = item_tr.transform;
         Vector2 loc = obj.GetComponent<Rigidbody2D>().position;
         loc = new Vector2(loc.x, loc.y - (obj.transform.localScale.y / 2f) + 1.8f);

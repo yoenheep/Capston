@@ -20,7 +20,12 @@ public class Last_Boss : Monsters
     Vector2 boss_Position;
 
     float move_Duration;
+    float summon_Minion_Time;
+    float summon_Minion_Cool_Time;
 
+    public float x = 3f;
+    public float y = 6f;
+    public float z = 2f;
     void Start()
     {
         PlayerController player = FindObjectOfType<PlayerController>();
@@ -31,13 +36,15 @@ public class Last_Boss : Monsters
         }
 
         monster_Name = "IAmYourDeath";
-        monster_Attack_Damage = 10f;
-        monster_Armor = 3f;
+        monster_Attack_Damage = 5f;
+        monster_Armor = 0f;
         range_Damage = 6f;
         monster_Attack_Speed = 3.5f;
         monster_Max_Health = 500f;
         monster_Pre_Health = monster_Max_Health;
         shield = 3;
+        summon_Minion_Time = -100f;
+        summon_Minion_Cool_Time = 15f;
         is_Elite = true;
 
         move_Duration = Get_Animation_Clip_Length("Death_Teleport");
@@ -108,13 +115,21 @@ public class Last_Boss : Monsters
         Debug.Log("실행 " + next_Attack);
 
         //1번 2연격 낫휘두르기 | 2번 낫 내려찍기 | 3번 하수인 소환 | 4번 발악 문제 공격
+        //개발 일정으로 2번은 기능 미구현
         switch (next_Attack)
         {
             case 1:
                 StartCoroutine(Attack_1());
                 break;
             case 3:
-                StartCoroutine(Attack_3());
+                if(Time.deltaTime > summon_Minion_Time + summon_Minion_Cool_Time)
+                {
+                    StartCoroutine(Attack_3());
+                } else
+                {
+                    Think();
+                }
+                
                 break;
             case 4:
                 StartCoroutine(Attack_4());
@@ -218,6 +233,7 @@ public class Last_Boss : Monsters
 
         float attack_Duration = Get_Animation_Clip_Length("Death_Attack_03");
 
+        summon_Minion_Time = Time.deltaTime;
         if (!attacking)
         {
             attacking = true;
@@ -263,8 +279,8 @@ public class Last_Boss : Monsters
         //애니메이션 오류로 제거
         //anim.SetTrigger("getDamage");
 
-        //monster_Audio.clip = monster_Audio_Clips[2];
-        //monster_Audio.Play();
+        monster_Audio.clip = monster_Audio_Clips[0];
+        monster_Audio.Play();
 
         Debug.Log(monster_Name + " 현재 체력 = " + monster_Pre_Health);
         monster_Pre_Health -= (damage - this.monster_Armor);

@@ -49,13 +49,13 @@ public class Monster_Spawn_Manager : MonoBehaviour
         }
 
         //제거 예정
-        //Summon_Monsters_For_Map(1, 0, 12);
+        Summon_Monsters_For_Map(1, 0, 12);
 
         Summon_Monsters_For_Map(2, 12, 15);
 
-        //Summon_Monsters_For_Map(3, 27, 12);
+        Summon_Monsters_For_Map(3, 27, 12);
 
-        //Summon_Monsters_For_Map(4, 39, 15);
+        Summon_Monsters_For_Map(4, 39, 15);
 
         if(GameManager.gameMgr.subStageIndex == 0)
         {

@@ -125,10 +125,92 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha1)) //1번무기
             {
                 nowWeapon = 0;
+                if(weapon_item[nowWeapon] == 0)
+                {
+                    animator.SetBool("Magic_Walk", false);
+                    animator.SetBool("Axe_Walk", false);
+                    animator.SetBool("knife_Walk", false);
+                    animator.SetBool("knife_Idle", false);
+                    animator.SetBool("Axe_Idle", false);
+                    animator.SetBool("Magic_Idle", false);
+                    animator.SetBool("Charac_Idle", true);
+                }
+                else if (weapon_item[nowWeapon] == 1)
+                {
+                    animator.SetBool("Magic_Walk", false);
+                    animator.SetBool("knife_Walk", false);
+                    animator.SetBool("Walk", false);
+                    animator.SetBool("Charac_Idle", false);
+                    animator.SetBool("knife_Idle", false);
+                    animator.SetBool("Magic_Idle", false);
+                    animator.SetBool("Axe_Idle", true);
+                }
+                else if (weapon_item[nowWeapon] == 2)
+                {
+                    animator.SetBool("Magic_Walk", false);
+                    animator.SetBool("Axe_Walk", false);
+                    animator.SetBool("Walk", false);
+                    animator.SetBool("Charac_Idle", false);
+                    animator.SetBool("Axe_Idle", false);
+                    animator.SetBool("Magic_Idle", false);
+                    animator.SetBool("knife_Idle", true);
+                }
+                else if (weapon_item[nowWeapon] == 3)
+                {
+                    animator.SetBool("Magic_Walk", false);
+                    animator.SetBool("knife_Walk", false);
+                    animator.SetBool("Axe_Walk", false);
+                    animator.SetBool("Walk", false);
+                    animator.SetBool("Charac_Idle", false);
+                    animator.SetBool("Axe_Idle", false);
+                    animator.SetBool("knife_Idle", false);
+                    animator.SetBool("Magic_Idle", true);
+                }
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2) && hasWeapons[1] == true) //2번무기
             {
                 nowWeapon = 1;
+                if (weapon_item[nowWeapon] == 0)
+                {
+                    animator.SetBool("Magic_Walk", false);
+                    animator.SetBool("Axe_Walk", false);
+                    animator.SetBool("knife_Walk", false);
+                    animator.SetBool("knife_Idle", false);
+                    animator.SetBool("Axe_Idle", false);
+                    animator.SetBool("Magic_Idle", false);
+                    animator.SetBool("Charac_Idle", true);
+                }
+                else if (weapon_item[nowWeapon] == 1)
+                {
+                    animator.SetBool("Magic_Walk", false);
+                    animator.SetBool("knife_Walk", false);
+                    animator.SetBool("Walk", false);
+                    animator.SetBool("Charac_Idle", false);
+                    animator.SetBool("knife_Idle", false);
+                    animator.SetBool("Magic_Idle", false);
+                    animator.SetBool("Axe_Idle", true);
+                }
+                else if (weapon_item[nowWeapon] == 2)
+                {
+                    animator.SetBool("Magic_Walk", false);
+                    animator.SetBool("Axe_Walk", false);
+                    animator.SetBool("Walk", false);
+                    animator.SetBool("Charac_Idle", false);
+                    animator.SetBool("Axe_Idle", false);
+                    animator.SetBool("Magic_Idle", false);
+                    animator.SetBool("knife_Idle", true);
+                }
+                else if (weapon_item[nowWeapon] == 3)
+                {
+                    animator.SetBool("Magic_Walk", false);
+                    animator.SetBool("knife_Walk", false);
+                    animator.SetBool("Axe_Walk", false);
+                    animator.SetBool("Walk", false);
+                    animator.SetBool("Charac_Idle", false);
+                    animator.SetBool("Axe_Idle", false);
+                    animator.SetBool("knife_Idle", false);
+                    animator.SetBool("Magic_Idle", true);
+                }
             }
 
             //원거리EX
@@ -142,13 +224,18 @@ public class PlayerController : MonoBehaviour
                     GameObject newBullet = Instantiate(bullet, pos_bullet.position, bulletRotation);
                     newBullet.GetComponent<Bullet>().SetMoveDirection(bulletDirection);
                     Bullet bulletComponent = newBullet.GetComponent<Bullet>();
-
+                    audioSource.clip = magicAttack;
+                    audioSource.Play();
+                    AttackCoolTime_max = 0.5f;
+                    bulletComponent.damage = 10f;
+                    animator.SetTrigger("Magic_Attack");
                     if (weapon_item[nowWeapon] == 3)//마법
                     {
-                        audioSource.clip = magicAttack;
+                        /*audioSource.clip = magicAttack;
                         audioSource.Play();
                         AttackCoolTime_max = 0.5f;
                         bulletComponent.damage = 10f;
+                        animator.SetTrigger("Magic_Attack");*/
                     }
                 }
                 bullet_curtime = AttackCoolTime_max;
@@ -172,6 +259,15 @@ public class PlayerController : MonoBehaviour
                         AttackCoolTime_max = 0.5f;
                         audioSource.clip = a_Weapon;
                         audioSource.Play();
+                        animator.SetTrigger("StickAttack");
+                    }
+                    else if (weapon_item[nowWeapon] == 1)//해머
+                    {
+                           damage = 25f;
+                        AttackCoolTime_max = 0.5f;
+                        audioSource.clip = hammer;
+                        audioSource.Play();
+                        animator.SetTrigger("Axe_A");
                     }
                     else if(weapon_item[nowWeapon] == 2)//검
                     {
@@ -179,16 +275,10 @@ public class PlayerController : MonoBehaviour
                         AttackCoolTime_max = 0.25f;
                         audioSource.clip = sword;
                         audioSource.Play();
-                    }
-                    else if (weapon_item[nowWeapon] == 1)//해머
-                    {
-                        damage = 25f;
-                        AttackCoolTime_max = 0.6f;
-                        audioSource.clip = hammer;
-                        audioSource.Play();
+                        animator.SetTrigger("knife_Attack");
                     }
                     Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, BoxSize, 0);
-                    animator.SetTrigger("StickAttack");
+                    //animator.SetTrigger("StickAttack");
 
                     foreach (Collider2D collider in collider2Ds)
                     {
@@ -255,18 +345,63 @@ public class PlayerController : MonoBehaviour
                 spriteRenderer.flipX = true; // 왼쪽으로 이동할 때 이미지를 뒤집음
                 pos.localPosition = new Vector3(-Mathf.Abs(pos.localPosition.x), pos.localPosition.y, pos.localPosition.z); // pos를 왼쪽으로 이동
                 pos_gun = -1;
-                animator.SetBool("Walk", true);
+                if (weapon_item[nowWeapon] == 0)
+                {
+                    animator.SetBool("Walk", true);
+                }
+                else if (weapon_item[nowWeapon] == 1)
+                {
+                    animator.SetBool("Axe_Walk", true);
+                }
+                else if (weapon_item[nowWeapon] == 2)
+                {
+                    animator.SetBool("knife_Walk", true);
+                }
+                else if (weapon_item[nowWeapon] == 3)
+                {
+                    animator.SetBool("Magic_Walk", true);
+                }
             }
             else if (hor > 0)
             {
                 spriteRenderer.flipX = false; // 오른쪽으로 이동할 때 이미지를 원래대로 돌림
                 pos.localPosition = new Vector3(Mathf.Abs(pos.localPosition.x), pos.localPosition.y, pos.localPosition.z); // pos를 오른쪽으로 이동
                 pos_gun = 1;
-                animator.SetBool("Walk", true);
+                if (weapon_item[nowWeapon] == 0)
+                {
+                    animator.SetBool("Walk", true);
+                }
+                else if (weapon_item[nowWeapon] == 1)
+                {
+                    animator.SetBool("Axe_Walk", true);
+                }
+                else if (weapon_item[nowWeapon] == 2)
+                {
+                    animator.SetBool("knife_Walk", true);
+                }
+                else if (weapon_item[nowWeapon] == 3)
+                {
+                    animator.SetBool("Magic_Walk", true);
+                }
             }
             else if (hor == 0)
             {
-                animator.SetBool("Walk", false);
+                if (weapon_item[nowWeapon] == 0)
+                {
+                    animator.SetBool("Walk", false);
+                }
+                else if (weapon_item[nowWeapon] == 1)
+                {
+                    animator.SetBool("Axe_Walk", false);
+                }
+                else if (weapon_item[nowWeapon] == 2)
+                {
+                    animator.SetBool("knife_Walk", false);
+                }
+                else if (weapon_item[nowWeapon] == 3)
+                {
+                    animator.SetBool("Magic_Walk", false);
+                }
             }
         }
 
@@ -316,6 +451,47 @@ public class PlayerController : MonoBehaviour
                     {
                         weapon_item[0] = weaponIndex;
                         hasWeapons[0] = true;
+                        if (weapon_item[nowWeapon] == 0)
+                        {
+                            animator.SetBool("Magic_Walk", false);
+                            animator.SetBool("Axe_Walk", false);
+                            animator.SetBool("knife_Walk", false);
+                            animator.SetBool("knife_Idle", false);
+                            animator.SetBool("Axe_Idle", false);
+                            animator.SetBool("Magic_Idle", false);
+                            animator.SetBool("Charac_Idle", true);
+                        }
+                        else if (weapon_item[nowWeapon] == 1)
+                        {
+                            animator.SetBool("Magic_Walk", false);
+                            animator.SetBool("knife_Walk", false);
+                            animator.SetBool("Walk", false);
+                            animator.SetBool("Charac_Idle", false);
+                            animator.SetBool("knife_Idle", false);
+                            animator.SetBool("Magic_Idle", false);
+                            animator.SetBool("Axe_Idle", true);
+                        }
+                        else if (weapon_item[nowWeapon] == 2)
+                        {
+                            animator.SetBool("Magic_Walk", false);
+                            animator.SetBool("Axe_Walk", false);
+                            animator.SetBool("Walk", false);
+                            animator.SetBool("Charac_Idle", false);
+                            animator.SetBool("Axe_Idle", false);
+                            animator.SetBool("Magic_Idle", false);
+                            animator.SetBool("knife_Idle", true);
+                        }
+                        else if (weapon_item[nowWeapon] == 3)
+                        {
+                            animator.SetBool("Magic_Walk", false);
+                            animator.SetBool("knife_Walk", false);
+                            animator.SetBool("Axe_Walk", false);
+                            animator.SetBool("Walk", false);
+                            animator.SetBool("Charac_Idle", false);
+                            animator.SetBool("Axe_Idle", false);
+                            animator.SetBool("knife_Idle", false);
+                            animator.SetBool("Magic_Idle", true);
+                        }
                         Debug.Log("first: " + weapon_item[0]);
                     }
                     else if (hasWeapons[1] == false && hasWeapons[0] == true)

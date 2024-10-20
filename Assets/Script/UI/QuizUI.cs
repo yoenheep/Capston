@@ -19,7 +19,7 @@ public class QuizUI : MonoBehaviour
     [SerializeField] private List<Sprite> SpriteList = new List<Sprite>();
     [SerializeField] private List<string> AList;
     private int rand;
-    private int max = 6;
+    private int max = 30;
 
     public GameObject QuizBoard;
     public bool quizTrigger;
@@ -34,7 +34,12 @@ public class QuizUI : MonoBehaviour
         quizTrigger = false;
         QuizBoard.SetActive(false);
 
-        AList = new List<string>() { "개포동", "칫솔","다리꼬지마","주토피아","메이플스토리","멕시코시티" };
+        AList = new List<string>() 
+        { 
+            "0", "중노동","검색","산채비빔밥","내 안에 너 있다","마이크로소프트하게", "스페이스바", "지져쓰", "글로벌", "바비 브라운",
+            "다리꼬지마", "메이플스토리", "주토피아", "쿵푸팬더", "봄여름가을겨울", "부산행", "쿠키런", "스타듀밸리", "내 귀의 캔디", "피파 온라인",
+            "멕시코시티", "싱가포르", "알제", "로마", "서울", "0", "36", "61", "2", "1"
+        };
     }
 
     private void Update()
@@ -58,7 +63,7 @@ public class QuizUI : MonoBehaviour
         if (answerFalseIcon.activeSelf == true)
         {
             answerFalseIcon.SetActive(false);
-            answerField.text = "";
+            answerField.text = AList[rand];
         }
         else
         {

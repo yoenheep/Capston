@@ -2415,7 +2415,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &48164961
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26726,12 +26726,36 @@ MonoBehaviour:
   answerFalseIcon: {fileID: 48164960}
   answerTrueIcon: {fileID: 1890101803}
   SpriteList:
-  - {fileID: 21300000, guid: 36419cfaccc0116428f2de56ab8ba5f9, type: 3}
-  - {fileID: 21300000, guid: 33907b17a7aa46e44b141cae8fdbcc65, type: 3}
-  - {fileID: 21300000, guid: 533e504dd7fcded4982a38d7e9704248, type: 3}
-  - {fileID: 21300000, guid: 8641345b4a2bc354699785987a50f4f7, type: 3}
-  - {fileID: 21300000, guid: 88469f0c2254b604aac8922af0f3f3b3, type: 3}
-  - {fileID: 21300000, guid: 46c0f4c5fe736624d9543df76323753b, type: 3}
+  - {fileID: 21300000, guid: 700e7ca326fd42d4b970e0070bd974af, type: 3}
+  - {fileID: 21300000, guid: 67a2d060d0af2c84cae5d42bc153d55a, type: 3}
+  - {fileID: 21300000, guid: 20f9037dc4d6dc347ad56f73377b3da6, type: 3}
+  - {fileID: 21300000, guid: 300a1f40d0e94794cabcf6ca066fca72, type: 3}
+  - {fileID: 21300000, guid: 6dbe02f7e565676419e7570957cef235, type: 3}
+  - {fileID: 21300000, guid: 64d3d2a12cc14e849b0fc92e64a67d44, type: 3}
+  - {fileID: 21300000, guid: e72865f8f2c532647a296cb2b4faadac, type: 3}
+  - {fileID: 21300000, guid: 5312f360da641c542bc2d7e917633dc9, type: 3}
+  - {fileID: 21300000, guid: 6ebe4e0d4033072458517500b2a704eb, type: 3}
+  - {fileID: 21300000, guid: 2cab3c180ae8cc142b4c196cb57026ef, type: 3}
+  - {fileID: 21300000, guid: 36d735bb093248c49ad21fe9915fb5e8, type: 3}
+  - {fileID: 21300000, guid: a88fb6899c24fda4aaee7ad625b7dcaa, type: 3}
+  - {fileID: 21300000, guid: 1acefc59b3c64d24193fca9fb41077de, type: 3}
+  - {fileID: 21300000, guid: 76275644b18c43042a63a41028c7a5e4, type: 3}
+  - {fileID: 21300000, guid: f9efd39987e9f5c4aa205c89e4ace1ac, type: 3}
+  - {fileID: 21300000, guid: 170e3d490ed7a0845b718d8cc900ff9a, type: 3}
+  - {fileID: 21300000, guid: 7aa2d9f1d85919843a382516d6351746, type: 3}
+  - {fileID: 21300000, guid: 058e2846d64452545a5a522dd58f6ca2, type: 3}
+  - {fileID: 21300000, guid: 945345d0d63b7034c801701aca4e3ac0, type: 3}
+  - {fileID: 21300000, guid: 344c8ff6f68be334c80ad7aa9b0f5f9a, type: 3}
+  - {fileID: 21300000, guid: f0112c662bbd1ce478a82c1c86530e33, type: 3}
+  - {fileID: 21300000, guid: eb80e3328839513488f7d758aae97c2d, type: 3}
+  - {fileID: 21300000, guid: 51d439a4bd523344db925af511cc7cb5, type: 3}
+  - {fileID: 21300000, guid: 50f3a62eff810164da1cd1f47f4ec476, type: 3}
+  - {fileID: 21300000, guid: ce8ef2e36cd06a74e9d985880ec124b2, type: 3}
+  - {fileID: 21300000, guid: 04bc4d10a2469c142901da0d64b075f4, type: 3}
+  - {fileID: 21300000, guid: ff905aecff87e8b4594a11fac5f58f29, type: 3}
+  - {fileID: 21300000, guid: 20d0cf99fc2eda040bdf6fc65cdc168a, type: 3}
+  - {fileID: 21300000, guid: ed26683d8385243418a2f350e5bf587c, type: 3}
+  - {fileID: 21300000, guid: d0be05d4851b7614d8827ba2eeea5d5a, type: 3}
   AList: []
   QuizBoard: {fileID: 826659215}
   quizTrigger: 0
@@ -31838,8 +31862,8 @@ RectTransform:
   - {fileID: 1890101806}
   m_Father: {fileID: 2006461993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.25, y: 0.3}
-  m_AnchorMax: {x: 0.75, y: 0.75}
+  m_AnchorMin: {x: 0.25, y: 0.2}
+  m_AnchorMax: {x: 0.75, y: 0.8}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
@@ -31871,7 +31895,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 7ca3cd340fedc1143b13ee789ee5a3d6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -46672,7 +46696,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1890101804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47723,8 +47747,8 @@ RectTransform:
   - {fileID: 586282769}
   m_Father: {fileID: 2006461993}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.3, y: 0.2}
-  m_AnchorMax: {x: 0.7, y: 0.28}
+  m_AnchorMin: {x: 0.3, y: 0.21}
+  m_AnchorMax: {x: 0.7, y: 0.27}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}

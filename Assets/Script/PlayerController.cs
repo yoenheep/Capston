@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
     public int nowWeapon;
 
     // 오디오
-    AudioSource audioSource;
+    public AudioSource audioSource;
     public AudioClip pickUpItem;
     public AudioClip magicAttack;
     public AudioClip a_Weapon;
@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip dash;
     public AudioClip jump;
     public AudioClip Death;
+    public AudioClip trapRoom;
 
     //애니메이션
     private Animator animator;

@@ -61,10 +61,18 @@ public class Monster_Spawn_Manager : MonoBehaviour
         {
             Summon_Monsters_For_Map(5, 54, 4);
         }
+    }
 
-        Summon_Mini_Boss();
-
-        Summon_Last_Boss();
+    private void Update()
+    {
+        if (GameManager.gameMgr.nowStage == 6)
+        {
+            Summon_Mini_Boss();
+        }
+        else if (GameManager.gameMgr.nowStage == 8) 
+        {
+            Summon_Last_Boss();
+        }
     }
 
     public void Summon_Monsters_For_Map(int mapIndex, int startIndex, int monsterCount)

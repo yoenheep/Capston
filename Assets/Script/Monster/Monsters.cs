@@ -143,7 +143,8 @@ public abstract class Monsters : MonoBehaviour
             Vector2 new_Position = new Vector2(present_Position.x + push_Force * direction.x, present_Position.y);
 
             // 몬스터를 밀린 후의 위치로 이동
-            tmp_Vec = Check_Cliff(new_Position, present_Position);
+            gameObject.transform.position = Check_Cliff(new_Position, present_Position);
+            
 
             if (monster_Pre_Health <= 0)
             {
@@ -154,7 +155,7 @@ public abstract class Monsters : MonoBehaviour
 
     public void Push_Back()
     {
-        gameObject.transform.position = tmp_Vec;
+        
     }
 
     //밀려난 위치가 플랫폼 끝일 경우 x값을 변경

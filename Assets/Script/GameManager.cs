@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
                     AudioPlayBGM.instance.bgmAudio.Play();
                 }
             }
-            if (Monster_Spawn_Manager.instance.boss_spawnedMonsters.Count == 1)
+            if (Monster_Spawn_Manager.instance.boss_spawnedMonsters.Count == 0)
             {
                 subOutPortal[subStageIndex].SetActive(true);
             }

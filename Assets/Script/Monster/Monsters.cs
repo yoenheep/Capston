@@ -55,6 +55,10 @@ public abstract class Monsters : MonoBehaviour
         hpBarLogic.maxHp = monster_Max_Health; // 최대 hp
         hpBarLogic.nowHp = monster_Pre_Health; // 현재 hp
         hpBarLogic.owner = this.transform; // 체력바 주인 설정
+
+        float sfxVolume = PlayerPrefs.GetFloat("MusicVol");
+
+        monster_Audio.volume = sfxVolume;
     }
 
     //몬스터 기본 이동

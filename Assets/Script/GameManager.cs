@@ -82,8 +82,18 @@ public class GameManager : MonoBehaviour
                 subOutPortal[subStageIndex].SetActive(true);
             }
         }
-        else if (nowStage == 7) // middle
+        else if (nowStage == 6) // middle
         {
+            if (AudioPlayBGM.instance.bgmAudio.clip != AudioPlayBGM.instance.middleBoss)
+            {
+                AudioPlayBGM.instance.bgmAudio.clip = AudioPlayBGM.instance.middleBoss;
+
+                // 오디오가 재생 중이지 않으면 재생
+                if (!AudioPlayBGM.instance.bgmAudio.isPlaying)
+                {
+                    AudioPlayBGM.instance.bgmAudio.Play();
+                }
+            }
             if (Monster_Spawn_Manager.instance.boss_spawnedMonsters.Count == 1)
             {
                 subOutPortal[subStageIndex].SetActive(true);
@@ -91,6 +101,17 @@ public class GameManager : MonoBehaviour
         }
         else if (nowStage == 8) // last
         {
+            if (AudioPlayBGM.instance.bgmAudio.clip != AudioPlayBGM.instance.lastBoss)
+            {
+                AudioPlayBGM.instance.bgmAudio.clip = AudioPlayBGM.instance.lastBoss;
+
+                // 오디오가 재생 중이지 않으면 재생
+                if (!AudioPlayBGM.instance.bgmAudio.isPlaying)
+                {
+                    AudioPlayBGM.instance.bgmAudio.Play();
+                }
+            }
+
             if (Monster_Spawn_Manager.instance.boss_spawnedMonsters.Count == 0)
             {
                 GameUI.UIData.Clear();

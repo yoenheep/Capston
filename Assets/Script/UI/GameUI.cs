@@ -28,7 +28,7 @@ public class GameUI : MonoBehaviour
     public Sprite deathSprite;
 
     [Header("# clear")]
-    [SerializeField] private GameObject clearPopup;
+    public GameObject clearPopup;
     public TextMeshProUGUI clearTimeTxt;
 
     [Header("Dash")]
@@ -214,6 +214,16 @@ public class GameUI : MonoBehaviour
             if (PlayerController.playerData.charac_PreHP <= 0)
             {
                 overPopup.SetActive(true);
+                if (AudioPlayBGM.instance.bgmAudio.clip != AudioPlayBGM.instance.gameOver)
+                {
+                    AudioPlayBGM.instance.bgmAudio.clip = AudioPlayBGM.instance.gameOver;
+
+                    // 오디오가 재생 중이지 않으면 재생
+                    if (!AudioPlayBGM.instance.bgmAudio.isPlaying)
+                    {
+                        AudioPlayBGM.instance.bgmAudio.Play();
+                    }
+                }
                 Invoke("hp_Invoke", 0.5f);
                 if (PlayerController.playerData.isDead)
                 {
@@ -238,6 +248,16 @@ public class GameUI : MonoBehaviour
         if(quizPopup.activeSelf == false)
         {
             clearPopup.SetActive(true);
+            if (AudioPlayBGM.instance.bgmAudio.clip != AudioPlayBGM.instance.gameClear)
+            {
+                AudioPlayBGM.instance.bgmAudio.clip = AudioPlayBGM.instance.gameClear;
+
+                // 오디오가 재생 중이지 않으면 재생
+                if (!AudioPlayBGM.instance.bgmAudio.isPlaying)
+                {
+                    AudioPlayBGM.instance.bgmAudio.Play();
+                }
+            }
             Time.timeScale = 0;
             clearTimeTxt.text = TimeTxt.text;
         }

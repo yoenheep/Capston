@@ -4,31 +4,57 @@ using UnityEngine;
 
 public class AudioPlayBGM : MonoBehaviour
 {
-    private AudioSource bgmAudio;
+    public AudioSource bgmAudio;
     private GameObject[] Musics;
+
+    public AudioClip Game;
+    public AudioClip middleBoss;
+    public AudioClip lastBoss;
+    public AudioClip gameClear;
+    public AudioClip gameOver;
+
+    //싱글톤
+    public static AudioPlayBGM instance { get; private set; }
 
     private void Awake()
     {
+        instance = this;
         Musics = GameObject.FindGameObjectsWithTag("Music");
 
-        if (Musics.Length >= 2)
+        if (Musics.Length >= 3)
         {
             Destroy(this.gameObject);
         }
 
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(transform.gameObject);
         bgmAudio = GetComponent<AudioSource>();
 
-        float sfxVolume = PlayerPrefs.GetFloat("MusicVol");
+        float bgmVolume = PlayerPrefs.GetFloat("MusicVol");
 
-        bgmAudio.volume = sfxVolume;
+        bgmAudio.volume = bgmVolume;
     }
 
     private void Update()
     {
-        float sfxVolume = PlayerPrefs.GetFloat("MusicVol");
+        bgmAudio.ignoreListenerPause = true;
 
-        bgmAudio.volume = sfxVolume;
+        float bgmVolume = PlayerPrefs.GetFloat("MusicVol");
+
+        bgmAudio.volume = bgmVolume;
+
+        if (GameUI.UIData.clearPopup.activeSelf == false && GameUI.UIData.overPopup.activeSelf == false && GameManager.gameMgr.nowStage != 6 && GameManager.gameMgr.nowStage != 8)
+        {
+            if (bgmAudio.clip != Game)
+            {
+                bgmAudio.clip = Game;
+
+                // 오디오가 재생 중이지 않으면 재생
+                if (!AudioPlayBGM.instance.bgmAudio.isPlaying)
+                {
+                    AudioPlayBGM.instance.bgmAudio.Play();
+                }
+            }
+        }
     }
 
     public void PlayMusic()

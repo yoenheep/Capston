@@ -37733,7 +37733,7 @@ Transform:
   m_GameObject: {fileID: 1529678049}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 880, y: -27.5, z: 0}
+  m_LocalPosition: {x: 880, y: -23.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -47059,8 +47059,10 @@ MonoBehaviour:
   - {fileID: 5996365572443928763, guid: 89f32fc178ea7c747bd2d9308c8707bb, type: 3}
   hpBar_Prefab: {fileID: 1983264480916593626, guid: fda7b72e883eb664d982f03404f72457, type: 3}
   monsters_Name: []
-  boss_Spawn_Point: {fileID: 2035331129}
-  boss_mon: {fileID: 8782375954495775655, guid: f70cbcc536980894c9027fbb531939df, type: 3}
+  mini_Boss_Spawn_Point: {fileID: 2035331129}
+  mini_Boss_Mon: {fileID: 8782375954495775655, guid: f70cbcc536980894c9027fbb531939df, type: 3}
+  last_Boss_Spawn_Point: {fileID: 1529678049}
+  last_Boss_Mon: {fileID: 6794178227994429118, guid: dae45e372054df44a80ac5239bf2bcc7, type: 3}
   monsters_Spawn_Point:
   - {fileID: 1835905581}
   - {fileID: 887877800}

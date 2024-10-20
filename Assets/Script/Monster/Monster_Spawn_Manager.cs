@@ -9,8 +9,12 @@ public class Monster_Spawn_Manager : MonoBehaviour
     public GameObject hpBar_Prefab;
     public List<string> monsters_Name = new List<string>();
 
-    public GameObject boss_Spawn_Point;
-    public GameObject boss_mon;
+    public GameObject mini_Boss_Spawn_Point;
+    public GameObject mini_Boss_Mon;
+
+    public GameObject last_Boss_Spawn_Point;
+    public GameObject last_Boss_Mon;
+
 
     //∏ÛΩ∫≈Õ DB
     Dictionary<string, GameObject> monstersDB;
@@ -137,9 +141,9 @@ public class Monster_Spawn_Manager : MonoBehaviour
 
     public void Summon_Mini_Boss()
     {
-        Vector2 position = new Vector2(boss_Spawn_Point.transform.localPosition.x, boss_Spawn_Point.transform.localPosition.y);
-        Transform tr = boss_Spawn_Point.transform.parent;
-        GameObject createdPrefab = Instantiate(boss_mon, position, Quaternion.identity);
+        Vector2 position = new Vector2(mini_Boss_Spawn_Point.transform.localPosition.x, mini_Boss_Spawn_Point.transform.localPosition.y);
+        Transform tr = mini_Boss_Spawn_Point.transform.parent;
+        GameObject createdPrefab = Instantiate(mini_Boss_Mon, position, Quaternion.identity);
         createdPrefab.transform.SetParent(tr, false);
 
         boss_spawnedMonsters.Add(createdPrefab);
@@ -149,9 +153,9 @@ public class Monster_Spawn_Manager : MonoBehaviour
 
     public void Summon_Last_Boss()
     {
-        Vector2 position = new Vector2(boss_Spawn_Point.transform.localPosition.x, boss_Spawn_Point.transform.localPosition.y);
-        Transform tr = boss_Spawn_Point.transform.parent;
-        GameObject createdPrefab = Instantiate(boss_mon, position, Quaternion.identity);
+        Vector2 position = new Vector2(last_Boss_Spawn_Point.transform.localPosition.x, last_Boss_Spawn_Point.transform.localPosition.y);
+        Transform tr = last_Boss_Spawn_Point.transform.parent;
+        GameObject createdPrefab = Instantiate(last_Boss_Mon, position, Quaternion.identity);
         createdPrefab.transform.SetParent(tr, false);
 
         boss_spawnedMonsters.Add(createdPrefab);

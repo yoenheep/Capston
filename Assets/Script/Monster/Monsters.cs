@@ -131,12 +131,12 @@ public abstract class Monsters : MonoBehaviour
             Vector2 present_Position = obj_Rb.position;
             Vector2 direction = (present_Position - attack_Direction).normalized;
 
-            float pushForce = 1.8f;
+            float push_Force = 1.8f;
 
             monster_Pre_Health -= (damage - this.monster_Armor);
 
             // 밀린 후의 위치 값
-            Vector2 new_Position = new Vector2(present_Position.x + pushForce * direction.x, present_Position.y);
+            Vector2 new_Position = new Vector2(present_Position.x + push_Force * direction.x, present_Position.y);
 
             // 몬스터를 밀린 후의 위치로 이동
             tmp_Vec = Check_Cliff(new_Position, present_Position);
@@ -180,10 +180,9 @@ public abstract class Monsters : MonoBehaviour
         if(this.quiz_Mon)
         {
             Die();
-        } else if(this.is_Elite)
+        } else if(is_Elite)
         {
-            hpBarLogic.Dmg();
-            monster_Pre_Health -= (25f - this.monster_Armor);
+
         }
     }
 

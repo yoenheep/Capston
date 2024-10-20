@@ -111,6 +111,7 @@ public class MonsterA : Monsters
         Vector3 pos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y - 0.5f, gameObject.transform.position.z);
         Debug.DrawRay(pos, diretion * range, new Color(0, 0, 1));
         RaycastHit2D rayHit = Physics2D.Raycast(pos, diretion, range, LayerMask.GetMask("Player"));
+        gameObject.transform.position += diretion;
 
         if (rayHit.collider != null && rayHit.collider.CompareTag("Player"))
         {

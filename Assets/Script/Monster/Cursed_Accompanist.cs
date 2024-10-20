@@ -11,7 +11,8 @@ public class Cursed_Accompanist : Monsters
     public GameObject kamikaze_Skull;
 
     private bool attacking = false;
-    private bool is_Stopped = false; // 행동 멈춤 여부를 나타내는 변수
+    private bool is_Stopped = false;
+    private float wait_Time;
 
     private int next_Attack;
     private float note_Damage;
@@ -29,9 +30,10 @@ public class Cursed_Accompanist : Monsters
 
         monster_Armor = 3f;
         note_Damage = 6f;
-        monster_Attack_Speed = 2f;
+        monster_Attack_Speed = 3f;
         monster_Max_Health = 300f;
         monster_Pre_Health = monster_Max_Health;
+        wait_Time = 0;
         is_Elite = true;
 
         sp = gameObject.GetComponent<SpriteRenderer>();
@@ -49,21 +51,28 @@ public class Cursed_Accompanist : Monsters
         if(GameUI.UIData.quizPopup.activeSelf == true)
         {
             is_Stopped = true;
+        } else
+        {
+            if (!attacking) // 공격 중이 아닌 상태일 때
+            {
+                wait_Time += Time.deltaTime; // 시간 누적
+
+                if (wait_Time >= 3f) // 일정 시간 지나면
+                {
+                    Think(); // Think 호출
+                    wait_Time = 0f; // 타이머 초기화
+                }
+            }
+            else
+            {
+                wait_Time = 0f; // attacking 상태라면 타이머 초기화
+            }
         }
     }
 
     private Vector2 trace_Target()
     {
         return target.transform.position;
-    }
-
-    private IEnumerator InvokeThinkAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        if (!is_Stopped) // 행동 멈춤 상태가 아니라면 Think 호출
-        {
-            Think();
-        }
     }
 
     protected override void Think()
@@ -118,7 +127,7 @@ public class Cursed_Accompanist : Monsters
         }
         attacking = false;
         Debug.Log("Attack_1 종료, Think 호출");
-        StartCoroutine(InvokeThinkAfterDelay(monster_Attack_Speed));
+        Invoke("Think", monster_Attack_Speed);
         anim.SetInteger("attack", 0);
     }
 
@@ -146,7 +155,7 @@ public class Cursed_Accompanist : Monsters
         }
         attacking = false;
         Debug.Log("Attack_2 종료, Think 호출");
-        StartCoroutine(InvokeThinkAfterDelay(monster_Attack_Speed));
+        Invoke("Think", monster_Attack_Speed);
         anim.SetInteger("attack", 0);
     }
 

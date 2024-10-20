@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip hammer;
     public AudioClip dash;
     public AudioClip jump;
+    public AudioClip Death;
 
     //애니메이션
     private Animator animator;
@@ -229,14 +230,6 @@ public class PlayerController : MonoBehaviour
                     AttackCoolTime_max = 0.5f;
                     bulletComponent.damage = 10f;
                     animator.SetTrigger("Magic_Attack");
-                    if (weapon_item[nowWeapon] == 3)//마법
-                    {
-                        /*audioSource.clip = magicAttack;
-                        audioSource.Play();
-                        AttackCoolTime_max = 0.5f;
-                        bulletComponent.damage = 10f;
-                        animator.SetTrigger("Magic_Attack");*/
-                    }
                 }
                 bullet_curtime = AttackCoolTime_max;
             }
@@ -408,6 +401,8 @@ public class PlayerController : MonoBehaviour
         if (charac_PreHP <= 0)
         {
             animator.SetBool("Death", true);
+            audioSource.clip = Death;
+            audioSource.Play();
         }
         else
         {

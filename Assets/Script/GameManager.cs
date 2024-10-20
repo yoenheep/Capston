@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
     public int subStageIndex;
     public GameObject[] subOutPortal;
 
+    AudioSource audioSource;
+    public AudioClip trapRoom;
+
     private void Awake()
     {
         gameMgr = this;
@@ -147,6 +150,7 @@ public class GameManager : MonoBehaviour
     public void SubNextStage() // 트랩, 미니보스방 이동
     {
         SubPlayerMove();
+        audioSource.clip = trapRoom;
     }
 
     public void SubOutStage() // 트랩, 미니보스방 나가기

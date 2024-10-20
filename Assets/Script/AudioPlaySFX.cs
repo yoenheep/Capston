@@ -11,7 +11,7 @@ public class AudioPlaySFX : MonoBehaviour
     {
         sfx = GameObject.FindGameObjectsWithTag("Music");
 
-        if (sfx.Length >= 2)
+        if (sfx.Length >= 3)
         {
             Destroy(this.gameObject);
         }

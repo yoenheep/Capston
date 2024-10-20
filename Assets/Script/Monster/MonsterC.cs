@@ -90,6 +90,7 @@ public class MonsterC : Monsters
         
         if(rayHit.collider != null && rayHit.collider.CompareTag("Player"))
         {
+            CancelInvoke();
             target = rayHit.collider.gameObject;
             RangeAttack(monster_Attack_Damage, target);
         }
@@ -106,6 +107,7 @@ public class MonsterC : Monsters
                 anim.SetTrigger("attack");
 
                 last_Attack_Time = Time.time;
+                Think();
             }
         }
     }

@@ -61,6 +61,10 @@ public class Monster_Spawn_Manager : MonoBehaviour
         {
             Summon_Monsters_For_Map(5, 54, 4);
         }
+
+        Summon_Mini_Boss();
+
+        //Summon_Last_Boss();
     }
 
     private void Update()
@@ -80,7 +84,7 @@ public class Monster_Spawn_Manager : MonoBehaviour
         //몬스터 스폰 포인트에 monsterDB에 저장된 몬스터를 소환
         for (int i = startIndex; i < (monsterCount + startIndex); i++)
         {
-            int mon = Random.Range(0, monsters_Prefab.Count-1);
+            int mon = Random.Range(0, monsters_Prefab.Count);
 
             //특정몬스터 생성용
             //mon = 1;

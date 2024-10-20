@@ -58,8 +58,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6493370973088763341, guid: faf7b245086bcf945a8610d99e862a9b, type: 3}
       propertyPath: monster_Audio_Clips.Array.size
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6493370973088763341, guid: faf7b245086bcf945a8610d99e862a9b, type: 3}
+      propertyPath: monster_Audio_Clips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 92c7738641d4f9a449099db7abf914ba, type: 3}
+    - target: {fileID: 6493370973088763341, guid: faf7b245086bcf945a8610d99e862a9b, type: 3}
+      propertyPath: monster_Audio_Clips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: ea303c1b37336484e8a515a9f4f97a87, type: 3}
+    - target: {fileID: 6493370973088763341, guid: faf7b245086bcf945a8610d99e862a9b, type: 3}
+      propertyPath: monster_Audio_Clips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 64412c1eb903e544a95c6d8aee21e1bc, type: 3}
     - target: {fileID: 9097410021907338820, guid: faf7b245086bcf945a8610d99e862a9b, type: 3}
       propertyPath: m_LocalScale.x
       value: 6

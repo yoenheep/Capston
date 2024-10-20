@@ -85,7 +85,6 @@ public class MonsterB :Monsters
                 Debug.Log("속도 증가");
                 StartCoroutine(Monter_Charge(3f, monster_Attack_Speed));
 
-                Invoke("Think", 1f);
                 last_Attack_Time = Time.time;
             }
         }
@@ -103,6 +102,7 @@ public class MonsterB :Monsters
         Debug.Log("속도 감소");
 
         anim.SetBool("attack", false);
+        Invoke("Think", 1f);
     }
 
     protected void Quiz_Attack(PlayerController obj)

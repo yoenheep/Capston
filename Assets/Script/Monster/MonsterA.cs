@@ -93,12 +93,11 @@ public class MonsterA : Monsters
             if (Time.time >= last_Attack_Time + this.monster_Attack_Speed || last_Attack_Time == 0)
             {
                 Stop();
+                anim.SetTrigger("attack");
                 monster_Audio.clip = monster_Audio_Clips[2];
                 monster_Audio.Play();
-                anim.SetTrigger("attack");
 
                 CancelInvoke();
-                Invoke("Think", 1f);
                 last_Attack_Time = Time.time;
             }
         }
@@ -120,5 +119,7 @@ public class MonsterA : Monsters
                 target.Hp(monster_Attack_Damage, rb.position);
             }
         }
+
+        Think();
     }
 }

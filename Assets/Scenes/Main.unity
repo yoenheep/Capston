@@ -7371,6 +7371,7 @@ MonoBehaviour:
   loginIdInput: {fileID: 20955228}
   loginPWDInput: {fileID: 795656567}
   loginUI: {fileID: 48138731}
+  loginSignupUI: {fileID: 2043976139}
   signupIdInput: {fileID: 1423582287}
   signupPWDInput: {fileID: 613281569}
   signupUI: {fileID: 128996790}

@@ -44,9 +44,24 @@ public class Cursed_Accompanist : Monsters
         this.Think();
     }
 
+    private void Update()
+    {
+        hpBarLogic.maxHp = monster_Max_Health; // 최대 hp
+        hpBarLogic.nowHp = monster_Pre_Health; // 현재 hp
+        hpBarLogic.owner = this.transform; // 체력바 주인 설정
+
+        float sfxVolume = PlayerPrefs.GetFloat("MusicVol");
+
+        monster_Audio.volume = sfxVolume;
+    }
     private void FixedUpdate()
     {
         target_Position = trace_Target();
+
+        if(is_Dead)
+        {
+            return;
+        }
 
         if(GameUI.UIData.quizPopup.activeSelf == true)
         {
@@ -59,6 +74,7 @@ public class Cursed_Accompanist : Monsters
 
                 if (wait_Time >= 3f) // 일정 시간 지나면
                 {
+                    Debug.Log("think 강제실행");
                     Think(); // Think 호출
                     wait_Time = 0f; // 타이머 초기화
                 }
@@ -161,16 +177,23 @@ public class Cursed_Accompanist : Monsters
 
     public override void GetDamage(float damage, Vector2 attack_Direction)
     {
-        anim.SetTrigger("GetDamage");
-
-        monster_Audio.clip = monster_Audio_Clips[0];
-        monster_Audio.Play();
-
-        monster_Pre_Health -= (damage - this.monster_Armor);
-
-        if (monster_Pre_Health <= 0)
+        if(!is_Dead)
         {
-            this.Die();
+            if(!attacking)
+            {
+                anim.SetTrigger("GetDamage");
+            }
+            anim.GetCurrentAnimatorStateInfo(0).
+
+            monster_Audio.clip = monster_Audio_Clips[0];
+            monster_Audio.Play();
+
+            monster_Pre_Health -= (damage - this.monster_Armor);
+
+            if (monster_Pre_Health <= 0)
+            {
+                this.Die();
+            }
         }
     }
 
@@ -196,8 +219,32 @@ public class Cursed_Accompanist : Monsters
             monster_Audio.clip = monster_Audio_Clips[0];
             monster_Audio.Play();
 
-            GameObject newSkull = Instantiate(kamikaze_Skull, this.gameObject.transform.position, Quaternion.identity);
+            GameObject newSkull = Instantiate(kamikaze_Skull, new Vector2(gameObject.transform.position.x, gameObject.transform.position.y -1f), Quaternion.identity);
             newSkull.GetComponent<Kamikaze_Skull>().SetMove(target_Position);
+        }
+    }
+
+    protected override void Die()
+    {
+        if (!is_Dead)
+        {
+            Debug.Log("죽음 실행");
+            is_Dead = true;
+
+            //몬스터 사망 애니메이션 재생
+            anim.SetBool("isDead", true);
+
+            //몬스터 사망 사운드 재생
+            monster_Audio.clip = monster_Audio_Clips[1];
+            monster_Audio.Play();
+
+            // 체력바
+            hpBar.gameObject.SetActive(false);
+            //죽으면 몬스터 객체 삭제
+            //StartCoroutine(DeactivateAfterSound());
+
+            // 리스트에서 제거
+            Monster_Spawn_Manager.instance.RemoveMonsterFromList(this);
         }
     }
 }

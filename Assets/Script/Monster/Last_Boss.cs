@@ -23,9 +23,6 @@ public class Last_Boss : Monsters
     float summon_Minion_Time;
     float summon_Minion_Cool_Time;
 
-    public float x = 3f;
-    public float y = 6f;
-    public float z = 2f;
     void Start()
     {
         PlayerController player = FindObjectOfType<PlayerController>();
@@ -289,6 +286,7 @@ public class Last_Boss : Monsters
         if (monster_Pre_Health <= 0)
         {
             this.Die();
+            //클리어 메소드 넣을 예정
         }
     }
 

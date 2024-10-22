@@ -127,7 +127,16 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha1)) //1번무기
             {
                 nowWeapon = 0;
-                if(weapon_item[nowWeapon] == 0)
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && hasWeapons[1] == true) //2번무기
+            {
+                nowWeapon = 1;
+            }
+
+
+            if(nowWeapon == 0)
+            {
+                if (weapon_item[nowWeapon] == 0)
                 {
                     animator.SetBool("Magic_Walk", false);
                     animator.SetBool("Axe_Walk", false);
@@ -169,9 +178,8 @@ public class PlayerController : MonoBehaviour
                     animator.SetBool("Magic_Idle", true);
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2) && hasWeapons[1] == true) //2번무기
+            if(nowWeapon == 1)
             {
-                nowWeapon = 1;
                 if (weapon_item[nowWeapon] == 0)
                 {
                     animator.SetBool("Magic_Walk", false);
@@ -447,47 +455,7 @@ public class PlayerController : MonoBehaviour
                     {
                         weapon_item[0] = weaponIndex;
                         hasWeapons[0] = true;
-                        if (weapon_item[nowWeapon] == 0)
-                        {
-                            animator.SetBool("Magic_Walk", false);
-                            animator.SetBool("Axe_Walk", false);
-                            animator.SetBool("knife_Walk", false);
-                            animator.SetBool("knife_Idle", false);
-                            animator.SetBool("Axe_Idle", false);
-                            animator.SetBool("Magic_Idle", false);
-                            animator.SetBool("Charac_Idle", true);
-                        }
-                        else if (weapon_item[nowWeapon] == 1)
-                        {
-                            animator.SetBool("Magic_Walk", false);
-                            animator.SetBool("knife_Walk", false);
-                            animator.SetBool("Walk", false);
-                            animator.SetBool("Charac_Idle", false);
-                            animator.SetBool("knife_Idle", false);
-                            animator.SetBool("Magic_Idle", false);
-                            animator.SetBool("Axe_Idle", true);
-                        }
-                        else if (weapon_item[nowWeapon] == 2)
-                        {
-                            animator.SetBool("Magic_Walk", false);
-                            animator.SetBool("Axe_Walk", false);
-                            animator.SetBool("Walk", false);
-                            animator.SetBool("Charac_Idle", false);
-                            animator.SetBool("Axe_Idle", false);
-                            animator.SetBool("Magic_Idle", false);
-                            animator.SetBool("knife_Idle", true);
-                        }
-                        else if (weapon_item[nowWeapon] == 3)
-                        {
-                            animator.SetBool("Magic_Walk", false);
-                            animator.SetBool("knife_Walk", false);
-                            animator.SetBool("Axe_Walk", false);
-                            animator.SetBool("Walk", false);
-                            animator.SetBool("Charac_Idle", false);
-                            animator.SetBool("Axe_Idle", false);
-                            animator.SetBool("knife_Idle", false);
-                            animator.SetBool("Magic_Idle", true);
-                        }
+                       
                         Debug.Log("first: " + weapon_item[0]);
                     }
                     else if (hasWeapons[1] == false && hasWeapons[0] == true)

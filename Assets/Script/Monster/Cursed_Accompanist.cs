@@ -183,7 +183,6 @@ public class Cursed_Accompanist : Monsters
             {
                 anim.SetTrigger("GetDamage");
             }
-            anim.GetCurrentAnimatorStateInfo(0).
 
             monster_Audio.clip = monster_Audio_Clips[0];
             monster_Audio.Play();

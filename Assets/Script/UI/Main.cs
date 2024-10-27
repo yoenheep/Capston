@@ -19,7 +19,6 @@ public class Main : MonoBehaviour
     public TMP_InputField loginIdInput;
     public TMP_InputField loginPWDInput;
     public GameObject loginUI;
-    public GameObject loginSignupUI;
 
     [Header("# signup")]
     public TMP_InputField signupIdInput;
@@ -77,15 +76,15 @@ public class Main : MonoBehaviour
         if (!string.IsNullOrEmpty(loginIdInput.text) && !string.IsNullOrEmpty(loginPWDInput.text))
         {
             string playerName = loginIdInput.text;
-            string pwd = loginPWDInput.text;
+            int pwd = int.Parse(loginPWDInput.text);
 
             XmlNodeList user = MySQLConnection.Select("users", $"WHERE ID = '{playerName}'");
 
             if (user != null)
             {
-                if (pwd == user[0]["Password"].InnerText.ToString())
+                if (pwd == int.Parse(user[0]["ID"].InnerText))
                 {
-                    loginSignupUI.SetActive(false);
+                    // 게임시작
                 }
                 else
                 {

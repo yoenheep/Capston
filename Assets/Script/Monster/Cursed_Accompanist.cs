@@ -13,7 +13,7 @@ public class Cursed_Accompanist : Monsters
     private bool attacking = false;
     private bool is_Stopped = false;
     private float wait_Time;
-
+    private float dodge_Time;
     private int next_Attack;
     private float note_Damage;
     Vector2 target_Position;

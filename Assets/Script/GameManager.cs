@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
                 subOutPortal[subStageIndex].SetActive(true);
             }
         }
-        else if (nowStage == 6) // middle
+        else if (nowStage == 1) // middle
         {
             if (AudioPlayBGM.instance.bgmAudio.clip != AudioPlayBGM.instance.middleBoss)
             {
@@ -122,7 +122,8 @@ public class GameManager : MonoBehaviour
     public void Drop_Item(GameObject obj)
     {
         int i = Random_Percentage();
-        //int i = 1;
+        //시연용
+        //i = Random.Range(0, drop_Item.Length);
         Transform parentTransform = item_tr.transform;
         Vector2 loc = obj.GetComponent<Rigidbody2D>().position;
         loc = new Vector2(loc.x, loc.y - (obj.transform.localScale.y / 2f) + 1.8f);
@@ -183,6 +184,8 @@ public class GameManager : MonoBehaviour
         subPortal.SetActive(true);
         mainPortal.SetActive(false);
 
+        //시연용 이동
+        //0 = map 1 | 1 = middle_boss | 2 = last_boss
         if (mainStageIndex == 0) // map1
         {
             Player.transform.position = mainPoints[0].transform.position;
@@ -198,7 +201,7 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetFloat("SaveX", mainPoints[1].transform.position.x);
             PlayerPrefs.SetFloat("SaveY", mainPoints[1].transform.position.y);
             PlayerPrefs.SetInt("SaveStage", 1);
-
+            
             nowStage = 1;
         }
         else if (mainStageIndex == 2) // map3
@@ -225,6 +228,8 @@ public class GameManager : MonoBehaviour
         {
             Player.transform.position = mainPoints[4].transform.position;
             nowStage = 8;
+
+            Monster_Spawn_Manager.instance.Summon_Last_Boss();
         }
     }
 
@@ -273,8 +278,10 @@ public class GameManager : MonoBehaviour
             Player.transform.position = subPoints[2].transform.position;
             nowStage = 6;
         }
-        else if(subStageIndex == 3) // middle
+        else if (subStageIndex == 3) // middle
         {
+            Monster_Spawn_Manager.instance.Summon_Mini_Boss();
+
             Player.transform.position = subPoints[3].transform.position;
             nowStage = 7;
         }

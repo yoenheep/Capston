@@ -42,19 +42,22 @@ public class AudioPlayBGM : MonoBehaviour
 
         bgmAudio.volume = bgmVolume;
 
-        if (GameUI.UIData.clearPopup.activeSelf == false && GameUI.UIData.overPopup.activeSelf == false && GameManager.gameMgr.nowStage != 6 && GameManager.gameMgr.nowStage != 8)
+        if (bgmAudio.clip != Game)
         {
-            if (bgmAudio.clip != Game)
-            {
-                bgmAudio.clip = Game;
+            bgmAudio.clip = Game;
 
-                // 오디오가 재생 중이지 않으면 재생
-                if (!AudioPlayBGM.instance.bgmAudio.isPlaying)
-                {
-                    AudioPlayBGM.instance.bgmAudio.Play();
-                }
+            // 오디오가 재생 중이지 않으면 재생
+            if (!AudioPlayBGM.instance.bgmAudio.isPlaying)
+            {
+                AudioPlayBGM.instance.bgmAudio.Play();
             }
         }
+        //null 오류
+        //수정 필요
+        /*if (GameUI.UIData.clearPopup.activeSelf == false && GameUI.UIData.overPopup.activeSelf == false && GameManager.gameMgr.nowStage != 6 && GameManager.gameMgr.nowStage != 8)
+        {
+            
+        }*/
     }
 
     public void PlayMusic()

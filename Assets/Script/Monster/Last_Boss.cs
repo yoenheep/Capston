@@ -34,10 +34,10 @@ public class Last_Boss : Monsters
 
         monster_Name = "IAmYourDeath";
         monster_Attack_Damage = 5f;
-        monster_Armor = 0f;
+        monster_Armor = 2f;
         range_Damage = 6f;
         monster_Attack_Speed = 3.5f;
-        monster_Max_Health = 500f;
+        monster_Max_Health = 650f;
         monster_Pre_Health = monster_Max_Health;
         shield = 3;
         summon_Minion_Time = -100f;
@@ -319,21 +319,8 @@ public class Last_Boss : Monsters
         //사거리 확인용
         Vector3 pos_1 = new Vector3(gameObject.transform.position.x + direction_X, gameObject.transform.position.y - 3f, gameObject.transform.position.z);
         Debug.DrawRay(pos_1, diretion * range, new Color(1, 0, 0));
-        Vector3 pos_2 = new Vector3(gameObject.transform.position.x + direction_X, gameObject.transform.position.y - 1f, gameObject.transform.position.z);
-        Debug.DrawRay(pos_2, diretion * range, new Color(1, 0, 0));
 
         RaycastHit2D rayHit = Physics2D.Raycast(pos_1, diretion, range, LayerMask.GetMask("Player"));
-
-        if (rayHit.collider != null && rayHit.collider.CompareTag("Player"))
-        {
-            if (target != null)
-            {
-                Debug.Log("플레이어");
-                target.GetComponent<PlayerController>().Hp(monster_Attack_Damage, boss_Position);
-            }
-        }
-
-        rayHit = Physics2D.Raycast(pos_2, diretion, range, LayerMask.GetMask("Player"));
 
         if (rayHit.collider != null && rayHit.collider.CompareTag("Player"))
         {

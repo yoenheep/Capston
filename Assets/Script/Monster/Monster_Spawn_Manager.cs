@@ -49,9 +49,10 @@ public class Monster_Spawn_Manager : MonoBehaviour
         }
 
         //제거 예정
-        Summon_Monsters_For_Map(1, 0, 12);
+        Summon_Monsters_For_Map(1, 0, 5);
 
-        Summon_Monsters_For_Map(2, 12, 15);
+        Summon_Monsters_For_Map(4, 54, 3);
+        /*Summon_Monsters_For_Map(2, 12, 15);
 
         Summon_Monsters_For_Map(3, 27, 12);
 
@@ -62,21 +63,9 @@ public class Monster_Spawn_Manager : MonoBehaviour
             Summon_Monsters_For_Map(5, 54, 4);
         }
 
-        Summon_Mini_Boss();
+        Summon_Mini_Boss();*/
 
         //Summon_Last_Boss();
-    }
-
-    private void Update()
-    {
-        if (GameManager.gameMgr.nowStage == 6)
-        {
-            Summon_Mini_Boss();
-        }
-        else if (GameManager.gameMgr.nowStage == 8) 
-        {
-            Summon_Last_Boss();
-        }
     }
 
     public void Summon_Monsters_For_Map(int mapIndex, int startIndex, int monsterCount)
@@ -87,7 +76,7 @@ public class Monster_Spawn_Manager : MonoBehaviour
             int mon = Random.Range(0, monsters_Prefab.Count);
 
             //특정몬스터 생성용
-            //mon = 1;
+            //mon = 2;
 
             //스폰포인트 비활성화일시 소환하지 않음
             if(!monsters_Spawn_Point[i].activeSelf)

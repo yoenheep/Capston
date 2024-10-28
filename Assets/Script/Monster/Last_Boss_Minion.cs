@@ -80,6 +80,8 @@ public class Last_Boss_Minion : Monsters
         monster_Audio.clip = monster_Audio_Clips[1];
         monster_Audio.Play();
 
+        hpBar.gameObject.SetActive(false);
+
         anim.SetBool("isDead", true);
     }
 }

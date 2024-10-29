@@ -154,10 +154,10 @@ public class MySQLConnection : MonoBehaviour
     {
         return m_OnChange($"INSERT INTO {tableName} VALUES ({value})");
     }
-    public static bool Insert(string tableName, string fieldName, string value)  // 값 하나만 변경할 때 쓰는 함수 -> 편하게 쓰려는 용도
-    {
-        return m_OnChange($"INSERT INTO {tableName} ({fieldName}) VALUES ({value})");
-    }
+    //public static bool Insert(string tableName, string fieldName, string value)  // 값 하나만 변경할 때 쓰는 함수 -> 편하게 쓰려는 용도
+    //{
+    //    return m_OnChange($"INSERT INTO {tableName} ({fieldName}) VALUES ({value})");
+    //}
 
     /// <summary>
     /// 레코드 갱신
@@ -172,7 +172,7 @@ public class MySQLConnection : MonoBehaviour
         Debug.Log("Update Data");
         return m_OnChange(query);
     }
-    public static bool UpdateRanking(string tableName, string fieldName, int score, string condition) // 하나의 컬럼만 값을 변경할 때 사용
+    public static bool UpdateRanking(string tableName, string fieldName, float score, string condition) // 하나의 컬럼만 값을 변경할 때 사용
     {
         Debug.Log("Update Ranking Data");
         return m_OnChange($"UPDATE {tableName} SET {fieldName}={score} WHERE {condition}");

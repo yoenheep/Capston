@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
 using System.Net.Http.Headers;
+using System.Xml;
 
 public class GameUI : MonoBehaviour
 {
@@ -58,6 +59,26 @@ public class GameUI : MonoBehaviour
     public GameObject ItemZTxtObj;
     [SerializeField] private Description Description;
 
+    public void SaveRanking()
+    {
+        string playerName = UserData.instance.userName;
+        XmlNodeList user = MySQLConnection.Select("ranking", $"WHERE ID = '{playerName}'");
+
+        if (user != null)
+        {
+
+            MySQLConnection.UpdateRanking("ranking", "time", timeSecs, $"ID = {playerName}");
+            Debug.Log("Update UserRanking");
+        }
+        else
+        {
+            string query = $"{playerName},{timeSecs.ToString()}";
+            MySQLConnection.Insert("ranking", query);
+            // INSERT INTO ranking VALUES playerName, timeSecs 
+            Debug.Log("save UserRanking");
+        }
+    }
+
     //ΩÃ±€≈Ê
     public static GameUI UIData { get; private set; }
 
@@ -109,6 +130,13 @@ public class GameUI : MonoBehaviour
         hp(); // HP ¿”Ω√≈∞
         hp_now = PlayerController.playerData.charac_PreHP;
         hpBar.fillAmount = hp_now / hp_max; // ƒ≥∏Ø≈Õ hpbar
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Clear();
+        }
+               
+            
     }
 
     public void time()
@@ -258,8 +286,9 @@ public class GameUI : MonoBehaviour
                     AudioPlayBGM.instance.bgmAudio.Play();
                 }
             }
-            Time.timeScale = 0;
             clearTimeTxt.text = TimeTxt.text;
+            SaveRanking();
+            Time.timeScale = 0;
         }
     }
 

@@ -25,8 +25,17 @@ public class AudioPlayBGM : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        var obj = FindObjectsOfType<AudioPlayBGM>();
 
-        DontDestroyOnLoad(transform.gameObject);
+        if (obj.Length == 1)
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         bgmAudio = GetComponent<AudioSource>();
 
         float bgmVolume = PlayerPrefs.GetFloat("MusicVol");

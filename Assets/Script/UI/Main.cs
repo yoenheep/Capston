@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Xml;
@@ -86,6 +85,7 @@ public class Main : MonoBehaviour
                 if (pwd == user[0]["Password"].InnerText.ToString())
                 {
                     loginSignupUI.SetActive(false);
+                    UserData.instance.userName = playerName;
                 }
                 else
                 {

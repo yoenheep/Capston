@@ -25,9 +25,18 @@ public class Main : MonoBehaviour
     public TMP_InputField signupPWDInput;
     public GameObject signupUI;
 
+    [Header("# warning")]
+    public TextMeshProUGUI warningTxt;
+    public GameObject warningUI;
+
     public void CloseUi(GameObject ui)
     {
         ui.SetActive(false);
+    }
+
+    public void WarningClose()
+    {
+        warningUI.SetActive(false);
     }
 
     public void Signup()
@@ -43,6 +52,10 @@ public class Main : MonoBehaviour
             {
                 //이미 존재하는 아이디입니다.
                 Debug.Log("이미 존재하는 아이디입니다.");
+                warningTxt.text = "이미 존재하는 아이디입니다.";
+                warningUI.SetActive(true);
+
+                Invoke("WarningClose", 5f);
             }
             else
             {
@@ -51,11 +64,19 @@ public class Main : MonoBehaviour
                     MySQLConnection.Insert("users", $"'{playerName}', {pwd}");
                     //회원가입 
                     Debug.Log("회원가입 성공");
+                    warningTxt.text = "회원가입 성공";
+                    warningUI.SetActive(true);
+
+                    Invoke("WarningClose", 5f);
                 }
                 else
                 {
                     //비밀번호는 4자리입니다. 4일때만 입력가능
                     Debug.Log("비밀번호는 4자리입니다.");
+                    warningTxt.text = "비밀번호는 4자리입니다.";
+                    warningUI.SetActive(true);
+
+                    Invoke("WarningClose", 5f);
                 }
             }
         }
@@ -63,11 +84,19 @@ public class Main : MonoBehaviour
         {
             //아이디가 비어있을 때
             Debug.Log("ID를 입력해주세요.");
+            warningTxt.text = "아이디를 입력해주세요";
+            warningUI.SetActive(true);
+
+            Invoke("WarningClose", 5f);
         }
         else if (string.IsNullOrEmpty(signupPWDInput.text))
         {
             //비밀번호가 비어있을 때
             Debug.Log("비밀번호를 입력해주세요");
+            warningTxt.text = "비밀번호를 입력해주세요";
+            warningUI.SetActive(true);
+
+            Invoke("WarningClose", 5f);
         }
     }
 
@@ -111,6 +140,9 @@ public class Main : MonoBehaviour
     {
         mainPage.SetActive(true);
         setPopup.SetActive(false);
+        warningUI.SetActive(false);
+        loginUI.SetActive(true);
+        signupUI.SetActive(true);
     }
 
     public void Clicked_start() //시작하기

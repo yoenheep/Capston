@@ -67,7 +67,7 @@ public class GameUI : MonoBehaviour
         if (user != null)
         {
 
-            MySQLConnection.UpdateRanking("ranking", "time", timeSecs, $"ID = {playerName}");
+            MySQLConnection.UpdateRanking("ranking", "time", timeSecs, $"ID = '{playerName}'");
             Debug.Log("Update UserRanking");
         }
         else

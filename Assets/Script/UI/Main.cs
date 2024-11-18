@@ -19,6 +19,7 @@ public class Main : MonoBehaviour
     public TMP_InputField loginPWDInput;
     public GameObject loginUI;
     public GameObject loginSignupUI;
+    public GameObject loginSignBtn;
 
     [Header("# signup")]
     public TMP_InputField signupIdInput;
@@ -39,6 +40,11 @@ public class Main : MonoBehaviour
         warningUI.SetActive(false);
     }
 
+    public void SignBtn()
+    {
+        signupUI.SetActive(true);
+    }
+
     public void Signup()
     {
         if (!string.IsNullOrEmpty(signupIdInput.text) && !string.IsNullOrEmpty(signupPWDInput.text))
@@ -55,7 +61,7 @@ public class Main : MonoBehaviour
                 warningTxt.text = "이미 존재하는 아이디입니다.";
                 warningUI.SetActive(true);
 
-                Invoke("WarningClose", 5f);
+                Invoke("WarningClose", 3f);
             }
             else
             {
@@ -67,7 +73,7 @@ public class Main : MonoBehaviour
                     warningTxt.text = "회원가입 성공";
                     warningUI.SetActive(true);
 
-                    Invoke("WarningClose", 5f);
+                    Invoke("WarningClose", 3f);
                 }
                 else
                 {
@@ -76,7 +82,7 @@ public class Main : MonoBehaviour
                     warningTxt.text = "비밀번호는 4자리입니다.";
                     warningUI.SetActive(true);
 
-                    Invoke("WarningClose", 5f);
+                    Invoke("WarningClose", 3f);
                 }
             }
         }
@@ -87,7 +93,7 @@ public class Main : MonoBehaviour
             warningTxt.text = "아이디를 입력해주세요";
             warningUI.SetActive(true);
 
-            Invoke("WarningClose", 5f);
+            Invoke("WarningClose", 3f);
         }
         else if (string.IsNullOrEmpty(signupPWDInput.text))
         {
@@ -96,7 +102,7 @@ public class Main : MonoBehaviour
             warningTxt.text = "비밀번호를 입력해주세요";
             warningUI.SetActive(true);
 
-            Invoke("WarningClose", 5f);
+            Invoke("WarningClose", 3f);
         }
     }
 
@@ -120,11 +126,21 @@ public class Main : MonoBehaviour
                 {
                     //OpenUI("alert");
                     //alertText.text = "비밀번호가 잘못되었습니다";
+                    Debug.Log("비밀번호를 입력해주세요");
+                    warningTxt.text = "비밀번호가 잘못되었습니다";
+                    warningUI.SetActive(true);
+
+                    Invoke("WarningClose", 3f);
                 }
             }
             else
             {
                 // 존재하지않은 아이디입니다.
+                Debug.Log("존재하지 않은 아이디입니다");
+                warningTxt.text = "존재하지 않은 아이디입니다";
+                warningUI.SetActive(true);
+
+                Invoke("WarningClose", 3f);
             }
         }
         else if (string.IsNullOrEmpty(loginIdInput.text) || (!string.IsNullOrEmpty(loginPWDInput.text)))
@@ -143,6 +159,18 @@ public class Main : MonoBehaviour
         warningUI.SetActive(false);
         loginUI.SetActive(true);
         signupUI.SetActive(true);
+    }
+
+    private void Update()
+    {
+        if(signupUI.activeSelf == true)
+        {
+            loginSignBtn.SetActive(false);
+        }
+        else
+        {
+            loginSignBtn.SetActive(true);
+        }
     }
 
     public void Clicked_start() //시작하기

@@ -63,7 +63,6 @@ public class QuizUI : MonoBehaviour
         if (answerFalseIcon.activeSelf == true)
         {
             answerFalseIcon.SetActive(false);
-            answerField.text = AList[rand];
         }
         else
         {
@@ -151,6 +150,7 @@ public class QuizUI : MonoBehaviour
             {
                 QuizBoard.SetActive(false);
                 PlayerController.playerData.charac_PreHP /= 2;
+                answerField.text = AList[rand];
                 GameManager.gameMgr.subOutPortal[GameManager.gameMgr.subStageIndex].SetActive(true);
             }
             else

@@ -157,8 +157,8 @@ public class Main : MonoBehaviour
         mainPage.SetActive(true);
         setPopup.SetActive(false);
         warningUI.SetActive(false);
-        loginUI.SetActive(true);
-        signupUI.SetActive(true);
+        //loginUI.SetActive(true);
+        //signupUI.SetActive(true);
     }
 
     private void Update()

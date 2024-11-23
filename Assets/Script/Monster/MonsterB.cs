@@ -95,6 +95,11 @@ public class MonsterB :Monsters
         anim.SetBool("attack", true);
 
         float originalSpeed = monster_Speed;
+
+        if(next_Move == 0)
+        {
+            next_Move = sprite_Renderer.flipX ? -1 : 1;
+        }
         monster_Speed *= multiplier;
 
         yield return new WaitForSeconds(duration);

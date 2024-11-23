@@ -52,7 +52,7 @@ public class MonsterC : Monsters
         {
             return;
         }
-        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Bone_Archer_Damaged"))
+        else if (anim.GetCurrentAnimatorStateInfo(0).IsName("Bone_Archer_Hit"))
         {
             return;
         }

@@ -61,6 +61,8 @@ public class Monster_Spawn_Manager : MonoBehaviour
         {
             Summon_Monsters_For_Map(5, 54, 4);
         }
+
+        Summon_Last_Boss();
     }
 
     public void Summon_Monsters_For_Map(int mapIndex, int startIndex, int monsterCount)

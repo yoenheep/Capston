@@ -65,7 +65,7 @@ public class MonsterA : Monsters
             rb.velocity = new Vector2(next_Move, rb.velocity.y);
 
             Vector2 frontVec = new Vector2(currentPosition.x + (0.9f * next_Move), currentPosition.y - 1f);
-            Debug.DrawRay(frontVec, Vector3.down * 2f, new Color(1, 1, 0));
+            //Debug.DrawRay(frontVec, Vector3.down * 2f, new Color(1, 1, 0));
             RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down * 2f, 1, LayerMask.GetMask("Platform"));
 
             if (rayHit.collider == null)
@@ -94,8 +94,6 @@ public class MonsterA : Monsters
             {
                 Stop();
                 anim.SetTrigger("attack");
-                monster_Audio.clip = monster_Audio_Clips[2];
-                monster_Audio.Play();
 
                 CancelInvoke();
                 last_Attack_Time = Time.time;
@@ -111,6 +109,9 @@ public class MonsterA : Monsters
         Debug.DrawRay(pos, diretion * range, new Color(0, 0, 1));
         RaycastHit2D rayHit = Physics2D.Raycast(pos, diretion, range, LayerMask.GetMask("Player"));
         gameObject.transform.position += diretion;
+
+        monster_Audio.clip = monster_Audio_Clips[2];
+        monster_Audio.Play();
 
         if (rayHit.collider != null && rayHit.collider.CompareTag("Player"))
         {

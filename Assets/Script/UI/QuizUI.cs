@@ -26,6 +26,7 @@ public class QuizUI : MonoBehaviour
 
     //몬스터 데미지 처리를 위한 변수
     private Monsters mon;
+    private Vector2 mon_Pos;
 
     private void Awake()
     {
@@ -87,6 +88,7 @@ public class QuizUI : MonoBehaviour
             quizPopup.SetActive(true);
 
             this.mon = mon.GetComponent<Monsters>();
+            mon_Pos = mon.gameObject.transform.position;
 
             quiz_on();
             StartCoroutine(quizTimerFunc());
@@ -155,7 +157,7 @@ public class QuizUI : MonoBehaviour
             }
             else
             {
-                PlayerController.playerData.Hp(10f, this.mon.gameObject.transform.position);
+                PlayerController.playerData.Hp(10f, mon_Pos);
             }
         }
     }

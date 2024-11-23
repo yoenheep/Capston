@@ -16,7 +16,7 @@ public class Last_Boss_Minion : Monsters
         monster_Speed = 0f;
         monster_Attack_Damage = 5f;
         monster_Attack_Speed = Random.Range(1.5f, 4f);  // 공격 간격 시간
-        monster_Max_Health = 30f;
+        monster_Max_Health = 50f;
         monster_Pre_Health = monster_Max_Health;
 
         hpBar = Instantiate(Monster_Spawn_Manager.instance.hpBar_Prefab, transform.position, Quaternion.identity);

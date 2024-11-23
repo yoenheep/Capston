@@ -14,6 +14,8 @@ public abstract class Monsters : MonoBehaviour
     protected float monster_Attack_Speed;
     public float monster_Attack_Damage;
 
+    private float damaged_Time;
+
     protected float last_Attack_Time;
     protected bool is_Dead;
     
@@ -32,8 +34,6 @@ public abstract class Monsters : MonoBehaviour
     
     protected AudioSource monster_Audio;
     public AudioClip[] monster_Audio_Clips;  /*[0]monster damaged [1]monster die ... */
-
-    protected Vector2 tmp_Vec;
 
     //몬스터 변수 초기화
     protected void Awake()
@@ -120,7 +120,6 @@ public abstract class Monsters : MonoBehaviour
     {
         Rigidbody2D obj_Rb = gameObject.GetComponent<Rigidbody2D>();
 
-        //obj_Rb가 null이 아니고 is_dead가 false일 때
         if (!is_Dead)
         {
             Debug.Log("피격");
@@ -135,16 +134,10 @@ public abstract class Monsters : MonoBehaviour
             Vector2 present_Position = obj_Rb.position;
             Vector2 direction = (present_Position - attack_Direction).normalized;
 
-            float push_Force = 1.8f;
-
+            float push_Force = 6f;
             monster_Pre_Health -= (damage - this.monster_Armor);
 
-            // 밀린 후의 위치 값
-            Vector2 new_Position = new Vector2(present_Position.x + push_Force * direction.x, present_Position.y);
-
-            // 몬스터를 밀린 후의 위치로 이동
-            gameObject.transform.position = Check_Cliff(new_Position, present_Position);
-            
+            StartCoroutine(Push_Back(direction, push_Force));
 
             if (monster_Pre_Health <= 0)
             {
@@ -153,29 +146,43 @@ public abstract class Monsters : MonoBehaviour
         }
     }
 
-    public void Push_Back()
+    //0.3초 동안 뒤로 물러남
+    protected IEnumerator Push_Back(Vector2 direction, float push_Force)
     {
-        
-    }
+        Rigidbody2D obj_Rb = gameObject.GetComponent<Rigidbody2D>();
+        float elapsedTime = 0f;
+        float pushDuration = 0.3f; // 초기 밀리는 시간
 
-    //밀려난 위치가 플랫폼 끝일 경우 x값을 변경
-    protected Vector2 Check_Cliff(Vector2 after, Vector2 before)
-    {
-        Vector2 final;
-
-        RaycastHit2D checkRay = Physics2D.Raycast(after, Vector2.down * 3f, 10f);
-        Debug.DrawRay(after, Vector2.down * 10f, new Color(0, 1, 0));
-
-        if (checkRay.collider != null)
+        while (elapsedTime < pushDuration)
         {
-            final = after;
-        }
-        else
-        {
-            final = before;
+            elapsedTime += Time.deltaTime;
+
+            // 밀린 후 예상 위치 계산
+            Vector2 predictedPosition = obj_Rb.position + new Vector2(direction.x * push_Force * 0.1f, 0);
+
+            // 예상 위치 아래에 Platform 태그 확인
+            Vector2 rayOrigin = new Vector2(predictedPosition.x, predictedPosition.y - 1f);
+            RaycastHit2D rayHit = Physics2D.Raycast(rayOrigin, Vector2.down, 1f, LayerMask.GetMask("Platform"));
+
+            if (rayHit.collider == null || !rayHit.collider.CompareTag("Platform"))
+            {
+                //Debug.Log("다음 위치에 Platform 없음");
+                pushDuration -= 0.1f; // 밀리는 시간 감소
+
+                if (pushDuration <= 0f)
+                {
+                    break; // 밀리는 시간을 모두 소진하면 루프 종료
+                }
+            }
+
+            // 방향으로 밀기
+            obj_Rb.velocity = new Vector2(direction.x * push_Force, 0);
+
+            yield return null;
         }
 
-        return final;
+        // 이동 중지
+        obj_Rb.velocity = Vector2.zero;
     }
 
     //퀴즈 몬스터일 경우 정답일 시 몬스터 제거
@@ -185,10 +192,7 @@ public abstract class Monsters : MonoBehaviour
         if(this.quiz_Mon)
         {
             Die();
-        } else if(is_Elite)
-        {
-
-        }
+        } 
     }
 
     //몬스터가 죽었을 때
@@ -199,6 +203,7 @@ public abstract class Monsters : MonoBehaviour
         {
             is_Dead = true;
             gameObject.GetComponent<Rigidbody2D>().simulated = false;
+
             //아이템 드롭
             if(!is_Elite)
             {

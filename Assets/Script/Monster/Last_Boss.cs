@@ -37,11 +37,11 @@ public class Last_Boss : Monsters
         monster_Armor = 2f;
         range_Damage = 6f;
         monster_Attack_Speed = 3.5f;
-        monster_Max_Health = 650f;
+        monster_Max_Health = 1000f;
         monster_Pre_Health = monster_Max_Health;
         shield = 3;
         summon_Minion_Time = -100f;
-        summon_Minion_Cool_Time = 15f;
+        summon_Minion_Cool_Time = 10f;
         is_Elite = true;
 
         move_Duration = Get_Animation_Clip_Length("Death_Teleport");
@@ -139,7 +139,7 @@ public class Last_Boss : Monsters
     {
         anim.SetTrigger("move");
 
-        yield return new WaitForSeconds(move_Duration);
+        yield return new WaitForSeconds(move_Duration + 0.25f);
 
         Think();
     }
@@ -171,11 +171,6 @@ public class Last_Boss : Monsters
     //2연격 낫 휘두르기 코루틴
     private IEnumerator Attack_1()
     {
-        while (!anim.GetCurrentAnimatorStateInfo(0).IsName("Death_Attack_01"))
-        {
-            yield return null;  //다른 애니메이션이 끝날 때까지 대기
-        }
-
         float attack_Duration = Get_Animation_Clip_Length("Death_Attack_01");
 
         if (!attacking)
@@ -197,11 +192,6 @@ public class Last_Boss : Monsters
     //시간 문제로 페기
     private IEnumerator Attack_2(Vector2 player_pos)
     {
-        while (!anim.GetCurrentAnimatorStateInfo(0).IsName("Death_Attack_02"))
-        {
-            yield return null;
-        }
-
         float attack_Duration = Get_Animation_Clip_Length("Death_Attack_02");
 
         if (!attacking)
@@ -273,7 +263,7 @@ public class Last_Boss : Monsters
     //피격
     public override void GetDamage(float damage, Vector2 attack_Direction)
     {
-        //애니메이션 오류로 제거
+        //애니메이션 꼬임 문제로 보류
         //anim.SetTrigger("getDamage");
 
         monster_Audio.clip = monster_Audio_Clips[0];
@@ -290,14 +280,11 @@ public class Last_Boss : Monsters
         }
     }
 
-    //문제 공격하는 자폭 해골 소환
+    //미니언 소환
     protected void Summon_Minion()
     {
         if (target != null && !is_Dead)
         {
-            //monster_Audio.clip = monster_Audio_Clips[0];
-            //monster_Audio.Play();
-
             int summon_count = Random.Range(1, 3);
 
             for(int i = 0; i < summon_count; i++)

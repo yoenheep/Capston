@@ -68,20 +68,21 @@ public class Cursed_Accompanist : Monsters
             is_Stopped = true;
         } else
         {
-            if (!attacking) // 공격 중이 아닌 상태일 때
-            {
-                wait_Time += Time.deltaTime; // 시간 누적
+            is_Stopped = false;
 
-                if (wait_Time >= 3f) // 일정 시간 지나면
-                {
-                    Debug.Log("think 강제실행");
-                    Think(); // Think 호출
-                    wait_Time = 0f; // 타이머 초기화
-                }
-            }
-            else
+            if (!attacking)
             {
-                wait_Time = 0f; // attacking 상태라면 타이머 초기화
+                wait_Time += Time.deltaTime;
+
+                if (wait_Time >= 6f)
+                {
+                    Invoke("Think", monster_Attack_Speed);
+
+                    wait_Time = 0f;
+                }
+            } else
+            {
+                wait_Time = 0f;
             }
         }
     }

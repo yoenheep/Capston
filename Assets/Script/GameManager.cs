@@ -24,11 +24,9 @@ public class GameManager : MonoBehaviour
     {
         gameMgr = this;
 
-        int stageNum = PlayerPrefs.GetInt("SaveStage");
-
-        nowStage = stageNum;
-        mainStageIndex = stageNum;
-        subStageIndex = stageNum;
+        nowStage = 0;
+        mainStageIndex = 0;
+        subStageIndex = 0;
 
         MainPlayerMove();
     }
@@ -92,16 +90,6 @@ public class GameManager : MonoBehaviour
         }
         else if (nowStage == 6) // middle
         {
-            if (AudioPlayBGM.instance.bgmAudio.clip != AudioPlayBGM.instance.middleBoss)
-            {
-                AudioPlayBGM.instance.bgmAudio.clip = AudioPlayBGM.instance.middleBoss;
-
-                // 오디오가 재생 중이지 않으면 재생
-                if (!AudioPlayBGM.instance.bgmAudio.isPlaying)
-                {
-                    AudioPlayBGM.instance.bgmAudio.Play();
-                }
-            }
             if (Monster_Spawn_Manager.instance.boss_spawnedMonsters.Count == 0)
             {
                 subOutPortal[subStageIndex].SetActive(true);
@@ -109,17 +97,6 @@ public class GameManager : MonoBehaviour
         }
         else if (nowStage == 8) // last
         {
-            if (AudioPlayBGM.instance.bgmAudio.clip != AudioPlayBGM.instance.lastBoss)
-            {
-                AudioPlayBGM.instance.bgmAudio.clip = AudioPlayBGM.instance.lastBoss;
-
-                // 오디오가 재생 중이지 않으면 재생
-                if (!AudioPlayBGM.instance.bgmAudio.isPlaying)
-                {
-                    AudioPlayBGM.instance.bgmAudio.Play();
-                }
-            }
-
             if (Monster_Spawn_Manager.instance.boss_spawnedMonsters.Count == 0)
             {
                 GameUI.UIData.Clear();
@@ -237,6 +214,15 @@ public class GameManager : MonoBehaviour
             Player.transform.position = mainPoints[4].transform.position;
             nowStage = 8;
 
+            if (AudioPlayBGM.instance != null)
+            {
+                AudioPlayBGM.instance.ChangeClip(AudioPlayBGM.instance.lastBoss);
+            }
+            else
+            {
+                Debug.LogError("AudioPlayBGM 인스턴스가 없습니다.");
+            }
+
             Monster_Spawn_Manager.instance.Summon_Last_Boss();
         }
     }
@@ -289,6 +275,15 @@ public class GameManager : MonoBehaviour
         else if (subStageIndex == 3) // middle
         {
             Monster_Spawn_Manager.instance.Summon_Mini_Boss();
+
+            if (AudioPlayBGM.instance != null)
+            {
+                AudioPlayBGM.instance.ChangeClip(AudioPlayBGM.instance.middleBoss);
+            }
+            else
+            {
+                Debug.LogError("AudioPlayBGM 인스턴스가 없습니다.");
+            }
 
             Player.transform.position = subPoints[3].transform.position;
             nowStage = 7;

@@ -159,6 +159,15 @@ public class Main : MonoBehaviour
         warningUI.SetActive(false);
         //loginUI.SetActive(true);
         //signupUI.SetActive(true);
+
+        if (AudioPlayBGM.instance != null)
+        {
+            AudioPlayBGM.instance.ChangeClip(AudioPlayBGM.instance.Game);
+        }
+        else
+        {
+            Debug.LogError("AudioPlayBGM 인스턴스가 없습니다.");
+        }
     }
 
     private void Update()
@@ -175,19 +184,14 @@ public class Main : MonoBehaviour
 
     public void Clicked_start() //시작하기
     {
-        //저장한 곳으로 이동하는
-        SceneManager.LoadScene("Game");
-    }
-    public void set() //설정창 열기
-    {
-        setPopup.SetActive(true);
-    }
-    public void re() //새로시작하기
-    {
         SceneManager.LoadScene("Game");
         PlayerPrefs.SetFloat("SaveX", -78);
         PlayerPrefs.SetFloat("SaveY", 11);
         PlayerPrefs.SetInt("SaveStage", 0);
+    }
+    public void set() //설정창 열기
+    {
+        setPopup.SetActive(true);
     }
     public void quit() //종료하기
     {

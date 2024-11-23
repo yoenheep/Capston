@@ -18,23 +18,18 @@ public class AudioPlayBGM : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
-        Musics = GameObject.FindGameObjectsWithTag("Music");
-
-        if (Musics.Length >= 3)
+        if (instance == null)
         {
-            Destroy(this.gameObject);
-        }
-        var obj = FindObjectsOfType<AudioPlayBGM>();
-
-        if (obj.Length == 1)
-        {
+            instance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
+            return;
         }
+
+        DontDestroyOnLoad(gameObject);
 
         bgmAudio = GetComponent<AudioSource>();
 
@@ -45,33 +40,27 @@ public class AudioPlayBGM : MonoBehaviour
 
     private void Update()
     {
-        bgmAudio.ignoreListenerPause = true;
 
         float bgmVolume = PlayerPrefs.GetFloat("MusicVol");
 
         bgmAudio.volume = bgmVolume;
-
-        if (bgmAudio.clip != Game)
-        {
-            bgmAudio.clip = Game;
-
-            // 오디오가 재생 중이지 않으면 재생
-            if (!AudioPlayBGM.instance.bgmAudio.isPlaying)
-            {
-                AudioPlayBGM.instance.bgmAudio.Play();
-            }
-        }
-        //null 오류
-        //수정 필요
-        /*if (GameUI.UIData.clearPopup.activeSelf == false && GameUI.UIData.overPopup.activeSelf == false && GameManager.gameMgr.nowStage != 6 && GameManager.gameMgr.nowStage != 8)
-        {
-            
-        }*/
     }
 
-    public void PlayMusic()
+    public void ChangeClip(AudioClip newClip)
     {
-        if (bgmAudio.isPlaying) return;
+        if (bgmAudio == null)
+        {
+            Debug.LogError("AudioSource가 초기화되지 않았습니다.");
+            return;
+        }
+
+        if (bgmAudio.clip == newClip)
+        {
+            Debug.Log("같은 클립으로 변경 시도, 무시합니다.");
+            return;
+        }
+
+        bgmAudio.clip = newClip;
         bgmAudio.Play();
     }
 }

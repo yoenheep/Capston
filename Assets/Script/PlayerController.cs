@@ -582,10 +582,8 @@ public class PlayerController : MonoBehaviour
     {
         charac_PreHP -= 10;
 
-        float x = PlayerPrefs.GetFloat("SaveX");
-        float y = PlayerPrefs.GetFloat("SaveY");
-
-        GameManager.gameMgr.Player.transform.position = new Vector3(x, y, 0);
+        GameManager.gameMgr.Player.transform.position = GameManager.gameMgr.mainPoints[GameManager.gameMgr.mainStageIndex].transform.position;
+        GameManager.gameMgr.nowStage = GameManager.gameMgr.mainStageIndex;
 
         isReInvoked = false;
     }

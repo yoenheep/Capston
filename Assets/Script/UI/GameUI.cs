@@ -203,11 +203,6 @@ public class GameUI : MonoBehaviour
         SceneManager.LoadScene("Main");
     }
 
-    public void ReGame()
-    {
-        SceneManager.LoadScene("Game");
-    }
-
     IEnumerator CoolTimeFunc() // 데쉬 쿨타임 이팩트
     {
         while (coolTime > 0.0f)
@@ -242,15 +237,13 @@ public class GameUI : MonoBehaviour
             if (PlayerController.playerData.charac_PreHP <= 0)
             {
                 overPopup.SetActive(true);
-                if (AudioPlayBGM.instance.bgmAudio.clip != AudioPlayBGM.instance.gameOver)
+                if (AudioPlayBGM.instance != null)
                 {
-                    AudioPlayBGM.instance.bgmAudio.clip = AudioPlayBGM.instance.gameOver;
-
-                    // 오디오가 재생 중이지 않으면 재생
-                    if (!AudioPlayBGM.instance.bgmAudio.isPlaying)
-                    {
-                        AudioPlayBGM.instance.bgmAudio.Play();
-                    }
+                    AudioPlayBGM.instance.ChangeClip(AudioPlayBGM.instance.gameOver);
+                }
+                else
+                {
+                    Debug.LogError("AudioPlayBGM 인스턴스가 없습니다.");
                 }
                 Invoke("hp_Invoke", 0.5f);
                 if (PlayerController.playerData.isDead)
@@ -276,15 +269,13 @@ public class GameUI : MonoBehaviour
         if(quizPopup.activeSelf == false)
         {
             clearPopup.SetActive(true);
-            if (AudioPlayBGM.instance.bgmAudio.clip != AudioPlayBGM.instance.gameClear)
+            if (AudioPlayBGM.instance != null)
             {
-                AudioPlayBGM.instance.bgmAudio.clip = AudioPlayBGM.instance.gameClear;
-
-                // 오디오가 재생 중이지 않으면 재생
-                if (!AudioPlayBGM.instance.bgmAudio.isPlaying)
-                {
-                    AudioPlayBGM.instance.bgmAudio.Play();
-                }
+                AudioPlayBGM.instance.ChangeClip(AudioPlayBGM.instance.gameClear);
+            }
+            else
+            {
+                Debug.LogError("AudioPlayBGM 인스턴스가 없습니다.");
             }
             clearTimeTxt.text = TimeTxt.text;
             SaveRanking();

@@ -51,8 +51,7 @@ public class Monster_Spawn_Manager : MonoBehaviour
         //제거 예정
         Summon_Monsters_For_Map(1, 0, 5);
 
-        Summon_Monsters_For_Map(4, 54, 3);
-        /*Summon_Monsters_For_Map(2, 12, 15);
+        Summon_Monsters_For_Map(2, 12, 15);
 
         Summon_Monsters_For_Map(3, 27, 12);
 
@@ -63,7 +62,7 @@ public class Monster_Spawn_Manager : MonoBehaviour
             Summon_Monsters_For_Map(5, 54, 4);
         }
 
-        Summon_Mini_Boss();*/
+        //Summon_Mini_Boss();
 
         //Summon_Last_Boss();
     }

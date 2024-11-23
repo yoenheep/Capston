@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
             subPortal.transform.position = new Vector3(-19, -5, 0);
             mainPortal.transform.position = new Vector3(38, -9, 0);
 
+            subOutPortal[subStageIndex].SetActive(false);
+
             if (Monster_Spawn_Manager.instance.map1_spawnedMonsters.Count == 0 && subPortal.activeSelf == false)
             {
                 mainPortal.SetActive(true);
@@ -49,6 +51,8 @@ public class GameManager : MonoBehaviour
         {
             subPortal.transform.position = new Vector3(176, -4, 0);
             mainPortal.transform.position = new Vector3(300, -15, 0);
+
+            subOutPortal[subStageIndex].SetActive(false);
 
             if (Monster_Spawn_Manager.instance.map2_spawnedMonsters.Count == 0 && subPortal.activeSelf == false)
             {
@@ -60,6 +64,8 @@ public class GameManager : MonoBehaviour
             subPortal.transform.position = new Vector3(438, -31.28f, 0);
             mainPortal.transform.position = new Vector3(547, -16.27f, 0);
 
+            subOutPortal[subStageIndex].SetActive(false);
+
             if (Monster_Spawn_Manager.instance.map3_spawnedMonsters.Count == 0 && subPortal.activeSelf == false)
             {
                 mainPortal.SetActive(true);
@@ -69,6 +75,8 @@ public class GameManager : MonoBehaviour
         {
             subPortal.transform.position = new Vector3(706, -21.27f, 0);
             mainPortal.transform.position = new Vector3(757, 8.72f, 0);
+
+            subOutPortal[subStageIndex].SetActive(false);
 
             if (Monster_Spawn_Manager.instance.map4_spawnedMonsters.Count == 0 && subPortal.activeSelf == false)
             {
@@ -82,7 +90,7 @@ public class GameManager : MonoBehaviour
                 subOutPortal[subStageIndex].SetActive(true);
             }
         }
-        else if (nowStage == 1) // middle
+        else if (nowStage == 6) // middle
         {
             if (AudioPlayBGM.instance.bgmAudio.clip != AudioPlayBGM.instance.middleBoss)
             {

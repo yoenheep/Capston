@@ -48675,10 +48675,10 @@ MonoBehaviour:
   nowStage: 0
   mainPoints:
   - {fileID: 721106245}
-  - {fileID: 127823299}
-  - {fileID: 903605660}
-  - {fileID: 1377860381}
+  - {fileID: 1841547169}
+  - {fileID: 1958493964}
   - {fileID: 1365693572}
+  - {fileID: 903605660}
   mainPortal: {fileID: 100114623}
   mainStageIndex: 0
   subPoints:

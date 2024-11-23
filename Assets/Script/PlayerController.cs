@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (weapon_item[nowWeapon] == 0)
                 {
-                    animator.SetBool("Magic_Walk", false);
+                    animator.SetBool("magic_Walk", false);
                     animator.SetBool("Axe_Walk", false);
                     animator.SetBool("knife_Walk", false);
                     animator.SetBool("knife_Idle", false);
@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (weapon_item[nowWeapon] == 1)
                 {
-                    animator.SetBool("Magic_Walk", false);
+                    animator.SetBool("magic_Walk", false);
                     animator.SetBool("knife_Walk", false);
                     animator.SetBool("Walk", false);
                     animator.SetBool("Charac_Idle", false);
@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (weapon_item[nowWeapon] == 2)
                 {
-                    animator.SetBool("Magic_Walk", false);
+                    animator.SetBool("magic_Walk", false);
                     animator.SetBool("Axe_Walk", false);
                     animator.SetBool("Walk", false);
                     animator.SetBool("Charac_Idle", false);
@@ -168,7 +168,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (weapon_item[nowWeapon] == 3)
                 {
-                    animator.SetBool("Magic_Walk", false);
+                    animator.SetBool("magic_Walk", false);
                     animator.SetBool("knife_Walk", false);
                     animator.SetBool("Axe_Walk", false);
                     animator.SetBool("Walk", false);
@@ -182,7 +182,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (weapon_item[nowWeapon] == 0)
                 {
-                    animator.SetBool("Magic_Walk", false);
+                    animator.SetBool("magic_Walk", false);
                     animator.SetBool("Axe_Walk", false);
                     animator.SetBool("knife_Walk", false);
                     animator.SetBool("knife_Idle", false);
@@ -192,7 +192,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (weapon_item[nowWeapon] == 1)
                 {
-                    animator.SetBool("Magic_Walk", false);
+                    animator.SetBool("magic_Walk", false);
                     animator.SetBool("knife_Walk", false);
                     animator.SetBool("Walk", false);
                     animator.SetBool("Charac_Idle", false);
@@ -202,7 +202,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (weapon_item[nowWeapon] == 2)
                 {
-                    animator.SetBool("Magic_Walk", false);
+                    animator.SetBool("magic_Walk", false);
                     animator.SetBool("Axe_Walk", false);
                     animator.SetBool("Walk", false);
                     animator.SetBool("Charac_Idle", false);
@@ -212,7 +212,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (weapon_item[nowWeapon] == 3)
                 {
-                    animator.SetBool("Magic_Walk", false);
+                    animator.SetBool("magic_Walk", false);
                     animator.SetBool("knife_Walk", false);
                     animator.SetBool("Axe_Walk", false);
                     animator.SetBool("Walk", false);
@@ -361,7 +361,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (weapon_item[nowWeapon] == 3)
                 {
-                    animator.SetBool("Magic_Walk", true);
+                    animator.SetBool("magic_Walk", true);
                 }
             }
             else if (hor > 0)
@@ -383,7 +383,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (weapon_item[nowWeapon] == 3)
                 {
-                    animator.SetBool("Magic_Walk", true);
+                    animator.SetBool("magic_Walk", true);
                 }
             }
             else if (hor == 0)
@@ -402,7 +402,7 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (weapon_item[nowWeapon] == 3)
                 {
-                    animator.SetBool("Magic_Walk", false);
+                    animator.SetBool("magic_Walk", false);
                 }
             }
         }

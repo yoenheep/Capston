@@ -28,6 +28,15 @@ public class GameManager : MonoBehaviour
         mainStageIndex = 0;
         subStageIndex = 0;
 
+        if (AudioPlayBGM.instance != null)
+        {
+            AudioPlayBGM.instance.ChangeClip(AudioPlayBGM.instance.Game);
+        }
+        else
+        {
+            Debug.LogError("AudioPlayBGM 인스턴스가 없습니다.");
+        }
+
         MainPlayerMove();
     }
 
@@ -86,20 +95,6 @@ public class GameManager : MonoBehaviour
             if (Monster_Spawn_Manager.instance.trap1_spawnedMonsters.Count == 0)
             {
                 subOutPortal[subStageIndex].SetActive(true);
-            }
-        }
-        else if (nowStage == 6) // middle
-        {
-            if (Monster_Spawn_Manager.instance.boss_spawnedMonsters.Count == 0)
-            {
-                subOutPortal[subStageIndex].SetActive(true);
-            }
-        }
-        else if (nowStage == 8) // last
-        {
-            if (Monster_Spawn_Manager.instance.boss_spawnedMonsters.Count == 0)
-            {
-                GameUI.UIData.Clear();
             }
         }
     }
@@ -266,13 +261,13 @@ public class GameManager : MonoBehaviour
             GameUI.UIData.QuizUI.QuizBoard.SetActive(true);
             nowStage = 5;
         }
-        else if(subStageIndex == 2) // angel
+        else if(subStageIndex == 3) // angel
         {
             subOutPortal[subStageIndex].SetActive(true);
-            Player.transform.position = subPoints[2].transform.position;
-            nowStage = 6;
+            Player.transform.position = subPoints[3].transform.position;
+            nowStage = 7;
         }
-        else if (subStageIndex == 3) // middle
+        else if (subStageIndex == 2) // middle
         {
             Monster_Spawn_Manager.instance.Summon_Mini_Boss();
 
@@ -285,8 +280,8 @@ public class GameManager : MonoBehaviour
                 Debug.LogError("AudioPlayBGM 인스턴스가 없습니다.");
             }
 
-            Player.transform.position = subPoints[3].transform.position;
-            nowStage = 7;
+            Player.transform.position = subPoints[2].transform.position;
+            nowStage = 6;
         }
     }
 }

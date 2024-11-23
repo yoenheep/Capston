@@ -269,6 +269,7 @@ public class GameUI : MonoBehaviour
         if(quizPopup.activeSelf == false)
         {
             clearPopup.SetActive(true);
+
             if (AudioPlayBGM.instance != null)
             {
                 AudioPlayBGM.instance.ChangeClip(AudioPlayBGM.instance.gameClear);

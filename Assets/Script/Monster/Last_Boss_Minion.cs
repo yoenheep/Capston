@@ -83,5 +83,12 @@ public class Last_Boss_Minion : Monsters
         hpBar.gameObject.SetActive(false);
 
         anim.SetBool("isDead", true);
+
+        Invoke("DieTrue", 3f);
+    }
+
+    public void DieTrue()
+    {
+        GameUI.UIData.Clear();
     }
 }

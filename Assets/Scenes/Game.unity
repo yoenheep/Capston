@@ -47419,7 +47419,7 @@ GameObject:
   - component: {fileID: 1984521548}
   m_Layer: 0
   m_Name: portal
-  m_TagString: mainPortal
+  m_TagString: subOutPortal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47897,8 +47897,8 @@ MonoBehaviour:
   subOutPortal:
   - {fileID: 1814071421}
   - {fileID: 1814071421}
-  - {fileID: 874646205}
   - {fileID: 1984521544}
+  - {fileID: 874646205}
 --- !u!1 &2017965472
 GameObject:
   m_ObjectHideFlags: 0

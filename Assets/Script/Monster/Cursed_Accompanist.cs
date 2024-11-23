@@ -243,8 +243,7 @@ public class Cursed_Accompanist : Monsters
             //죽으면 몬스터 객체 삭제
             //StartCoroutine(DeactivateAfterSound());
 
-            // 리스트에서 제거
-            Monster_Spawn_Manager.instance.RemoveMonsterFromList(this);
+            GameManager.gameMgr.subOutPortal[GameManager.gameMgr.subStageIndex].SetActive(true);
         }
     }
 }

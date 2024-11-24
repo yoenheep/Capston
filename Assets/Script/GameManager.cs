@@ -239,6 +239,15 @@ public class GameManager : MonoBehaviour
         else if (mainStageIndex == 2)
         {          
             nowStage = 2;
+
+            if (AudioPlayBGM.instance != null)
+            {
+                AudioPlayBGM.instance.ChangeClip(AudioPlayBGM.instance.Game);
+            }
+            else
+            {
+                Debug.LogError("AudioPlayBGM 인스턴스가 없습니다.");
+            }
         }
         else if (mainStageIndex == 3)
         {

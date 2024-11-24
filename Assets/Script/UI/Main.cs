@@ -20,6 +20,7 @@ public class Main : MonoBehaviour
     public GameObject loginUI;
     public GameObject loginSignupUI;
     public GameObject loginSignBtn;
+    public bool loginBool;
 
     [Header("# signup")]
     public TMP_InputField signupIdInput;
@@ -30,19 +31,45 @@ public class Main : MonoBehaviour
     public TextMeshProUGUI warningTxt;
     public GameObject warningUI;
 
+    [Header("# Ranking")]
+    public RankItem[] rankItems;
+    public GameObject rankUI;
+
+    public void OpenUI(GameObject ui)
+    {
+        ui.SetActive(true);
+    }
+    public void rankingSystem()
+    {
+        // 데이터베이스에서 1위부터 10위까지의 랭킹 데이터를 가져옴
+        XmlNodeList rankingData = MySQLConnection.Select("ranking", "ORDER BY time ASC LIMIT 5");
+
+        if (rankingData != null)
+        {
+            int rank = 0;
+
+            foreach (XmlNode data in rankingData)
+            {
+                rankItems[rank].SetRankingData(data["ID"].InnerText, int.Parse(data["time"].InnerText));
+                rank++;
+            }
+        }
+        else
+        {
+            Debug.Log("랭킹 데이터를 가져오지 못했습니다.");
+        }
+    }
     public void CloseUi(GameObject ui)
     {
         ui.SetActive(false);
+
+        signupIdInput.text = "";
+        signupPWDInput.text = "";
     }
 
     public void WarningClose()
     {
         warningUI.SetActive(false);
-    }
-
-    public void SignBtn()
-    {
-        signupUI.SetActive(true);
     }
 
     public void Signup()
@@ -121,6 +148,8 @@ public class Main : MonoBehaviour
                 {
                     loginSignupUI.SetActive(false);
                     UserData.instance.userName = playerName;
+
+                    UserData.instance.isLoggedIn = true;
                 }
                 else
                 {
@@ -157,8 +186,20 @@ public class Main : MonoBehaviour
         mainPage.SetActive(true);
         setPopup.SetActive(false);
         warningUI.SetActive(false);
-        loginUI.SetActive(true);
-        signupUI.SetActive(true);
+        rankUI.SetActive(false);
+        signupUI.SetActive(false);
+
+        if (UserData.instance.isLoggedIn)
+        {
+            Debug.Log("로그인 중 : "+ UserData.instance.userName);
+            loginSignupUI.SetActive(false); // 로그인 창 비활성화
+            loginUI.SetActive(false);
+        }
+        else
+        {
+            loginSignupUI.SetActive(true);
+            loginUI.SetActive(true); // 로그인 창 활성화
+        }
 
         if (AudioPlayBGM.instance != null)
         {
@@ -172,7 +213,7 @@ public class Main : MonoBehaviour
 
     private void Update()
     {
-        if(signupUI.activeSelf == true)
+        if (signupUI.activeSelf == true)
         {
             loginSignBtn.SetActive(false);
         }
@@ -184,17 +225,16 @@ public class Main : MonoBehaviour
 
     public void Clicked_start() //시작하기
     {
+        loginBool = true;
         SceneManager.LoadScene("Game");
         PlayerPrefs.SetFloat("SaveX", -78);
         PlayerPrefs.SetFloat("SaveY", 11);
         PlayerPrefs.SetInt("SaveStage", 0);
     }
-    public void set() //설정창 열기
-    {
-        setPopup.SetActive(true);
-    }
     public void quit() //종료하기
     {
+        loginBool = false;
+
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
@@ -202,9 +242,4 @@ public class Main : MonoBehaviour
 #endif
 
     }
-    public void x()
-    {
-        setPopup.SetActive(false);
-    }
-
 }

@@ -14,6 +14,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI TimeTxt;
     private float timeSecs = 0f;
     private int timeMin = 0;
+    private int clearTime = 0;
 
     [Header("# stop")]
     [SerializeField] private GameObject stopPopup;
@@ -67,12 +68,12 @@ public class GameUI : MonoBehaviour
         if (user != null)
         {
 
-            MySQLConnection.UpdateRanking("ranking", "time", timeSecs, $"ID = '{playerName}'");
+            MySQLConnection.UpdateRanking("ranking", "time", clearTime, $"ID = '{playerName}'");
             Debug.Log("Update UserRanking");
         }
         else
         {
-            string query = $"{playerName},{timeSecs.ToString()}";
+            string query = $"{playerName},{clearTime.ToString()}";
             MySQLConnection.Insert("ranking", query);
             // INSERT INTO ranking VALUES playerName, timeSecs 
             Debug.Log("save UserRanking");
@@ -278,6 +279,8 @@ public class GameUI : MonoBehaviour
             {
                 Debug.LogError("AudioPlayBGM 인스턴스가 없습니다.");
             }
+
+            clearTime = (timeMin * 60) + (int)timeSecs;
             clearTimeTxt.text = TimeTxt.text;
             SaveRanking();
             Time.timeScale = 0;

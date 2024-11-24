@@ -9,7 +9,7 @@ using System.Xml;
 
 public class MySQLConnection : MonoBehaviour
 {
-    private string connectionString = "server=127.0.0.1;user=root;database=testdb;port=3306;password=1212;";
+    private string connectionString = "server=127.0.0.1;user=root;database=testdb;port=3306;password=1234;";
 
     public void RegisterUser(string username, string password)
     {
@@ -43,7 +43,7 @@ public class MySQLConnection : MonoBehaviour
                 try
                 {
                     string formatSql = string.Format("Server={0};Database={1};Uid={2};Pwd={3};Port={4};SslMode=none;",
-                                                        "127.0.0.1", "testdb", "root", "1212", "3306");
+                                                        "127.0.0.1", "testdb", "root", "1234", "3306");
                     _connection = new MySqlConnection(formatSql);
                 }
                 catch (MySqlException e)

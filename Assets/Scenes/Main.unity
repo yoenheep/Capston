@@ -4789,7 +4789,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: now want
+  m_text: ENTER TEXT...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7218e2dd41e108142b01a40494e79c11, type: 2}
   m_sharedMaterial: {fileID: 1247509777859822663, guid: 7218e2dd41e108142b01a40494e79c11, type: 2}
@@ -6083,14 +6083,14 @@ MonoBehaviour:
   m_VerticalScrollbarEventHandler: {fileID: 0}
   m_LayoutGroup: {fileID: 0}
   m_ScrollSensitivity: 1
-  m_ContentType: 2
-  m_InputType: 0
+  m_ContentType: 7
+  m_InputType: 2
   m_AsteriskChar: 42
-  m_KeyboardType: 4
+  m_KeyboardType: 0
   m_LineType: 0
   m_HideMobileInput: 0
   m_HideSoftKeyboard: 0
-  m_CharacterValidation: 2
+  m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 14
   m_CharacterLimit: 4
@@ -7028,7 +7028,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: now want
+  m_text: ENTER TEXT...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7218e2dd41e108142b01a40494e79c11, type: 2}
   m_sharedMaterial: {fileID: 1247509777859822663, guid: 7218e2dd41e108142b01a40494e79c11, type: 2}
@@ -7061,7 +7061,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 2
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -9127,7 +9127,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2043976140
 RectTransform:
   m_ObjectHideFlags: 0

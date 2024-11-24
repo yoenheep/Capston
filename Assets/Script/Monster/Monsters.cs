@@ -126,7 +126,6 @@ public abstract class Monsters : MonoBehaviour
             Stop();
 
             anim.SetTrigger("getDamaged");
-            hpBarLogic.Dmg();
 
             monster_Audio.clip = monster_Audio_Clips[0];
             monster_Audio.Play();

@@ -130,14 +130,7 @@ public class GameUI : MonoBehaviour
         time(); // 타임표시
         hp(); // HP 임시키
         hp_now = PlayerController.playerData.charac_PreHP;
-        hpBar.fillAmount = hp_now / hp_max; // 캐릭터 hpbar
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Clear();
-        }
-               
-            
+        hpBar.fillAmount = hp_now / hp_max; // 캐릭터 hpbar       
     }
 
     public void time()

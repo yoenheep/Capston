@@ -83,8 +83,6 @@ public class GameManager : MonoBehaviour
             subPortal.transform.position = new Vector3(706, -21.27f, 0);
             mainPortal.transform.position = new Vector3(757, 8.72f, 0);
 
-            subOutPortal[subStageIndex].SetActive(false);
-
             if (Monster_Spawn_Manager.instance.map4_spawnedMonsters.Count == 0 && subPortal.activeSelf == false)
             {
                 mainPortal.SetActive(true);

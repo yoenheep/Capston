@@ -131,6 +131,7 @@ public class QuizUI : MonoBehaviour
                             QuizBoard.SetActive(false);
 
                             GameManager.gameMgr.subOutPortal[GameManager.gameMgr.subStageIndex].SetActive(true);
+                            quizTrigger = false;
                         }
                     }
                     else

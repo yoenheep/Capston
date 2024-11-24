@@ -29,7 +29,6 @@ public class Monster_Spawn_Manager : MonoBehaviour
     public List<GameObject> map3_spawnedMonsters = new List<GameObject>();
     public List<GameObject> map4_spawnedMonsters = new List<GameObject>();
     public List<GameObject> trap1_spawnedMonsters = new List<GameObject>();
-    public List<GameObject> boss_spawnedMonsters = new List<GameObject>();
 
     //싱글톤
     public static Monster_Spawn_Manager instance;
@@ -61,8 +60,6 @@ public class Monster_Spawn_Manager : MonoBehaviour
         {
             Summon_Monsters_For_Map(5, 54, 4);
         }
-
-        Summon_Last_Boss();
     }
 
     public void Summon_Monsters_For_Map(int mapIndex, int startIndex, int monsterCount)
@@ -144,8 +141,6 @@ public class Monster_Spawn_Manager : MonoBehaviour
         GameObject createdPrefab = Instantiate(mini_Boss_Mon, position, Quaternion.identity);
         createdPrefab.transform.SetParent(tr, false);
 
-        boss_spawnedMonsters.Add(createdPrefab);
-
         Debug.Log("중간 보스 소환");
     }
 
@@ -155,8 +150,6 @@ public class Monster_Spawn_Manager : MonoBehaviour
         Transform tr = last_Boss_Spawn_Point.transform.parent;
         GameObject createdPrefab = Instantiate(last_Boss_Mon, position, Quaternion.identity);
         createdPrefab.transform.SetParent(tr, false);
-
-        boss_spawnedMonsters.Add(createdPrefab);
 
         Debug.Log("라스트 보스 소환");
     }
@@ -182,10 +175,6 @@ public class Monster_Spawn_Manager : MonoBehaviour
         else if (trap1_spawnedMonsters.Contains(monster.gameObject))
         {
             trap1_spawnedMonsters.Remove(monster.gameObject);
-        }
-        else if (boss_spawnedMonsters.Contains(monster.gameObject))
-        {
-            boss_spawnedMonsters.Remove(monster.gameObject);
         }
 
         Debug.Log("몬스터가 리스트에서 제거됨: " + monster.gameObject.name);

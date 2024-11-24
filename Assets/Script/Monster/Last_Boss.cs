@@ -275,8 +275,8 @@ public class Last_Boss : Monsters
 
         if (monster_Pre_Health <= 0)
         {
+            GameUI.UIData.Clear();
             this.Die();
-            //클리어 메소드 넣을 예정
         }
     }
 

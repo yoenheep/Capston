@@ -205,9 +205,6 @@ MonoBehaviour:
   target: {fileID: 0}
   music_Note: {fileID: 0}
   minion: {fileID: 3436724966520705234, guid: fce75e577b3c57e43b817aa7872d5d40, type: 3}
-  x: 3
-  y: 6
-  z: 2
 --- !u!82 &-5302007981110525791
 AudioSource:
   m_ObjectHideFlags: 0
